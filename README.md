@@ -1,2 +1,2 @@
-# course-practical_tools_for_quick_data_visualization
+# Practical tools for quick data visualization
 Course materials.
