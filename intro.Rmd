@@ -1,0 +1,122 @@
+---
+title: Practical tools for quick data visualization - Introduction
+author: miquel [dot] anglada [ad] crg [dot] eu
+date: 2021-02-17
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output:
+    html_document:
+      self_contained: true
+      toc: true
+      toc_depth: true
+      number_sections: true
+---
+
+## Useful packages
+- **Data Wrangling**
+  - [`here`](https://cran.r-project.org/web/packages/here/vignettes/here.html)
+  - [`readr`](https://readr.tidyverse.org/)
+  - [`dplyr`](https://dplyr.tidyverse.org/)
+  - [`tidyr`](https://tidyr.tidyverse.org/)
+  - [`reshape2`](https://www.rdocumentation.org/packages/reshape2/versions/1.4.4)
+  - [`seqinr`](https://seqinr.r-forge.r-project.org/)
+  - [`ape`](https://www.rdocumentation.org/packages/ape/versions/5.4-1)
+
+- **Visualization**
+  - [`ggplot2`](https://ggplot2.tidyverse.org/)
+  - [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
+  - [`pheatmap`](https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12)
+  - [`ggtree`](https://bioconductor.org/packages/release/bioc/html/ggtree.html)
+  
+## Install packages  
+```{r install packages, message=FALSE, warning=FALSE}
+# install packages from CRAN
+## wrangling
+install.packages('here')
+install.packages('readr')
+install.packages('dplyr')
+install.packages('tidyr')
+install.packages('reshape2')
+install.packages('seqinr')
+install.packages('ape')
+
+## visualization
+install.packages('ggplot2')
+install.packages('ggpubr') # requires libcurl4 in ubuntu
+install.packages('pheatmap')
+
+# install packages from Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+BiocManager::install('ggtree')
+```
+
+## Basic plots
+- [bible](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
+
+### Bar plot
+```{r}
+```
+### Pie plot
+```{r}
+```
+### Histogram
+```{r}
+```
+### Box plot
+```{r}
+```
+### Strip plot
+```{r}
+```
+### Dot plot
+```{r}
+```
+### Violin plot
+```{r}
+```
+### Scatter plot
+```{r}
+```
+### Heat map
+```{r}
+```
+### Phylogenetic tree
+[book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
+```{r}
+library(ggtree)
+set.seed(2017-02-16)
+tree <- rtree(50)
+ggtree(tree)
+ggtree(tree, layout="slanted")
+```
+
+
+## Add annotations
+### Stats
+```{r}
+```
+### Labels
+```{r}
+```
+
+## Other
+- `ggparagraph`
+- `ggsummarytable`
+
+## Combine plots into figures
+```{r}
+```
+
+## Save your figures
+```{r}
+```
+
+## References
+
+## Session Info
+```{r session info}
+sessionInfo()
+```

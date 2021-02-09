@@ -1,0 +1,36 @@
+---
+title: Exploratory Data Analysis of the most popular human gene
+author: miquel [dot] anglada [ad] crg [dot] eu
+date: 2021-02-17
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output:
+    html_document:
+      self_contained: true
+      toc: true
+      toc_depth: true
+      number_sections: true
+---
+
+According to this [article](https://www.nature.com/articles/d41586-017-07291-9), *TP53* is the most popular gene in the human genome.
+We will look into it from multiple perspectives.
+
+## Data description
+We collected harmonized data from the [XenaBrowser]() and [Ensembl]().
+- XenaBrowser:
+  - Gene expression (FPKM)
+  - Exon expression (FPKM)
+  - Gene methylation (beta values)
+  - Mutations
+- Ensembl:
+  - orthologues aminoacid alignment
+  
+## Exploratory Data Analysis
+### 
+
+## References
+
+## Session Info
