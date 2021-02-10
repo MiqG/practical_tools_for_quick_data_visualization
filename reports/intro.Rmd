@@ -1,6 +1,6 @@
 ---
 title: Practical tools for quick data visualization - Introduction
-author: miquel [dot] anglada [ad] crg [dot] eu
+author: miquel [dot] anglada [at] crg [dot] eu
 date: 2021-02-17
 
 font-size: 11pt
@@ -14,6 +14,12 @@ output:
       toc_depth: true
       number_sections: true
 ---
+
+When starting a new project, designing new methods for data analysis or even preparing
+a new publication, data visualization is essential to both explore new hypotheses and
+to validate our findings.
+
+This crash talk aims to outline 
 
 ## Useful packages
 - **Data Wrangling**
