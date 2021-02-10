@@ -35,10 +35,12 @@ data_cnv_file = file.path(RAWDATA_DIR,'TCGA-cnv-TP53.tsv')
 data_meth_file = file.path(RAWDATA_DIR,'TCGA-dna_methylation-TP53.tsv')
 data_genexpr_file = file.path(RAWDATA_DIR,'TCGA-gene_expression-TP53.tsv')
 data_exexpr_file = file.path(RAWDATA_DIR,'TCGA-exon_expression-TP53.tsv')
+data_mut_file = file.path(RAWDATA_DIR,'TCGA-somatic_mutation-TP53.tsv')
 metadata_file = file.path(RAWDATA_DIR,'TCGA-sample_metadata.tsv')
 
 # outputs
-output_file = file.path(PREPDATA_DIR,'multiomic_data.tsv')
+output_dat_file = file.path(PREPDATA_DIR,'data_multiomics.tsv')
+output_dat_mut_file = file.path(PREPDATA_DIR, 'data_somatic_mutations.tsv')
 
 ##### FUNCTIONS #####
 get_omic_types = function(dat){
@@ -51,9 +53,9 @@ get_omic_types = function(dat){
     return(omic_type)
 }
 
-
+  
 prepare_multiomic_dataset = function(data_cnv_file, data_meth_file, data_genexpr_file, 
-                                     data_exexpr_file, metadata_file){
+                                     data_exexpr_file, data_mut_file, metadata_file){
     # load omic data
     dat = list(
       data_cnv = read_tsv(data_cnv_file),
@@ -61,6 +63,7 @@ prepare_multiomic_dataset = function(data_cnv_file, data_meth_file, data_genexpr
       data_genexpr = read_tsv(data_genexpr_file),
       data_exexpr = read_tsv(data_exexpr_file)
     )
+    dat_mut = read_tsv(data_mut_file)
     metadata = read_tsv(metadata_file)
     
     # remove 'samples' column (it is a duplicate of 'sample')
@@ -77,30 +80,33 @@ prepare_multiomic_dataset = function(data_cnv_file, data_meth_file, data_genexpr
     # identify omic types based on omic names
     dat$omic_type = get_omic_types(dat)
     
-    # add sample (phenotypic) metadata
-    dat = merge(dat, metadata, by='sample')
-    
     # create 'cancer_type' column
     cols_oi = c('_primary_disease','cancer type abbreviation')
-    cancer_types = dat[!duplicated(dat[,cols_oi]),cols_oi] %>% drop_na()
+    cancer_types = metadata[!duplicated(metadata[,cols_oi]),cols_oi] %>% drop_na()
     colnames(cancer_types) = c('_primary_disease','cancer_type')
-    dat = merge(dat, cancer_types, by='_primary_disease')
+    metadata = merge(metadata, cancer_types, by='_primary_disease')
     
     # remove misleading columns
-    cols_to_drop = c('samples','cancer type abbreviation')
-    dat = dat[,!colnames(dat) %in% cols_to_drop]
+    cols_to_drop = c('cancer type abbreviation')
+    metadata = metadata[,!colnames(metadata) %in% cols_to_drop]
     
-    return(dat)
+    # add sample (phenotypic) metadata
+    dat = merge(dat, metadata, by='sample')
+    dat_mut = merge(dat_mut, metadata, by='sample')
+    
+    return(list(dat=dat,dat_mut=dat_mut))
 }
 
 main = function(){
-  dat = prepare_multiomic_dataset(data_cnv_file, 
-                                  data_meth_file, 
-                                  data_genexpr_file, 
-                                  data_exexpr_file, 
-                                  metadata_file)
+  prep = prepare_multiomic_dataset(data_cnv_file, 
+                                   data_meth_file, 
+                                   data_genexpr_file, 
+                                   data_exexpr_file, 
+                                   data_mut_file,
+                                   metadata_file)
   # save
-  write_tsv(dat, output_file)
+  write_tsv(prep$dat, output_dat_file)
+  write_tsv(prep$dat_mut, output_dat_mut_file)
 }
 
 ##### SCRIPT #####
