@@ -11,14 +11,16 @@ output:
     html_document:
       self_contained: true
       toc: true
-      toc_depth: true
+      toc_depth: 3
       number_sections: true
+    md_document:
+      variant: markdown_github
 ---
 
 According to this [article](https://www.nature.com/articles/d41586-017-07291-9), *TP53* is the most popular gene in the human genome.
 We will look into it from multiple perspectives.
 
-## Data description
+# Data description
 We collected harmonized data from the [XenaBrowser]() and [NCBI]().
 - XenaBrowser [TCGA Pan Cancer (PANCAN) dataset](https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443):
   - Gene expression: log2(norm_value+1)
@@ -29,9 +31,18 @@ We collected harmonized data from the [XenaBrowser]() and [NCBI]().
 - [COBALT](https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674) (from NCBI):
   - orthologues aminoacid alignment of 153 mammals
   
-## Exploratory Data Analysis
-### 
+# Exploratory Data Analysis
+## Overview across omics and cancer types
+## Total number of samples per cancer type
+## Total number of samples per cancer type and sample type
+## Omic values differences between sample types
+## How many samples have at least a mutation?
+## Which are the most common effects of mutations?
+## Are there mutations associated to cancer types?
+## Are there mutations associated to sample types?
+## How are mutation effects associated to certain positions?
+## Pairwise associations
 
-## References
+# References
 
-## Session Info
+# Session Info

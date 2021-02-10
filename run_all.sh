@@ -20,6 +20,9 @@
 
 # outputs
 
+# run report
+R -e "rmarkdown::render('reports/intro.Rmd', output_format='all')"
+R -e "rmarkdown::render('reports/exercise.Rmd', output_format='all')"
 
 
 echo "Done!"

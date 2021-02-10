@@ -39,8 +39,8 @@ data_mut_file = file.path(RAWDATA_DIR,'TCGA-somatic_mutation-TP53.tsv')
 metadata_file = file.path(RAWDATA_DIR,'TCGA-sample_metadata.tsv')
 
 # outputs
-output_dat_file = file.path(PREPDATA_DIR,'data_multiomics.tsv')
-output_dat_mut_file = file.path(PREPDATA_DIR, 'data_somatic_mutations.tsv')
+output_dat_file = file.path(PREPDATA_DIR,'data_multiomics.tsv.gz')
+output_dat_mut_file = file.path(PREPDATA_DIR, 'data_somatic_mutations.tsv.gz')
 
 ##### FUNCTIONS #####
 get_omic_types = function(dat){

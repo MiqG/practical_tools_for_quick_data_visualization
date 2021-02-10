@@ -1,0 +1,13 @@
+title: "Practical tools for quick data visualization"
+author: "Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)"
+
+exclude_patterns: [_build, "**README**", "**.ipynb_checkpoints"] # to speed up jupyter-book's build
+execute:
+  execute_notebooks: "off"
+  
+repository:
+  url: https://github.com/MiqG/practical_tools_for_quick_data_visualization
+
+html:
+  use_repository_button: true
+  use_issues_button: true
