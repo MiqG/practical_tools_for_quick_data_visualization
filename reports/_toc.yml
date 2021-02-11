@@ -1,4 +1,7 @@
-- file: intro
-- part: Exercise
+- file: welcome
+- part: Get started
+  chapters:
+    - file: intro
+- part: An exercise
   chapters:
     - file: exercise
