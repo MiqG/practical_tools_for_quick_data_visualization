@@ -1,5 +1,5 @@
 ---
-title: Practical tools for quick data visualization - Introduction
+title: Introduction
 author: miquel [dot] anglada [at] crg [dot] eu
 date: 2021-02-17
 
@@ -17,94 +17,107 @@ output:
       variant: markdown_github
 ---
 
-When starting a new project, designing new methods for data analysis or even preparing
-a new publication, data visualization is essential to both explore new hypotheses and
-to validate our findings.
+Personally, I am a big fan of `ggpubr` because it allows to make simple quick plots
+and at the same time, as being built on top og `ggplot2`, it also allows to customize them
+to a very high degree.
 
-This crash talk aims to outline 
+# General plotting with `ggpubr`
 
-# Useful packages
-- **Data Wrangling**
-  - [`here`](https://cran.r-project.org/web/packages/here/vignettes/here.html)
-  - [`readr`](https://readr.tidyverse.org/)
-  - [`dplyr`](https://dplyr.tidyverse.org/)
-  - [`tidyr`](https://tidyr.tidyverse.org/)
-  - [`reshape2`](https://www.rdocumentation.org/packages/reshape2/versions/1.4.4)
-  - [`seqinr`](https://seqinr.r-forge.r-project.org/)
-  - [`ape`](https://www.rdocumentation.org/packages/ape/versions/5.4-1)
+```{r load data and libraries, message=FALSE, warning=FALSE}
+require(ggpubr)
+require(dplyr)
+require(tidyr)
+require(pheatmap)
 
-- **Visualization**
-  - [`ggplot2`](https://ggplot2.tidyverse.org/)
-  - [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
-  - [`pheatmap`](https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12)
-  - [`ggtree`](https://bioconductor.org/packages/release/bioc/html/ggtree.html)
-  
-# Install packages  
-```{r install packages, eval=FALSE, message=FALSE, warning=FALSE}
-# install packages from CRAN
-# wrangling
-install.packages('here')
-install.packages('readr')
-install.packages('dplyr')
-install.packages('tidyr')
-install.packages('reshape2')
-install.packages('seqinr')
-install.packages('ape')
-
-# visualization
-install.packages('ggplot2')
-install.packages('ggpubr') # requires libcurl4 in ubuntu
-install.packages('pheatmap')
-
-# install packages from Bioconductor
-if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-BiocManager::install('ggtree')
+penguins_url = 'https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv'
+dat = read.csv(url(penguins_url), stringsAsFactors = TRUE)
+dat = dat %>% drop_na()
+head(dat)
 ```
-
-# Basic plots
-- [bible](https://cran.r-project.org/web/packages/ggpubr/ggpubr.pdf)
-
 ## Bar plot
 ```{r}
+ggbarplot(dat %>% count(species), x = 'species', y = 'n')
+ggbarplot(dat %>% count(species), x = 'species', y = 'n', fill = 'species')
 ```
+
 ## Pie plot
 ```{r}
+ggpie(dat %>% count(island), x = 'n', color = 'island')
 ```
+
 ## Histogram
 ```{r}
+gghistogram(dat, x = 'species', stat = 'count', fill = 'species')
+gghistogram(dat, x = 'bill_length_mm')
+gghistogram(dat, x = 'bill_length_mm', fill = 'sex')
+gghistogram(dat, x = 'bill_length_mm', fill = 'island')
+gghistogram(dat, x = 'bill_length_mm', fill = 'species')
 ```
+## Balloon plot
+```{r}
+tbl = as.data.frame(table(dat$species, dat$island))
+ggballoonplot(tbl, fill = 'value')
+```
+
 ## Box plot
 ```{r}
+ggboxplot(dat, x = 'species', y = 'body_mass_g')
+ggboxplot(dat, x = 'species', y = 'body_mass_g', fill = 'sex')
+ggboxplot(dat, x = 'species', y = 'body_mass_g', fill = 'sex', facet.by = 'island')
+ggboxplot(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species')
 ```
-## Strip plot
+## Strip chart
 ```{r}
+ggstripchart(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species')
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5)
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge())
+?ggstripchart
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr')
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black'))
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
 ```
 ## Dot plot
 ```{r}
+ggdotplot(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
 ```
 ## Violin plot
 ```{r}
+ggviolin(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
+ggviolin(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
+ggviolin(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species', alpha = 0.5, add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
 ```
 ## Scatter plot
 ```{r}
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5)
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'island')
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'sex')
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year')
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
+ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
 ```
-## Heat map
+
+# Change palette
 ```{r}
-```
-## Phylogenetic tree
-[book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
-```{r}
-library(ggtree)
-set.seed(2017-02-16)
-tree <- rtree(50)
-ggtree(tree)
-ggtree(tree, layout="slanted")
+
 ```
 
 
 # Add annotations
 ## Stats
 ```{r}
+ggstripchart()
+```
+
+```{r}
+ggscatter(df, x = "wt", y = "mpg",
+   color = "black", shape = 21, size = 3, # Points color, shape and size
+   add = "reg.line",  # Add regressin line
+   add.params = list(color = "blue", fill = "lightgray"), # Customize reg. line
+   conf.int = TRUE, # Add confidence interval
+   cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
+   cor.coeff.args = list(method = "pearson", label.x = 3, label.sep = "\n")
+   )
 ```
 ## Labels
 ```{r}
@@ -120,6 +133,55 @@ ggtree(tree, layout="slanted")
 
 # Save your figures
 ```{r}
+```
+
+# Heatmaps with `pheatmap`
+```{r}
+# we are only interested in numeric columns
+cols_oi = c('bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g')
+pheatmap(dat[,cols_oi])
+
+pheatmap(dat[,cols_oi], scale = 'column')
+pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE)
+
+# annotate a dimension
+rownames(dat) = 1:nrow(dat)
+pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE, annotation_row = dat[,'species',drop=FALSE])
+pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE, annotation_row = dat[,c('species','island'),drop=FALSE])
+```
+
+# Phylogenetic tree with `ggtree`
+[book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
+```{r}
+require(ggtree)
+set.seed(100)
+tree <- rtree(50)
+ggtree(tree)
+ggtree(tree, layout="slanted")
+ggtree(tree, layout="slanted") + geom_tiplab()
+```
+```{r, fig.height=10}
+require(seqinr)
+require(ape)
+# tree and MSA
+fasta_file = file.path(here::here(), 'data', 'raw', 'TP53-mammals-alignment-aa.fa')
+# create tree
+#aln = read.alignment(fasta_file, format = 'fasta')
+aln = read.alignment(fasta_file, format = 'fasta', whole.header=TRUE)
+D = dist.alignment(aln)
+#tree = nj(D)
+tree = njs(D)
+ggtree(tree)
+ggtree(tree, ladderize = FALSE)
+ggtree(tree, ladderize = FALSE) + 
+  xlim(NA,0.5) +
+  geom_tiplab(align=TRUE, linetype='dashed', linesize=.3)
+ggtree(tree, ladderize = FALSE, layout = 'circular') + 
+  xlim(NA,0.5) +
+  geom_tiplab(align=TRUE, linetype='dashed', linesize=.3)
+tree_plot = ggtree(tree, ladderize = FALSE)
+# plot tree with MSA
+msaplot(tree_plot, fasta = fasta_file)
 ```
 
 # References
