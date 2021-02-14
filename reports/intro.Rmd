@@ -16,175 +16,159 @@ output:
     md_document:
       variant: markdown_github
 ---
+# Load data
+To start playing around with the functions from these packages we will use the [`palmerpenguins` data set](https://allisonhorst.github.io/palmerpenguins/articles/intro.html).
+This simple data set has both continuous and categorical variables that make it perfect for showcasing how different functions work.
 
-Personally, I am a big fan of `ggpubr` because it allows to make simple quick plots
-and at the same time, as being built on top og `ggplot2`, it also allows to customize them
-to a very high degree.
+![](images/palmerpenguins.png)
 
-# General plotting with `ggpubr`
-
-```{r load data and libraries, message=FALSE, warning=FALSE}
-require(ggpubr)
+```{r, message=FALSE, warning=FALSE}
 require(dplyr)
 require(tidyr)
-require(pheatmap)
 
 penguins_url = 'https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv'
 dat = read.csv(url(penguins_url), stringsAsFactors = TRUE)
 dat = dat %>% drop_na()
 head(dat)
 ```
-## Bar plot
-```{r}
-ggbarplot(dat %>% count(species), x = 'species', y = 'n')
-ggbarplot(dat %>% count(species), x = 'species', y = 'n', fill = 'species')
+
+
+# General plotting with `ggpubr`
+```{r message=FALSE, warning=FALSE}
+require(ggpubr)
+require(ggplot2)
 ```
 
-## Pie plot
+Personally, I am a big fan of `ggpubr` because it allows to make insightful plots quickly for exploration that in turn can be further customized thanks to being built on top of `ggplot2`.
+
+These are useful links for using this package:
+- plotting functions
+- [palettes](http://rpkgs.datanovia.com/ggpubr/reference/get_palette.html)
+- figure making
+
+
+Next, we will try to answer different questions using this library and `ggplot2`.
+
+## How many penguins of each species did we observe in total?
 ```{r}
-ggpie(dat %>% count(island), x = 'n', color = 'island')
+ggpie(dat %>% count(species), x = 'n', fill = 'species')
 ```
 
-## Histogram
+## How many penguins of each species and sex did we observe across the different islands?
 ```{r}
-gghistogram(dat, x = 'species', stat = 'count', fill = 'species')
-gghistogram(dat, x = 'bill_length_mm')
-gghistogram(dat, x = 'bill_length_mm', fill = 'sex')
-gghistogram(dat, x = 'bill_length_mm', fill = 'island')
-gghistogram(dat, x = 'bill_length_mm', fill = 'species')
-```
-## Balloon plot
-```{r}
-tbl = as.data.frame(table(dat$species, dat$island))
-ggballoonplot(tbl, fill = 'value')
-```
-
-## Box plot
-```{r}
-ggboxplot(dat, x = 'species', y = 'body_mass_g')
-ggboxplot(dat, x = 'species', y = 'body_mass_g', fill = 'sex')
-ggboxplot(dat, x = 'species', y = 'body_mass_g', fill = 'sex', facet.by = 'island')
-ggboxplot(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species')
-```
-## Strip chart
-```{r}
-ggstripchart(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species')
-ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5)
-ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge())
-?ggstripchart
-ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr')
-ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black'))
-ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
-```
-## Dot plot
-```{r}
-ggdotplot(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
-```
-## Violin plot
-```{r}
-ggviolin(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
-ggviolin(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
-ggviolin(dat, x = 'island', y = 'body_mass_g', fill = 'sex', facet.by = 'species', alpha = 0.5, add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
-```
-## Scatter plot
-```{r}
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5)
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'island')
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'sex')
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year')
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
-ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
-ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year') + theme(legend.key.width=unit(1,"cm")) 
-```
-
-# Change palette
-```{r}
-
+ggbarplot(dat %>% count(species, sex, island), x = 'species', y = 'n', fill = 'sex', 
+          label = TRUE, position = position_dodge(0.7), facet.by = 'island', palette = 'lancet')
 ```
 
 
-# Add annotations
-## Stats
+## What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
+```{r, message=FALSE, warning=FALSE}
+gghistogram(dat, x = 'flipper_length_mm', fill = 'sex', facet.by = c('species','island'))
+```
+Alternatively, we can use stripcharts charts:
 ```{r}
-ggstripchart()
+ggstripchart(dat, x = 'island', y = 'flipper_length_mm', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
 ```
 
+## Are the differences of body mass between sexes significant if we control for species and island?
 ```{r}
-ggscatter(df, x = "wt", y = "mpg",
-   color = "black", shape = 21, size = 3, # Points color, shape and size
-   add = "reg.line",  # Add regressin line
-   add.params = list(color = "blue", fill = "lightgray"), # Customize reg. line
-   conf.int = TRUE, # Add confidence interval
-   cor.coef = TRUE, # Add correlation coefficient. see ?stat_cor
-   cor.coeff.args = list(method = "pearson", label.x = 3, label.sep = "\n")
-   )
-```
-## Labels
-```{r}
+ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))+
+   stat_compare_means(aes(color = sex), label = "p.signif", method = 'wilcox.test')
 ```
 
-# Other
-- `ggparagraph`
-- `ggsummarytable`
-
-# Combine plots into figures
+## What is the relationship between flipper length, body mass and bill length?
 ```{r}
+ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', color = 'bill_length_mm', alpha = 0.5)
 ```
 
-# Save your figures
+## Could we have sampling bias in the relationship between flipper length and body mass?
 ```{r}
+ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year', ellipse = TRUE)
 ```
+
+## What is the spearman correlation coefficient between body mass and flipper length?
+```{r, message=FALSE, warning=FALSE}
+ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year', 
+          add = 'reg.line', conf.int = TRUE, 
+          cor.coef = TRUE,
+          cor.coeff.args = list(method = 'spearman', label.sep = '\n')) + 
+   theme(aspect.ratio = 1)
+```
+
+## Create and save a figure
+```{r, eval=FALSE}
+fontsize = 6
+labsize = 2
+
+# overview number of observations of every sex across islands and species
+p1 = ggbarplot(dat %>% count(species, sex, island), x = 'species', y = 'n', fill = 'sex', 
+               label = TRUE, lab.size = labsize,
+               position = position_dodge(0.7), facet.by = 'island', palette = 'lancet') + 
+   ylim(NA, 68)
+
+# sex-related body mass distributions across islands and species
+p2 = ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'species', 
+                  alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', 
+                  add.params = list(color='black', group='sex', size=0.2),
+                  palette = 'lancet')+
+            stat_compare_means(aes(color = sex), label = "p.signif", method = 'wilcox.test', size = labsize)
+
+# association of flipper length and body mass
+p3 = ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year', 
+          add = 'reg.line', conf.int = TRUE, 
+          cor.coef = TRUE,
+          cor.coeff.args = list(method = 'spearman', label.sep = '\n', size = labsize)) + 
+   theme(aspect.ratio = 1)
+
+
+p1p2 = ggarrange(p1 + theme_pubr(base_size = fontsize), p2 + theme_pubr(base_size = fontsize), ncol = 1, common.legend = TRUE)
+fig = ggarrange(p1p2, p3 + theme_pubr(base_size = fontsize), widths = c(2,1), heights = c(2, 1), labels = 'AUTO')
+
+# save
+ggsave('myfig.pdf', fig, width = 15, height = 10, unit = 'cm')
+```
+
+![](myfig.pdf)
 
 # Heatmaps with `pheatmap`
 ```{r}
+require(pheatmap)
 # we are only interested in numeric columns
 cols_oi = c('bill_length_mm','bill_depth_mm','flipper_length_mm','body_mass_g')
-pheatmap(dat[,cols_oi])
-
-pheatmap(dat[,cols_oi], scale = 'column')
-pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE)
-
-# annotate a dimension
 rownames(dat) = 1:nrow(dat)
-pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE, annotation_row = dat[,'species',drop=FALSE])
 pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE, annotation_row = dat[,c('species','island'),drop=FALSE])
 ```
 
-# Phylogenetic tree with `ggtree`
+# Phylogenetic trees with `ggtree`
 [book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
+
+## Basic tree
 ```{r}
 require(ggtree)
 set.seed(100)
 tree <- rtree(50)
-ggtree(tree)
-ggtree(tree, layout="slanted")
-ggtree(tree, layout="slanted") + geom_tiplab()
+ggtree(tree, layout="circular") + geom_tiplab()
 ```
-```{r, fig.height=10}
+
+## Tree and multiple sequence alignment
+```{r, warning=FALSE, message=FALSE, fig.height=10}
 require(seqinr)
 require(ape)
-# tree and MSA
+
+# create tree from alignment
 fasta_file = file.path(here::here(), 'data', 'raw', 'TP53-mammals-alignment-aa.fa')
-# create tree
-#aln = read.alignment(fasta_file, format = 'fasta')
 aln = read.alignment(fasta_file, format = 'fasta', whole.header=TRUE)
 D = dist.alignment(aln)
-#tree = nj(D)
 tree = njs(D)
-ggtree(tree)
-ggtree(tree, ladderize = FALSE)
-ggtree(tree, ladderize = FALSE) + 
-  xlim(NA,0.5) +
-  geom_tiplab(align=TRUE, linetype='dashed', linesize=.3)
-ggtree(tree, ladderize = FALSE, layout = 'circular') + 
-  xlim(NA,0.5) +
-  geom_tiplab(align=TRUE, linetype='dashed', linesize=.3)
-tree_plot = ggtree(tree, ladderize = FALSE)
+
 # plot tree with MSA
-msaplot(tree_plot, fasta = fasta_file)
+tree_plot = ggtree(tree)
+msaplot(tree_plot, fasta = fasta_file) + ggtitle('tree with MSA')
 ```
 
 # References
+
+
 
 # Session Info
 ```{r session info}

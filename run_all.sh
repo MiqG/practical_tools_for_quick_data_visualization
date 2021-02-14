@@ -10,19 +10,12 @@
 # Outline
 # -------
 
-
-
-# variables
-
-# paths
-
-# inputs
-
-# outputs
+# prepare raw data
+Rscript scripts/prepare_multiomic_data.R
 
 # run report
-R -e "rmarkdown::render('reports/intro.Rmd', output_format='all')"
-R -e "rmarkdown::render('reports/exercise.Rmd', output_format='all')"
+R -e "rmarkdown::render('reports/intro.Rmd', output_format='md_document', output_dir='rendered')"
+R -e "rmarkdown::render('reports/exercise.Rmd', output_format='md_document')"
 
 
 echo "Done!"

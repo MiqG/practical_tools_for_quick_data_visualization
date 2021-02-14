@@ -60,7 +60,7 @@ How many penguins of each species did we observe in total?
 ggpie(dat %>% count(species), x = 'n', fill = 'species')
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-3-1.png)
 
 How many penguins of each species and sex did we observe across the different islands?
 --------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ ggbarplot(dat %>% count(species, sex, island), x = 'species', y = 'n', fill = 's
           label = TRUE, position = position_dodge(0.7), facet.by = 'island', palette = 'lancet')
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
 -----------------------------------------------------------------------------------------------------
@@ -79,14 +79,14 @@ What are the distributions of flipper lengths considering penguin species, sex a
 gghistogram(dat, x = 'flipper_length_mm', fill = 'sex', facet.by = c('species','island'))
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-5-1.png)
 Alternatively, we can use stripcharts charts:
 
 ``` r
 ggstripchart(dat, x = 'island', y = 'flipper_length_mm', color = 'sex', facet.by = 'species', alpha = 0.5, position = position_jitterdodge(), add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2))
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 Are the differences of body mass between sexes significant if we control for species and island?
 ------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ ggstripchart(dat, x = 'island', y = 'body_mass_g', color = 'sex', facet.by = 'sp
    stat_compare_means(aes(color = sex), label = "p.signif", method = 'wilcox.test')
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-7-1.png)
 
 What is the relationship between flipper length, body mass and bill length?
 ---------------------------------------------------------------------------
@@ -105,7 +105,7 @@ What is the relationship between flipper length, body mass and bill length?
 ggscatter(dat, x = 'flipper_length_mm', y = 'body_mass_g', color = 'bill_length_mm', alpha = 0.5)
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-8-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-8-1.png)
 
 Could we have sampling bias in the relationship between flipper length and body mass?
 -------------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ Could we have sampling bias in the relationship between flipper length and body 
 ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_mass_g', alpha = 0.5, color = 'year', ellipse = TRUE)
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-9-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
 What is the spearman correlation coefficient between body mass and flipper length?
 ----------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ ggscatter(dat %>% mutate(year=factor(year)), x = 'flipper_length_mm', y = 'body_
    theme(aspect.ratio = 1)
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-10-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-10-1.png)
 
 Create and save a figure
 ------------------------
@@ -182,7 +182,7 @@ rownames(dat) = 1:nrow(dat)
 pheatmap(dat[,cols_oi], scale = 'column', show_rownames = FALSE, annotation_row = dat[,c('species','island'),drop=FALSE])
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-12-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-12-1.png)
 
 Phylogenetic trees with `ggtree`
 ================================
@@ -227,7 +227,7 @@ tree <- rtree(50)
 ggtree(tree, layout="circular") + geom_tiplab()
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-13-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Tree and multiple sequence alignment
 ------------------------------------
@@ -247,7 +247,7 @@ tree_plot = ggtree(tree)
 msaplot(tree_plot, fasta = fasta_file) + ggtitle('tree with MSA')
 ```
 
-![](intro_files/figure-markdown_github/unnamed-chunk-14-1.png)
+![](/mnt/0E510B420E510B42/Documents/projectes_pers/practical_tools_for_quick_data_visualization/rendered/intro_files/figure-markdown_github/unnamed-chunk-14-1.png)
 
 References
 ==========

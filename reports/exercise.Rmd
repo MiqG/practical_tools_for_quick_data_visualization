@@ -46,3 +46,6 @@ We collected harmonized data from the [XenaBrowser]() and [NCBI]().
 # References
 
 # Session Info
+```{r session info}
+sessionInfo()
+```
