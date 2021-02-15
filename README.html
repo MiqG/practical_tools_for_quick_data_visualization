@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>This is the welcome page! &#8212; Practical tools for quick data visualization</title>
+    <title>Practical tools for quick data visualization &#8212; Practical tools for quick data visualization</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Useful packages" href="intro.html" />
+    <link rel="next" title="Load data" href="intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -85,7 +85,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="reference internal" href="#">
-   This is the welcome page!
+   Practical tools for quick data visualization
   </a>
  </li>
 </ul>
@@ -97,37 +97,37 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Useful packages
+   Load data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#install-packages">
-   Install packages
+  <a class="reference internal" href="intro.html#general-plotting-with-ggpubr">
+   General plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggpubr
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#basic-plots">
-   Basic plots
+  <a class="reference internal" href="intro.html#heatmaps-with-pheatmap">
+   Heatmaps with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pheatmap
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#add-annotations">
-   Add annotations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#other">
-   Other
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#combine-plots-into-figures">
-   Combine plots into figures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#save-your-figures">
-   Save your figures
+  <a class="reference internal" href="intro.html#phylogenetic-trees-with-ggtree">
+   Phylogenetic trees with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggtree
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
@@ -149,7 +149,7 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="exercise.html">
-   Data description
+   Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -207,7 +207,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/welcome.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/README.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -227,7 +227,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/MiqG/practical_tools_for_quick_data_visualization/issues/new?title=Issue%20on%20page%20%2Fwelcome.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/MiqG/practical_tools_for_quick_data_visualization/issues/new?title=Issue%20on%20page%20%2FREADME.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -248,6 +248,22 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-starting">
+   Before starting
+  </a>
+  <ul class="nav section-nav flex-column">
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -255,11 +271,69 @@
         
               <div>
                 
-  <div class="section" id="this-is-the-welcome-page">
-<h1>This is the welcome page!<a class="headerlink" href="#this-is-the-welcome-page" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="practical-tools-for-quick-data-visualization">
+<h1>Practical tools for quick data visualization<a class="headerlink" href="#practical-tools-for-quick-data-visualization" title="Permalink to this headline">¶</a></h1>
+<p>When starting a new project, designing new methods for data analysis or even when preparing
+a new publication, data visualization is essential to both explore new hypotheses and
+to validate our findings.</p>
+<p>With this crash talk I aim to spread the word on the existence of a series of packages that have made my life much easier when it comes to exploratory data anlysis.</p>
+<div class="section" id="before-starting">
+<h2>Before starting<a class="headerlink" href="#before-starting" title="Permalink to this headline">¶</a></h2>
+<p>Please, make sure to have R and RStudio installed with the following packages:</p>
+<ul class="simple">
+<li><p><strong>Data Wrangling</strong></p>
+<ul>
+<li><p><a class="reference external" href="https://cran.r-project.org/web/packages/here/vignettes/here.html"><code class="docutils literal notranslate"><span class="pre">here</span></code></a>: to automate locating your root directory.</p></li>
+<li><p><a class="reference external" href="https://readr.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">readr</span></code></a>: to read and write files.</p></li>
+<li><p><a class="reference external" href="https://dplyr.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">dplyr</span></code></a>: to play with dataframes through piping.</p></li>
+<li><p><a class="reference external" href="https://tidyr.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">tidyr</span></code></a>: to cleanup dataframes.</p></li>
+<li><p><a class="reference external" href="https://www.rdocumentation.org/packages/reshape2/versions/1.4.4"><code class="docutils literal notranslate"><span class="pre">reshape2</span></code></a>: to change data matrices from long to wide format and viceversa.</p></li>
+<li><p><a class="reference external" href="https://seqinr.r-forge.r-project.org/"><code class="docutils literal notranslate"><span class="pre">seqinr</span></code></a>: to read and write files with biological sequences.</p></li>
+<li><p><a class="reference external" href="https://www.rdocumentation.org/packages/ape/versions/5.4-1"><code class="docutils literal notranslate"><span class="pre">ape</span></code></a>: to compute distances between aligned sequences.</p></li>
+<li><p><a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/Biostrings.html"><code class="docutils literal notranslate"><span class="pre">Biostrings</span></code></a>: to wrangle biological sequences.</p></li>
+</ul>
+</li>
+<li><p><strong>Visualization</strong></p>
+<ul>
+<li><p><a class="reference external" href="https://ggplot2.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code></a>: powerful suite for general data visualization in R.</p></li>
+<li><p><a class="reference external" href="https://rpkgs.datanovia.com/ggpubr/"><code class="docutils literal notranslate"><span class="pre">ggpubr</span></code></a>: ggplot metapackage that wraps many funcitonalities together.</p></li>
+<li><p><a class="reference external" href="https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12"><code class="docutils literal notranslate"><span class="pre">pheatmap</span></code></a>: to make “pretty-heatmaps”.</p></li>
+<li><p><a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/ggtree.html"><code class="docutils literal notranslate"><span class="pre">ggtree</span></code></a>: to visualize muliple sequence alignments as trees.</p></li>
+</ul>
+</li>
+</ul>
+<p>Here’s the code snipped in case you need to install some of them.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># install packages from CRAN</span>
+<span class="c1"># wrangling</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;here&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;readr&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;dplyr&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;tidyr&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;reshape2&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;seqinr&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;ape&#39;</span><span class="p">)</span>
+
+<span class="c1"># visualization</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;ggpubr&#39;</span><span class="p">)</span> <span class="c1"># requires libcurl4 in ubuntu</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;pheatmap&#39;</span><span class="p">)</span>
+
+<span class="c1"># install packages from Bioconductor</span>
+<span class="nf">if </span><span class="p">(</span><span class="o">!</span><span class="nf">requireNamespace</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">,</span> <span class="n">quietly</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span> <span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;BiocManager&quot;</span><span class="p">)</span>
+<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&#39;ggtree&#39;</span><span class="p">)</span>
+<span class="n">BiocManager</span><span class="o">::</span><span class="nf">install</span><span class="p">(</span><span class="s">&#39;Biostrings&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, you can also download the notebooks for the talk with:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="o">://</span><span class="n">github.com</span><span class="o">/</span><span class="n">MiqG</span><span class="o">/</span><span class="n">practical_tools_for_quick_data_visualization.git</span>
+</pre></div>
+</div>
+<p>or just by clicking <a class="reference external" href="https://codeload.github.com/MiqG/practical_tools_for_quick_data_visualization/zip/main">here</a>.</p>
+<p>Enjoy!</p>
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
@@ -291,7 +365,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="intro.html" title="next page">Useful packages</a>
+    <a class='right-next' id="next-link" href="intro.html" title="next page">Load data</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

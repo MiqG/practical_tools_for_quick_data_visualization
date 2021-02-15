@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data description &#8212; Practical tools for quick data visualization</title>
+    <title>Data &#8212; Practical tools for quick data visualization</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,7 +54,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Useful packages" href="intro.html" />
+    <link rel="prev" title="Load data" href="intro.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -84,8 +84,8 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="welcome.html">
-   This is the welcome page!
+  <a class="reference internal" href="README.html">
+   Practical tools for quick data visualization
   </a>
  </li>
 </ul>
@@ -97,37 +97,37 @@
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   Useful packages
+   Load data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#install-packages">
-   Install packages
+  <a class="reference internal" href="intro.html#general-plotting-with-ggpubr">
+   General plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggpubr
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#basic-plots">
-   Basic plots
+  <a class="reference internal" href="intro.html#heatmaps-with-pheatmap">
+   Heatmaps with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pheatmap
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#add-annotations">
-   Add annotations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#other">
-   Other
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#combine-plots-into-figures">
-   Combine plots into figures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#save-your-figures">
-   Save your figures
+  <a class="reference internal" href="intro.html#phylogenetic-trees-with-ggtree">
+   Phylogenetic trees with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggtree
+    </span>
+   </code>
   </a>
  </li>
  <li class="toctree-l1">
@@ -149,7 +149,7 @@
 <ul class="current nav sidenav_l1">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data description
+   Data
   </a>
  </li>
  <li class="toctree-l1">
@@ -255,8 +255,20 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Data description
+   Data
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#description">
+     Description
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exploratory-data-analysis">
@@ -264,54 +276,115 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overview-across-omics-and-cancer-types">
-     Overview across omics and cancer types
+    <a class="reference internal nav-link" href="#counting">
+     Counting
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-per-cancer-type-are-there">
+       How many samples per cancer type are there?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-per-cancer-type-and-sample-type-are-there">
+       How many samples per cancer type and sample type are there?
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#total-number-of-samples-per-cancer-type">
-     Total number of samples per cancer type
+    <a class="reference internal nav-link" href="#distributions">
+     Distributions
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types">
+       What are the distributions of values for every omic type across cancer types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-you-now-split-them-by-sample-type">
+       Could you now split them by sample type?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
+       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#total-number-of-samples-per-cancer-type-and-sample-type">
-     Total number of samples per cancer type and sample type
+    <a class="reference internal nav-link" href="#mutations">
+     Mutations
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-have-at-least-a-mutation">
+       How many samples have at least a mutation?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#which-are-the-most-common-effects-of-mutations">
+       Which are the most common effects of mutations?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-certain-cancer-types">
+       Are there mutations associated to certain cancer types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-sample-types">
+       Are there mutations associated to sample types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions">
+       How are mutation effects associated to certain positions?
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#omic-values-differences-between-sample-types">
-     Omic values differences between sample types
+    <a class="reference internal nav-link" href="#generating-data-overviews">
+     Generating data overviews
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-many-samples-have-at-least-a-mutation">
-     How many samples have at least a mutation?
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#which-are-the-most-common-effects-of-mutations">
-     Which are the most common effects of mutations?
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#are-there-mutations-associated-to-cancer-types">
-     Are there mutations associated to cancer types?
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#are-there-mutations-associated-to-sample-types">
-     Are there mutations associated to sample types?
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions">
-     How are mutation effects associated to certain positions?
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
+       Could you use
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pheatmap
+        </span>
+       </code>
+       to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pairwise-associations">
      Pairwise associations
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-mutation-effects-be-associated-with-gene-expression">
+       Could mutation effects be associated with gene expression?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-gene-expression-be-associated-with-copy-number-variation">
+       Could gene expression be associated with copy number variation?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualize-other-pairwise-associations-that-you-found-interesting">
+       Visualize other pairwise associations that you found interesting
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -336,61 +409,273 @@
         
               <div>
                 
-  <p>According to this
+  <div class="section" id="data">
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span>
+<span class="n">ROOT</span> <span class="o">=</span> <span class="n">here</span><span class="o">::</span><span class="nf">here</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>According to this
 <a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">article</a>, <em>TP53</em> is
-the most popular gene in the human genome. We will look into it from
-multiple perspectives.</p>
-<div class="section" id="data-description">
-<h1>Data description<a class="headerlink" href="#data-description" title="Permalink to this headline">¶</a></h1>
-<p>We collected harmonized data from the <span class="xref myst">XenaBrowser</span> and <span class="xref myst">NCBI</span>. -
-XenaBrowser <a class="reference external" href="https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&amp;removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443">TCGA Pan Cancer (PANCAN)
+the most popular gene in the human genome by far. In the practical part
+of the talk, we will all dive into pubicly available data on this gene.</p>
+<p>We collected harmonized multi-omic data from the XenaBrowser’s <a class="reference external" href="https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&amp;removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443">TCGA Pan
+Cancer (PANCAN)
 dataset</a>:</p>
 <ul class="simple">
-<li><p>Gene expression: log2(norm_value+1) - Exon expression: log2(RPKM+1) -
-Gene methylation 450k: beta value - Copy Number Variation: log( tumor /
-normal ) - Mutations -
-<a class="reference external" href="https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674">COBALT</a>
-(from NCBI): - orthologues aminoacid alignment of 153 mammals</p></li>
+<li><p>Gene expression: log2(norm_value+1)</p></li>
+<li><p>Exon expression: log2(RPKM+1)</p></li>
+<li><p>Gene methylation 450k: beta value</p></li>
+<li><p>Copy Number Variation: log( tumor / normal )</p></li>
+<li><p>Mutations</p></li>
 </ul>
+<p>Additionally, we downloaded a protein Multiple Sequence Alignment (MSA)
+of 153 <em>TP53</em> mammal orthologues from
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a>, generated through their aligner
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674">COBALT</a>.</p>
+</div>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The pre-processed data sets can be found in <code class="docutils literal notranslate"><span class="pre">data/prep</span></code>.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omics</span> <span class="o">=</span> <span class="nf">read_tsv</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;prep&#39;</span><span class="p">,</span><span class="s">&#39;data_multiomics.tsv.gz&#39;</span><span class="p">))</span>
+<span class="n">muts</span> <span class="o">=</span> <span class="nf">read_tsv</span><span class="p">(</span><span class="nf">file.path</span><span class="p">(</span><span class="n">ROOT</span><span class="p">,</span><span class="s">&#39;data&#39;</span><span class="p">,</span><span class="s">&#39;prep&#39;</span><span class="p">,</span><span class="s">&#39;data_somatic_mutations.tsv.gz&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The data sets contain data on all these cancer types:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">cancer_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;GBM&quot;  &quot;OV&quot;   &quot;LUAD&quot; &quot;LUSC&quot; &quot;PRAD&quot; &quot;UCEC&quot; &quot;BLCA&quot; &quot;TGCT&quot; &quot;ESCA&quot; &quot;PAAD&quot;
+## [11] &quot;KIRP&quot; &quot;LIHC&quot; &quot;CESC&quot; &quot;SARC&quot; &quot;BRCA&quot; &quot;THYM&quot; &quot;MESO&quot; &quot;COAD&quot; &quot;STAD&quot; &quot;SKCM&quot;
+## [21] &quot;CHOL&quot; &quot;KIRC&quot; &quot;THCA&quot; &quot;HNSC&quot; &quot;LAML&quot; &quot;READ&quot; &quot;LGG&quot;  &quot;DLBC&quot; &quot;KICH&quot; &quot;UCS&quot; 
+## [31] &quot;ACC&quot;  &quot;PCPG&quot; &quot;UVM&quot;
+</pre></div>
+</div>
+<p>I pre-processed different omic data sets into a long format data frame
+in which every “value” is linked to an “omic_type”, which in turn can
+have several “omic_names”. Additionally, we added information on the
+sample metadata.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># available variables</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">omics</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;sample&quot;                              &quot;omic_name&quot;                          
+##  [3] &quot;value&quot;                               &quot;omic_type&quot;                          
+##  [5] &quot;_primary_disease&quot;                    &quot;age_at_initial_pathologic_diagnosis&quot;
+##  [7] &quot;clinical_stage&quot;                      &quot;gender&quot;                             
+##  [9] &quot;histological_grade&quot;                  &quot;histological_type&quot;                  
+## [11] &quot;OS&quot;                                  &quot;OS.time&quot;                            
+## [13] &quot;residual_tumor&quot;                      &quot;sample_type&quot;                        
+## [15] &quot;tumor_status&quot;                        &quot;_PATIENT&quot;                           
+## [17] &quot;cancer_type&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># omic data types</span>
+<span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">omic_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## # A tibble: 4 x 2
+## # Groups:   omic_type [4]
+##   omic_type                  n
+##   &lt;chr&gt;                  &lt;int&gt;
+## 1 copy_number_variation  10873
+## 2 exon_expression       125508
+## 3 gene_expression        11060
+## 4 methylation           318050
+</pre></div>
+</div>
+<p>In the cases of exon expression and methylation, there are multiple
+“omic_name”s that correspond to different exons and methylation sites.</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># exons</span>
+<span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="s">&#39;exon_expression&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;chr17:7580643-7580745:-&quot; &quot;chr17:7577019-7577155:-&quot;
+##  [3] &quot;chr17:7577499-7577608:-&quot; &quot;chr17:7571720-7573008:-&quot;
+##  [5] &quot;chr17:7576525-7576657:-&quot; &quot;chr17:7578371-7578811:-&quot;
+##  [7] &quot;chr17:7590695-7590863:-&quot; &quot;chr17:7565097-7565332:-&quot;
+##  [9] &quot;chr17:7579312-7579590:-&quot; &quot;chr17:7579700-7579940:-&quot;
+## [11] &quot;chr17:7576853-7576926:-&quot; &quot;chr17:7573927-7574033:-&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># methylation sites</span>
+<span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="s">&#39;methylation&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;cg21050342&quot; &quot;cg26539663&quot; &quot;cg17461511&quot; &quot;cg12373934&quot; &quot;cg06365412&quot;
+##  [6] &quot;cg16397722&quot; &quot;cg14351634&quot; &quot;cg25896754&quot; &quot;cg18198734&quot; &quot;cg02045224&quot;
+## [11] &quot;cg10792831&quot; &quot;cg22949073&quot; &quot;cg02166782&quot; &quot;cg12041075&quot; &quot;cg13468400&quot;
+## [16] &quot;cg15206330&quot; &quot;cg05479194&quot; &quot;cg00807143&quot; &quot;cg05348746&quot; &quot;cg16203911&quot;
+## [21] &quot;cg18311066&quot; &quot;cg02087342&quot; &quot;cg22175811&quot; &quot;cg06587969&quot; &quot;cg08119584&quot;
+## [26] &quot;cg13169780&quot; &quot;cg06317056&quot; &quot;cg02690969&quot; &quot;cg02842899&quot; &quot;cg02855142&quot;
+## [31] &quot;cg04009932&quot; &quot;cg25053252&quot; &quot;cg07991600&quot;
+</pre></div>
+</div>
+<p>Then, the mutations data set is structured as a list of mutations that
+occur inthis gene in every sample:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">muts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;sample&quot;                              &quot;chr&quot;                                
+##  [3] &quot;start&quot;                               &quot;end&quot;                                
+##  [5] &quot;gene&quot;                                &quot;reference&quot;                          
+##  [7] &quot;alt&quot;                                 &quot;altGene&quot;                            
+##  [9] &quot;effect&quot;                              &quot;aminoAcid&quot;                          
+## [11] &quot;rnaVaf&quot;                              &quot;dnaVaf&quot;                             
+## [13] &quot;_primary_disease&quot;                    &quot;age_at_initial_pathologic_diagnosis&quot;
+## [15] &quot;clinical_stage&quot;                      &quot;gender&quot;                             
+## [17] &quot;histological_grade&quot;                  &quot;histological_type&quot;                  
+## [19] &quot;OS&quot;                                  &quot;OS.time&quot;                            
+## [21] &quot;residual_tumor&quot;                      &quot;sample_type&quot;                        
+## [23] &quot;tumor_status&quot;                        &quot;_PATIENT&quot;                           
+## [25] &quot;cancer_type&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">muts</span> <span class="o">%&gt;%</span> <span class="nf">drop_na</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## # A tibble: 9,104 x 25
+##    sample chr     start     end gene  reference alt   altGene effect aminoAcid
+##    &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;  &lt;chr&gt;    
+##  1 TCGA-… chr17 7577094 7577094 TP53  G         A     NA      Misse… p.R282W  
+##  2 TCGA-… chr17 7577538 7577538 TP53  C         T     NA      Misse… p.R248Q  
+##  3 TCGA-… no v…      NA      NA no v… no varia… no v… NA      no va… no varia…
+##  4 TCGA-… chr17 7578203 7578203 TP53  C         T     NA      Misse… p.V216M  
+##  5 TCGA-… no v…      NA      NA no v… no varia… no v… NA      no va… no varia…
+##  6 TCGA-… chr17 7577120 7577120 TP53  C         T     NA      Misse… p.R273H  
+##  7 TCGA-… chr17 7577538 7577538 TP53  C         T     NA      Misse… p.R248Q  
+##  8 TCGA-… no v…      NA      NA no v… no varia… no v… NA      no va… no varia…
+##  9 TCGA-… no v…      NA      NA no v… no varia… no v… NA      no va… no varia…
+## 10 TCGA-… chr17 7577099 7577099 TP53  C         A     NA      Misse… p.R280I  
+## # … with 9,094 more rows, and 15 more variables: rnaVaf &lt;lgl&gt;, dnaVaf &lt;dbl&gt;,
+## #   `_primary_disease` &lt;chr&gt;, age_at_initial_pathologic_diagnosis &lt;dbl&gt;,
+## #   clinical_stage &lt;chr&gt;, gender &lt;chr&gt;, histological_grade &lt;chr&gt;,
+## #   histological_type &lt;chr&gt;, OS &lt;dbl&gt;, OS.time &lt;dbl&gt;, residual_tumor &lt;lgl&gt;,
+## #   sample_type &lt;chr&gt;, tumor_status &lt;chr&gt;, `_PATIENT` &lt;chr&gt;, cancer_type &lt;chr&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="exploratory-data-analysis">
 <h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview-across-omics-and-cancer-types">
-<h2>Overview across omics and cancer types<a class="headerlink" href="#overview-across-omics-and-cancer-types" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we will try to answer the questions using functions
+from the packages introduced previously. These solutions are completely
+subjective, so feel free to find your own best ways of combining and
+visualizing the different types of data.</p>
+<p>[This section will be updated the day of the talk to build some
+“suspense”… :)]</p>
+<div class="section" id="counting">
+<h2>Counting<a class="headerlink" href="#counting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-many-samples-per-cancer-type-are-there">
+<h3>How many samples per cancer type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-are-there" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="total-number-of-samples-per-cancer-type">
-<h2>Total number of samples per cancer type<a class="headerlink" href="#total-number-of-samples-per-cancer-type" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-many-samples-per-cancer-type-and-sample-type-are-there">
+<h3>How many samples per cancer type and sample type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-and-sample-type-are-there" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="total-number-of-samples-per-cancer-type-and-sample-type">
-<h2>Total number of samples per cancer type and sample type<a class="headerlink" href="#total-number-of-samples-per-cancer-type-and-sample-type" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="omic-values-differences-between-sample-types">
-<h2>Omic values differences between sample types<a class="headerlink" href="#omic-values-differences-between-sample-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="distributions">
+<h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types">
+<h3>What are the distributions of values for every omic type across cancer types?<a class="headerlink" href="#what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types" title="Permalink to this headline">¶</a></h3>
 </div>
+<div class="section" id="could-you-now-split-them-by-sample-type">
+<h3>Could you now split them by sample type?<a class="headerlink" href="#could-you-now-split-them-by-sample-type" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
+<h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="mutations">
+<h2>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="how-many-samples-have-at-least-a-mutation">
-<h2>How many samples have at least a mutation?<a class="headerlink" href="#how-many-samples-have-at-least-a-mutation" title="Permalink to this headline">¶</a></h2>
+<h3>How many samples have at least a mutation?<a class="headerlink" href="#how-many-samples-have-at-least-a-mutation" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="which-are-the-most-common-effects-of-mutations">
-<h2>Which are the most common effects of mutations?<a class="headerlink" href="#which-are-the-most-common-effects-of-mutations" title="Permalink to this headline">¶</a></h2>
+<h3>Which are the most common effects of mutations?<a class="headerlink" href="#which-are-the-most-common-effects-of-mutations" title="Permalink to this headline">¶</a></h3>
 </div>
-<div class="section" id="are-there-mutations-associated-to-cancer-types">
-<h2>Are there mutations associated to cancer types?<a class="headerlink" href="#are-there-mutations-associated-to-cancer-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="are-there-mutations-associated-to-certain-cancer-types">
+<h3>Are there mutations associated to certain cancer types?<a class="headerlink" href="#are-there-mutations-associated-to-certain-cancer-types" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="are-there-mutations-associated-to-sample-types">
-<h2>Are there mutations associated to sample types?<a class="headerlink" href="#are-there-mutations-associated-to-sample-types" title="Permalink to this headline">¶</a></h2>
+<h3>Are there mutations associated to sample types?<a class="headerlink" href="#are-there-mutations-associated-to-sample-types" title="Permalink to this headline">¶</a></h3>
 </div>
 <div class="section" id="how-are-mutation-effects-associated-to-certain-positions">
-<h2>How are mutation effects associated to certain positions?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions" title="Permalink to this headline">¶</a></h2>
+<h3>How are mutation effects associated to certain positions?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="generating-data-overviews">
+<h2>Generating data overviews<a class="headerlink" href="#generating-data-overviews" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
+<h3>Could you use <code class="docutils literal notranslate"><span class="pre">pheatmap</span></code> to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?<a class="headerlink" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 <div class="section" id="pairwise-associations">
 <h2>Pairwise associations<a class="headerlink" href="#pairwise-associations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="could-mutation-effects-be-associated-with-gene-expression">
+<h3>Could mutation effects be associated with gene expression?<a class="headerlink" href="#could-mutation-effects-be-associated-with-gene-expression" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="could-gene-expression-be-associated-with-copy-number-variation">
+<h3>Could gene expression be associated with copy number variation?<a class="headerlink" href="#could-gene-expression-be-associated-with-copy-number-variation" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
+<h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this headline">¶</a></h3>
+<p>Try to visualize them considering different sample types, cancer types
+and omic types and names.</p>
+</div>
 </div>
 </div>
 <div class="section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">Article on the most popular
+genes.</a></p></li>
+<li><p><a class="reference external" href="https://xenabrowser.net/">XenaBrowser</a></p></li>
+<li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a></p></li>
+</ul>
 </div>
 <div class="section" id="session-info">
 <h1>Session Info<a class="headerlink" href="#session-info" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## R version 4.0.3 (2020-10-10)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.5 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+## LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.7.1
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_ES.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_ES.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=es_ES.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_ES.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] tidyr_1.1.2 dplyr_1.0.4 readr_1.4.0
+## 
+## loaded via a namespace (and not attached):
+##  [1] rstudioapi_0.13   knitr_1.31        magrittr_2.0.1    hms_1.0.0        
+##  [5] tidyselect_1.1.0  here_1.0.1        R6_2.5.0          rlang_0.4.10     
+##  [9] fansi_0.4.2       stringr_1.4.0     tools_4.0.3       xfun_0.20        
+## [13] utf8_1.1.4        cli_2.3.0         htmltools_0.5.1.1 ellipsis_0.3.1   
+## [17] assertthat_0.2.1  rprojroot_2.0.2   yaml_2.2.1        digest_0.6.27    
+## [21] tibble_3.0.6      lifecycle_0.2.0   crayon_1.4.1      purrr_0.3.4      
+## [25] ps_1.5.0          vctrs_0.3.6       glue_1.4.2        evaluate_0.14    
+## [29] rmarkdown_2.6     stringi_1.5.3     compiler_4.0.3    pillar_1.4.7     
+## [33] generics_0.1.0    pkgconfig_2.0.3
+</pre></div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -421,7 +706,7 @@ normal ) - Mutations -
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Useful packages</a>
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Load data</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
