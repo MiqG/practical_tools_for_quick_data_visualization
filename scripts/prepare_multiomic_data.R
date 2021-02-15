@@ -29,7 +29,8 @@ ROOT = here::here()
 DATA_DIR = file.path(ROOT,'data')
 RAWDATA_DIR = file.path(DATA_DIR,'raw')
 PREPDATA_DIR = file.path(DATA_DIR,'prep')
-
+GENE_NAME = 'TP53'
+  
 # inputs
 data_cnv_file = file.path(RAWDATA_DIR,'TCGA-cnv-TP53.tsv')
 data_meth_file = file.path(RAWDATA_DIR,'TCGA-dna_methylation-TP53.tsv')
@@ -43,12 +44,12 @@ output_dat_file = file.path(PREPDATA_DIR,'data_multiomics.tsv.gz')
 output_dat_mut_file = file.path(PREPDATA_DIR, 'data_somatic_mutations.tsv.gz')
 
 ##### FUNCTIONS #####
-get_omic_types = function(dat){
+get_omic_types = function(dat, gene_name){
     omic_name = dat$omic_name
     omic_type = vector(length = nrow(dat))
     omic_type[grepl('cg',omic_name)] = 'methylation'
     omic_type[grepl('chr',omic_name)] = 'exon_expression'
-    omic_type[grepl('ENS',omic_name)] = 'gene_expression'
+    omic_type[grepl(gene_name,omic_name)] = 'gene_expression'
     omic_type[grepl('(average)',omic_name)] = 'copy_number_variation'
     return(omic_type)
 }
@@ -78,7 +79,7 @@ prepare_multiomic_dataset = function(data_cnv_file, data_meth_file, data_genexpr
     colnames(dat) = c('sample','omic_name','value')
     
     # identify omic types based on omic names
-    dat$omic_type = get_omic_types(dat)
+    dat$omic_type = get_omic_types(dat, GENE_NAME)
     
     # create 'cancer_type' column
     cols_oi = c('_primary_disease','cancer type abbreviation')
@@ -89,6 +90,9 @@ prepare_multiomic_dataset = function(data_cnv_file, data_meth_file, data_genexpr
     # remove misleading columns
     cols_to_drop = c('cancer type abbreviation')
     metadata = metadata[,!colnames(metadata) %in% cols_to_drop]
+    
+    # drop rows with missing values at column 'value'
+    dat = dat %>% drop_na(value)
     
     # add sample (phenotypic) metadata
     dat = merge(dat, metadata, by='sample')
