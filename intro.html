@@ -461,14 +461,14 @@ making</a></p></li>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat, x = &#39;flipper_length_mm&#39;, y = &#39;body_mass_g&#39;, color = &#39;bill_length_mm&#39;, alpha = 0.5)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-11.png" /></p>
 </div>
 <div class="section" id="could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass">
 <h2>Could we have sampling bias in the relationship between flipper length and body mass?<a class="headerlink" href="#could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat %&gt;% mutate(year=factor(year)), x = &#39;flipper_length_mm&#39;, y = &#39;body_mass_g&#39;, alpha = 0.5, color = &#39;year&#39;, ellipse = TRUE)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-11.png" /></p>
 </div>
 <div class="section" id="what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length">
 <h2>What is the spearman correlation coefficient between body mass and flipper length?<a class="headerlink" href="#what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length" title="Permalink to this headline">¶</a></h2>
@@ -547,7 +547,7 @@ tree &lt;- rtree(50)
 ggtree(tree, layout=&quot;circular&quot;) + geom_tiplab()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-13-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-13-11.png" /></p>
 </div>
 <div class="section" id="tree-and-multiple-sequence-alignment-of-tp53-amino-acids">
 <h2>Tree and multiple sequence alignment of <em>TP53</em> amino acids<a class="headerlink" href="#tree-and-multiple-sequence-alignment-of-tp53-amino-acids" title="Permalink to this headline">¶</a></h2>
