@@ -1,0 +1,114 @@
+---
+title: Introduction
+author: miquel [dot] anglada [at] crg [dot] eu
+date: 2021-02-17
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output: md_document
+---
+# Load data
+
+<img src='images/palmerpenguins.png' width='25%'>
+
+To start playing around with the functions from these packages we will use the [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data set.
+This simple data set has both continuous and categorical variables that make it perfect for showcasing how different functions work.
+
+
+```{r, message=FALSE, warning=FALSE}
+require(dplyr)
+require(tidyr)
+
+penguins_url = 'https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv'
+dat = read.csv(url(penguins_url), stringsAsFactors = TRUE)
+dat = dat %>% drop_na()
+head(dat)
+```
+
+# General plotting with `ggpubr`
+```{r message=FALSE, warning=FALSE}
+require(ggpubr)
+require(ggplot2)
+```
+
+`ggpubr` allows to make insightful plots quickly for exploration that in turn can be further customized thanks to being built on top of `ggplot2`.
+
+These are useful links for using this package:
+
+- [function reference](http://rpkgs.datanovia.com/ggpubr/reference/index.html)
+- [palettes](http://rpkgs.datanovia.com/ggpubr/reference/get_palette.html)
+- [figure making](http://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html)
+
+Next, we will try to answer different questions using this library and `ggplot2`.
+
+## How many penguins of each species did we observe in total?
+```{r}
+```
+## How many penguins of each species and sex did we observe across the different islands?
+```{r}
+```
+
+## What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
+```{r}
+```
+Alternatively, we can use stripcharts charts:
+```{r}
+```
+## Are the differences of body mass between sexes significant if we control for species and island?
+```{r}
+```
+
+## What is the relationship between flipper length, body mass and bill length?
+```{r}
+```
+
+## Could we have sampling bias in the relationship between flipper length and body mass?
+```{r}
+```
+
+## What is the spearman correlation coefficient between body mass and flipper length?
+```{r, message=FALSE, warning=FALSE}
+```
+
+## Create and save a figure
+```{r, warning=FALSE, message=FALSE}
+
+```
+
+![](images/myfig.png)
+
+# Heatmaps with `pheatmap`
+A part from `ggpubr`, one of the most common packages to visualize multiple types of data altogether is `pheatmap`, which allows to combine hierarchical clustering of rows and columns with continuous and categorical data.
+
+```{r message=FALSE, warning=FALSE}
+```
+
+# Phylogenetic trees with `ggtree`
+Trees are another very common plot to visualize hierarchical patterns. Here, we will use [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html) to visualize the phylogenetic relationships extracted from a multiple sequence alignment of *TP53* across mammals.
+
+## Basic tree
+```{r, message=FALSE, warning=FALSE}
+```
+
+## Tree and multiple sequence alignment of *TP53* amino acids
+We will follow [Russell J. Gray](https://github.com/RussellGrayxd/Phylogenetics/blob/master/Sequence%20analysis.R)'s approach.
+```{r, warning=FALSE, message=FALSE, fig.height=10}
+```
+
+
+# References
+- [`ggplot2`](https://ggplot2.tidyverse.org/)
+- [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
+- [`pheatmap`](https://cran.r-project.org/web/packages/pheatmap/index.html)
+- [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
+- [`seqinr`](https://seqinr.r-forge.r-project.org/)
+- [`ape`](https://www.rdocumentation.org/packages/ape/versions/5.4-1)
+- [`Biostrings`](https://bioconductor.org/packages/release/bioc/html/Biostrings.html)
+- [`Russell J. Gray's github`](https://github.com/RussellGrayxd)
+
+# Session Info
+```{r session info}
+sessionInfo()
+```

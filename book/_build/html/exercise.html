@@ -340,26 +340,8 @@
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions">
-       How are mutation effects associated to certain positions?
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#generating-data-overviews">
-     Generating data overviews
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
-       Could you use
-       <code class="docutils literal notranslate">
-        <span class="pre">
-         pheatmap
-        </span>
-       </code>
-       to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?
+      <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
+       How are mutation effects associated to certain positions? And cancer_types?
       </a>
      </li>
     </ul>
@@ -382,6 +364,24 @@
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#visualize-other-pairwise-associations-that-you-found-interesting">
        Visualize other pairwise associations that you found interesting
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-data-overviews">
+     Generating data overviews
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
+       Could you use
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pheatmap
+        </span>
+       </code>
+       to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?
       </a>
      </li>
     </ul>
@@ -414,6 +414,11 @@
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
 <span class="nf">require</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="nf">require</span><span class="p">(</span><span class="n">tidyr</span><span class="p">)</span>
+
+<span class="nf">require</span><span class="p">(</span><span class="n">ggpubr</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">pheatmap</span><span class="p">)</span>
+
 <span class="n">ROOT</span> <span class="o">=</span> <span class="n">here</span><span class="o">::</span><span class="nf">here</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -572,59 +577,403 @@ visualizing the different types of data.</p>
 <h2>Counting<a class="headerlink" href="#counting" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="how-many-samples-per-cancer-type-are-there">
 <h3>How many samples per cancer type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-are-there" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">cancer_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">(),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> 
+          <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span>
+          <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
 </div>
 <div class="section" id="how-many-samples-per-cancer-type-and-sample-type-are-there">
 <h3>How many samples per cancer type and sample type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-and-sample-type-are-there" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">cancer_type</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">(),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> 
+          <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#39;uchicago&#39;</span><span class="p">,</span>
+          <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-9-1.png" /></p>
 </div>
 </div>
 <div class="section" id="distributions">
 <h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types">
 <h3>What are the distributions of values for every omic type across cancer types?<a class="headerlink" href="#what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omic_types</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">omics</span><span class="o">$</span><span class="n">omic_type</span><span class="p">)</span>
+<span class="c1">#omic_type_oi = &#39;gene_expression&#39;</span>
+
+<span class="n">plts</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">omic_type_oi</span> <span class="n">in</span> <span class="n">omic_types</span><span class="p">){</span>
+  <span class="n">omic_names</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">omic_name_oi</span> <span class="n">in</span> <span class="n">omic_names</span><span class="p">){</span>
+    <span class="c1"># plot</span>
+    <span class="n">pltTitle</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="n">omic_name_oi</span><span class="p">)</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="nf">ggboxplot</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span> <span class="o">&amp;</span> <span class="n">omic_name</span><span class="o">==</span><span class="n">omic_name_oi</span><span class="p">),</span> 
+                    <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;value&#39;</span><span class="p">,</span>
+                    <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span>
+                    <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">))</span> <span class="o">+</span>
+                  <span class="nf">ggtitle</span><span class="p">(</span><span class="n">pltTitle</span><span class="p">)</span>
+    <span class="c1"># save</span>
+    <span class="n">plts</span><span class="p">[[</span><span class="n">pltTitle</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">plts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;copy_number_variation-TP53 (average)&quot;   
+##  [2] &quot;exon_expression-chr17:7580643-7580745:-&quot;
+##  [3] &quot;exon_expression-chr17:7577019-7577155:-&quot;
+##  [4] &quot;exon_expression-chr17:7577499-7577608:-&quot;
+##  [5] &quot;exon_expression-chr17:7571720-7573008:-&quot;
+##  [6] &quot;exon_expression-chr17:7576525-7576657:-&quot;
+##  [7] &quot;exon_expression-chr17:7578371-7578811:-&quot;
+##  [8] &quot;exon_expression-chr17:7590695-7590863:-&quot;
+##  [9] &quot;exon_expression-chr17:7565097-7565332:-&quot;
+## [10] &quot;exon_expression-chr17:7579312-7579590:-&quot;
+## [11] &quot;exon_expression-chr17:7579700-7579940:-&quot;
+## [12] &quot;exon_expression-chr17:7576853-7576926:-&quot;
+## [13] &quot;exon_expression-chr17:7573927-7574033:-&quot;
+## [14] &quot;gene_expression-TP53&quot;                   
+## [15] &quot;methylation-cg21050342&quot;                 
+## [16] &quot;methylation-cg26539663&quot;                 
+## [17] &quot;methylation-cg17461511&quot;                 
+## [18] &quot;methylation-cg12373934&quot;                 
+## [19] &quot;methylation-cg06365412&quot;                 
+## [20] &quot;methylation-cg16397722&quot;                 
+## [21] &quot;methylation-cg14351634&quot;                 
+## [22] &quot;methylation-cg25896754&quot;                 
+## [23] &quot;methylation-cg18198734&quot;                 
+## [24] &quot;methylation-cg02045224&quot;                 
+## [25] &quot;methylation-cg10792831&quot;                 
+## [26] &quot;methylation-cg22949073&quot;                 
+## [27] &quot;methylation-cg02166782&quot;                 
+## [28] &quot;methylation-cg12041075&quot;                 
+## [29] &quot;methylation-cg13468400&quot;                 
+## [30] &quot;methylation-cg15206330&quot;                 
+## [31] &quot;methylation-cg05479194&quot;                 
+## [32] &quot;methylation-cg00807143&quot;                 
+## [33] &quot;methylation-cg05348746&quot;                 
+## [34] &quot;methylation-cg16203911&quot;                 
+## [35] &quot;methylation-cg18311066&quot;                 
+## [36] &quot;methylation-cg02087342&quot;                 
+## [37] &quot;methylation-cg22175811&quot;                 
+## [38] &quot;methylation-cg06587969&quot;                 
+## [39] &quot;methylation-cg08119584&quot;                 
+## [40] &quot;methylation-cg13169780&quot;                 
+## [41] &quot;methylation-cg06317056&quot;                 
+## [42] &quot;methylation-cg02690969&quot;                 
+## [43] &quot;methylation-cg02842899&quot;                 
+## [44] &quot;methylation-cg02855142&quot;                 
+## [45] &quot;methylation-cg04009932&quot;                 
+## [46] &quot;methylation-cg25053252&quot;                 
+## [47] &quot;methylation-cg07991600&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`methylation-cg25053252`</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-11-1.png" /></p>
 </div>
 <div class="section" id="could-you-now-split-them-by-sample-type">
 <h3>Could you now split them by sample type?<a class="headerlink" href="#could-you-now-split-them-by-sample-type" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omic_types</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">omics</span><span class="o">$</span><span class="n">omic_type</span><span class="p">)</span>
+<span class="c1">#omic_type_oi = &#39;gene_expression&#39;</span>
+
+<span class="n">plts</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">omic_type_oi</span> <span class="n">in</span> <span class="n">omic_types</span><span class="p">){</span>
+  <span class="n">omic_names</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">omic_name_oi</span> <span class="n">in</span> <span class="n">omic_names</span><span class="p">){</span>
+    <span class="c1"># plot</span>
+    <span class="n">pltTitle</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="n">omic_name_oi</span><span class="p">)</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="nf">ggboxplot</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span> <span class="o">&amp;</span> <span class="n">omic_name</span><span class="o">==</span><span class="n">omic_name_oi</span><span class="p">),</span> 
+                    <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;value&#39;</span><span class="p">,</span>
+                    <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span>
+                    <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">))</span> <span class="o">+</span>
+                  <span class="nf">ggtitle</span><span class="p">(</span><span class="n">pltTitle</span><span class="p">)</span>
+    <span class="c1"># save</span>
+    <span class="n">plts</span><span class="p">[[</span><span class="n">pltTitle</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">plts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;copy_number_variation-TP53 (average)&quot;   
+##  [2] &quot;exon_expression-chr17:7580643-7580745:-&quot;
+##  [3] &quot;exon_expression-chr17:7577019-7577155:-&quot;
+##  [4] &quot;exon_expression-chr17:7577499-7577608:-&quot;
+##  [5] &quot;exon_expression-chr17:7571720-7573008:-&quot;
+##  [6] &quot;exon_expression-chr17:7576525-7576657:-&quot;
+##  [7] &quot;exon_expression-chr17:7578371-7578811:-&quot;
+##  [8] &quot;exon_expression-chr17:7590695-7590863:-&quot;
+##  [9] &quot;exon_expression-chr17:7565097-7565332:-&quot;
+## [10] &quot;exon_expression-chr17:7579312-7579590:-&quot;
+## [11] &quot;exon_expression-chr17:7579700-7579940:-&quot;
+## [12] &quot;exon_expression-chr17:7576853-7576926:-&quot;
+## [13] &quot;exon_expression-chr17:7573927-7574033:-&quot;
+## [14] &quot;gene_expression-TP53&quot;                   
+## [15] &quot;methylation-cg21050342&quot;                 
+## [16] &quot;methylation-cg26539663&quot;                 
+## [17] &quot;methylation-cg17461511&quot;                 
+## [18] &quot;methylation-cg12373934&quot;                 
+## [19] &quot;methylation-cg06365412&quot;                 
+## [20] &quot;methylation-cg16397722&quot;                 
+## [21] &quot;methylation-cg14351634&quot;                 
+## [22] &quot;methylation-cg25896754&quot;                 
+## [23] &quot;methylation-cg18198734&quot;                 
+## [24] &quot;methylation-cg02045224&quot;                 
+## [25] &quot;methylation-cg10792831&quot;                 
+## [26] &quot;methylation-cg22949073&quot;                 
+## [27] &quot;methylation-cg02166782&quot;                 
+## [28] &quot;methylation-cg12041075&quot;                 
+## [29] &quot;methylation-cg13468400&quot;                 
+## [30] &quot;methylation-cg15206330&quot;                 
+## [31] &quot;methylation-cg05479194&quot;                 
+## [32] &quot;methylation-cg00807143&quot;                 
+## [33] &quot;methylation-cg05348746&quot;                 
+## [34] &quot;methylation-cg16203911&quot;                 
+## [35] &quot;methylation-cg18311066&quot;                 
+## [36] &quot;methylation-cg02087342&quot;                 
+## [37] &quot;methylation-cg22175811&quot;                 
+## [38] &quot;methylation-cg06587969&quot;                 
+## [39] &quot;methylation-cg08119584&quot;                 
+## [40] &quot;methylation-cg13169780&quot;                 
+## [41] &quot;methylation-cg06317056&quot;                 
+## [42] &quot;methylation-cg02690969&quot;                 
+## [43] &quot;methylation-cg02842899&quot;                 
+## [44] &quot;methylation-cg02855142&quot;                 
+## [45] &quot;methylation-cg04009932&quot;                 
+## [46] &quot;methylation-cg25053252&quot;                 
+## [47] &quot;methylation-cg07991600&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`exon_expression-chr17:7573927-7574033:-`</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-13-1.png" /></p>
 </div>
 <div class="section" id="can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
 <h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omic_types</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">omics</span><span class="o">$</span><span class="n">omic_type</span><span class="p">)</span>
+<span class="n">sample_types_oi</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;Primary Tumor&#39;</span><span class="p">,</span><span class="s">&#39;Solid Tissue Normal&#39;</span><span class="p">)</span>
+  
+<span class="n">plts</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">omic_type_oi</span> <span class="n">in</span> <span class="n">omic_types</span><span class="p">){</span>
+  <span class="n">omic_names</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">omic_name_oi</span> <span class="n">in</span> <span class="n">omic_names</span><span class="p">){</span>
+    <span class="c1"># plot</span>
+    <span class="n">pltTitle</span> <span class="o">=</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">,</span><span class="s">&#39;-&#39;</span><span class="p">,</span><span class="n">omic_name_oi</span><span class="p">)</span>
+    <span class="n">plt</span> <span class="o">=</span> <span class="nf">ggboxplot</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span> <span class="o">&amp;</span> <span class="n">omic_name</span><span class="o">==</span><span class="n">omic_name_oi</span> <span class="o">&amp;</span> <span class="n">sample_type</span><span class="o">%in%</span><span class="n">sample_types_oi</span><span class="p">),</span> 
+                    <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;value&#39;</span><span class="p">,</span>
+                    <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span>
+                    <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span> <span class="o">+</span>
+                  <span class="nf">stat_compare_means</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">sample_type</span><span class="p">),</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&quot;p.signif&quot;</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s">&#39;wilcox.test&#39;</span><span class="p">)</span>
+                  <span class="nf">ggtitle</span><span class="p">(</span><span class="n">pltTitle</span><span class="p">)</span>
+    <span class="c1"># save</span>
+    <span class="n">plts</span><span class="p">[[</span><span class="n">pltTitle</span><span class="p">]]</span> <span class="o">=</span> <span class="n">plt</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">plts</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>##  [1] &quot;copy_number_variation-TP53 (average)&quot;   
+##  [2] &quot;exon_expression-chr17:7580643-7580745:-&quot;
+##  [3] &quot;exon_expression-chr17:7577019-7577155:-&quot;
+##  [4] &quot;exon_expression-chr17:7577499-7577608:-&quot;
+##  [5] &quot;exon_expression-chr17:7571720-7573008:-&quot;
+##  [6] &quot;exon_expression-chr17:7576525-7576657:-&quot;
+##  [7] &quot;exon_expression-chr17:7578371-7578811:-&quot;
+##  [8] &quot;exon_expression-chr17:7590695-7590863:-&quot;
+##  [9] &quot;exon_expression-chr17:7565097-7565332:-&quot;
+## [10] &quot;exon_expression-chr17:7579312-7579590:-&quot;
+## [11] &quot;exon_expression-chr17:7579700-7579940:-&quot;
+## [12] &quot;exon_expression-chr17:7576853-7576926:-&quot;
+## [13] &quot;exon_expression-chr17:7573927-7574033:-&quot;
+## [14] &quot;gene_expression-TP53&quot;                   
+## [15] &quot;methylation-cg21050342&quot;                 
+## [16] &quot;methylation-cg26539663&quot;                 
+## [17] &quot;methylation-cg17461511&quot;                 
+## [18] &quot;methylation-cg12373934&quot;                 
+## [19] &quot;methylation-cg06365412&quot;                 
+## [20] &quot;methylation-cg16397722&quot;                 
+## [21] &quot;methylation-cg14351634&quot;                 
+## [22] &quot;methylation-cg25896754&quot;                 
+## [23] &quot;methylation-cg18198734&quot;                 
+## [24] &quot;methylation-cg02045224&quot;                 
+## [25] &quot;methylation-cg10792831&quot;                 
+## [26] &quot;methylation-cg22949073&quot;                 
+## [27] &quot;methylation-cg02166782&quot;                 
+## [28] &quot;methylation-cg12041075&quot;                 
+## [29] &quot;methylation-cg13468400&quot;                 
+## [30] &quot;methylation-cg15206330&quot;                 
+## [31] &quot;methylation-cg05479194&quot;                 
+## [32] &quot;methylation-cg00807143&quot;                 
+## [33] &quot;methylation-cg05348746&quot;                 
+## [34] &quot;methylation-cg16203911&quot;                 
+## [35] &quot;methylation-cg18311066&quot;                 
+## [36] &quot;methylation-cg02087342&quot;                 
+## [37] &quot;methylation-cg22175811&quot;                 
+## [38] &quot;methylation-cg06587969&quot;                 
+## [39] &quot;methylation-cg08119584&quot;                 
+## [40] &quot;methylation-cg13169780&quot;                 
+## [41] &quot;methylation-cg06317056&quot;                 
+## [42] &quot;methylation-cg02690969&quot;                 
+## [43] &quot;methylation-cg02842899&quot;                 
+## [44] &quot;methylation-cg02855142&quot;                 
+## [45] &quot;methylation-cg04009932&quot;                 
+## [46] &quot;methylation-cg25053252&quot;                 
+## [47] &quot;methylation-cg07991600&quot;
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`gene_expression-TP53`</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-15-1.png" /></p>
 </div>
 </div>
 <div class="section" id="mutations">
 <h2>Mutations<a class="headerlink" href="#mutations" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="how-many-samples-have-at-least-a-mutation">
 <h3>How many samples have at least a mutation?<a class="headerlink" href="#how-many-samples-have-at-least-a-mutation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">muts</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">effect</span> <span class="o">!=</span> <span class="s">&#39;no variant&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">nrow</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## [1] 3325
+</pre></div>
+</div>
 </div>
 <div class="section" id="which-are-the-most-common-effects-of-mutations">
 <h3>Which are the most common effects of mutations?<a class="headerlink" href="#which-are-the-most-common-effects-of-mutations" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">muts</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">effect</span> <span class="o">!=</span> <span class="s">&#39;no variant&#39;</span><span class="p">)</span>
+
+<span class="nf">ggbarplot</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">(),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> 
+          <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-17-1.png" /></p>
 </div>
 <div class="section" id="are-there-mutations-associated-to-certain-cancer-types">
 <h3>Are there mutations associated to certain cancer types?<a class="headerlink" href="#are-there-mutations-associated-to-certain-cancer-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">cancer_type</span><span class="p">,</span> <span class="n">effect</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">(),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> 
+          <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-18-1.png" /></p>
 </div>
 <div class="section" id="are-there-mutations-associated-to-sample-types">
 <h3>Are there mutations associated to sample types?<a class="headerlink" href="#are-there-mutations-associated-to-sample-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">sample_type</span><span class="p">,</span> <span class="n">effect</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarise</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nf">n</span><span class="p">())</span> <span class="o">%&gt;%</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;freq&#39;</span><span class="p">,</span> 
+          <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
+</pre></div>
 </div>
-<div class="section" id="how-are-mutation-effects-associated-to-certain-positions">
-<h3>How are mutation effects associated to certain positions?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `summarise()` has grouped output by &#39;sample_type&#39;. You can override using the `.groups` argument.
+</pre></div>
 </div>
+<p><img alt="" src="_images/unnamed-chunk-19-1.png" /></p>
 </div>
-<div class="section" id="generating-data-overviews">
-<h2>Generating data overviews<a class="headerlink" href="#generating-data-overviews" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
-<h3>Could you use <code class="docutils literal notranslate"><span class="pre">pheatmap</span></code> to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?<a class="headerlink" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
+<h3>How are mutation effects associated to certain positions? And cancer_types?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span> <span class="o">=</span> <span class="nf">gghistogram</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;..density..&#39;</span><span class="p">,</span> <span class="n">facet.by</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#39;simpsons&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## Warning: Using `bins = 30` by default. Pick better value with the argument
+## `bins`.
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggpar</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">font.xtickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">font.ytickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-20-1.png" /></p>
 </div>
 </div>
 <div class="section" id="pairwise-associations">
 <h2>Pairwise associations<a class="headerlink" href="#pairwise-associations" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="could-mutation-effects-be-associated-with-gene-expression">
 <h3>Could mutation effects be associated with gene expression?<a class="headerlink" href="#could-mutation-effects-be-associated-with-gene-expression" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omic_type_oi</span> <span class="o">=</span> <span class="s">&#39;gene_expression&#39;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="nf">merge</span><span class="p">(</span><span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span><span class="p">),</span> <span class="n">muts</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">effect</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">effect</span> <span class="o">!=</span> <span class="s">&#39;no variant&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">select</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">effect</span><span class="p">),</span> <span class="n">by</span> <span class="o">=</span> <span class="s">&#39;sample&#39;</span><span class="p">)</span>
+<span class="nf">ggboxplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;value&#39;</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">),</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#39;simpsons&#39;</span><span class="p">)</span> <span class="o">+</span>
+  <span class="nf">ggtitle</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-21-1.png" /></p>
 </div>
 <div class="section" id="could-gene-expression-be-associated-with-copy-number-variation">
 <h3>Could gene expression be associated with copy number variation?<a class="headerlink" href="#could-gene-expression-be-associated-with-copy-number-variation" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">cancer_types_oi</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;BRCA&#39;</span><span class="p">,</span><span class="s">&#39;OV&#39;</span><span class="p">,</span><span class="s">&#39;GBM&#39;</span><span class="p">,</span><span class="s">&#39;PRAD&#39;</span><span class="p">,</span><span class="s">&#39;LUAD&#39;</span><span class="p">)</span>
+<span class="n">omic_types_oi</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;gene_expression&#39;</span><span class="p">,</span><span class="s">&#39;copy_number_variation&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">%in%</span><span class="n">omic_types_oi</span> <span class="o">&amp;</span> <span class="n">cancer_type</span><span class="o">%in%</span><span class="n">cancer_types_oi</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+               <span class="nf">pivot_wider</span><span class="p">(</span><span class="n">id_cols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">cancer_type</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">),</span> <span class="n">names_from</span> <span class="o">=</span> <span class="n">omic_type</span><span class="p">,</span> <span class="n">values_from</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span> <span class="o">%&gt;%</span>
+               <span class="nf">drop_na</span><span class="p">()</span>
+<span class="nf">ggscatter</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;gene_expression&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;copy_number_variation&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> 
+          <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#39;uchicago&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">,</span>
+          <span class="n">facet.by</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span>
+          <span class="n">add</span> <span class="o">=</span> <span class="s">&#39;reg.line&#39;</span><span class="p">,</span>
+          <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">))</span> <span class="o">+</span>
+          <span class="nf">stat_cor</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">sample_type</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&#39;spearman&#39;</span><span class="p">,</span> <span class="n">label.x.npc</span> <span class="o">=</span> <span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">label.y.npc</span> <span class="o">=</span> <span class="s">&#39;bottom&#39;</span><span class="p">)</span> <span class="o">+</span>
+          <span class="nf">theme</span><span class="p">(</span><span class="n">aspect.ratio</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `geom_smooth()` using formula &#39;y ~ x&#39;
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-22-1.png" /></p>
 </div>
 <div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
 <h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this headline">¶</a></h3>
 <p>Try to visualize them considering different sample types, cancer types
 and omic types and names.</p>
+</div>
+</div>
+<div class="section" id="generating-data-overviews">
+<h2>Generating data overviews<a class="headerlink" href="#generating-data-overviews" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
+<h3>Could you use <code class="docutils literal notranslate"><span class="pre">pheatmap</span></code> to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?<a class="headerlink" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># subset by cancer types (my computer does not have enough memory)</span>
+<span class="n">cancer_types_oi</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;BRCA&#39;</span><span class="p">)</span>
+
+<span class="c1"># prepare annotations</span>
+<span class="n">annotation_col</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">select</span><span class="p">(</span><span class="n">omic_type</span><span class="p">,</span> <span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">as.data.frame</span><span class="p">()</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">annotation_col</span><span class="p">)</span> <span class="o">=</span> <span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_name</span>
+<span class="n">annotation_row</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">select</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">,</span> <span class="n">cancer_type</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">as.data.frame</span><span class="p">()</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">annotation_row</span><span class="p">)</span> <span class="o">=</span> <span class="n">annotation_row</span><span class="o">$</span><span class="n">sample</span>
+<span class="n">annotation_row</span> <span class="o">=</span> <span class="n">annotation_row</span><span class="p">[,</span><span class="nf">setdiff</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">annotation_row</span><span class="p">),</span><span class="s">&#39;sample&#39;</span><span class="p">)]</span>
+
+<span class="c1"># prepare annotation colors</span>
+<span class="n">annotation_colors</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span>
+  <span class="c1">#omic_name = setNames(get_palette(k=length(unique(annotation_col$omic_name))), unique(annotation_col$omic_name)),</span>
+  <span class="n">omic_type</span> <span class="o">=</span> <span class="nf">setNames</span><span class="p">(</span><span class="nf">get_palette</span><span class="p">(</span><span class="s">&#39;lancet&#39;</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_type</span><span class="p">))),</span> <span class="nf">unique</span><span class="p">(</span><span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_type</span><span class="p">)),</span>
+  <span class="n">sample_type</span> <span class="o">=</span> <span class="nf">setNames</span><span class="p">(</span><span class="nf">get_palette</span><span class="p">(</span><span class="s">&#39;npg&#39;</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">annotation_row</span><span class="o">$</span><span class="n">sample_type</span><span class="p">))),</span> <span class="nf">unique</span><span class="p">(</span><span class="n">annotation_row</span><span class="o">$</span><span class="n">sample_type</span><span class="p">)),</span>
+  <span class="n">cancer_type</span> <span class="o">=</span> <span class="nf">setNames</span><span class="p">(</span><span class="nf">get_palette</span><span class="p">(</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="nf">unique</span><span class="p">(</span><span class="n">annotation_row</span><span class="o">$</span><span class="n">cancer_type</span><span class="p">))),</span> <span class="nf">unique</span><span class="p">(</span><span class="n">annotation_row</span><span class="o">$</span><span class="n">cancer_type</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1"># prepare matrix of values, sorted by gene expression</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">cancer_type</span><span class="o">%in%</span><span class="n">cancer_types_oi</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+               <span class="nf">pivot_wider</span><span class="p">(</span><span class="n">id_cols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">cancer_type</span><span class="p">,</span> <span class="n">sample_type</span><span class="p">),</span> <span class="n">names_from</span> <span class="o">=</span> <span class="n">omic_name</span><span class="p">,</span> <span class="n">values_from</span> <span class="o">=</span> <span class="n">value</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">arrange</span><span class="p">(</span><span class="n">TP53</span><span class="p">)</span> <span class="c1"># gene expression</span>
+<span class="n">mat</span> <span class="o">=</span> <span class="nf">as.matrix</span><span class="p">(</span><span class="n">df</span><span class="p">[,</span><span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_name</span><span class="p">])</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span> <span class="o">=</span> <span class="n">df</span><span class="o">$</span><span class="n">sample</span>
+
+<span class="n">plts</span> <span class="o">=</span> <span class="nf">list</span><span class="p">()</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">omic_type_oi</span> <span class="n">in</span> <span class="n">omic_types</span><span class="p">){</span>
+    <span class="c1"># get omic names corresponding to this omic type</span>
+    <span class="n">omic_names_oi</span> <span class="o">=</span> <span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_name</span><span class="p">[</span><span class="n">annotation_col</span><span class="o">$</span><span class="n">omic_type</span><span class="o">==</span><span class="n">omic_type_oi</span><span class="p">]</span>
+    <span class="n">plts</span><span class="p">[[</span><span class="n">omic_type_oi</span><span class="p">]]</span> <span class="o">=</span> <span class="nf">pheatmap</span><span class="p">(</span><span class="n">mat</span><span class="p">[,</span><span class="n">omic_names_oi</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">],</span> 
+                                    <span class="n">main</span> <span class="o">=</span> <span class="n">omic_type_oi</span><span class="p">,</span>
+                                    <span class="n">annotation_row</span> <span class="o">=</span> <span class="n">annotation_row</span><span class="p">,</span> <span class="n">annotation_col</span> <span class="o">=</span> <span class="n">annotation_col</span><span class="p">,</span> <span class="n">annotation_colors</span> <span class="o">=</span> <span class="n">annotation_colors</span><span class="p">,</span>
+                                    <span class="n">cluster_rows</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">cluster_cols</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">show_rownames</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">show_colnames</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">silent</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+<span class="nf">png</span><span class="p">(</span><span class="s">&#39;images/heatmaps.png&#39;</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="m">400</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="m">800</span><span class="p">,</span> <span class="n">units</span> <span class="o">=</span> <span class="s">&#39;mm&#39;</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="m">100</span><span class="p">)</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">plts</span><span class="p">[[</span><span class="s">&#39;gene_expression&#39;</span><span class="p">]]</span><span class="o">$</span><span class="n">gtable</span><span class="p">,</span> 
+             <span class="n">plts</span><span class="p">[[</span><span class="s">&#39;exon_expression&#39;</span><span class="p">]]</span><span class="o">$</span><span class="n">gtable</span><span class="p">,</span> 
+             <span class="n">plts</span><span class="p">[[</span><span class="s">&#39;methylation&#39;</span><span class="p">]]</span><span class="o">$</span><span class="n">gtable</span><span class="p">,</span> 
+             <span class="n">plts</span><span class="p">[[</span><span class="s">&#39;copy_number_variation&#39;</span><span class="p">]]</span><span class="o">$</span><span class="n">gtable</span><span class="p">,</span>
+             <span class="n">ncol</span><span class="o">=</span><span class="nf">length</span><span class="p">(</span><span class="n">plts</span><span class="p">),</span> <span class="n">widths</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0.75</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">0.75</span><span class="p">))</span>
+<span class="nf">dev.off</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><img alt="" src="_images/heatmaps.png" /></p>
 </div>
 </div>
 </div>
@@ -662,18 +1011,27 @@ genes.</a></p></li>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] tidyr_1.1.2 dplyr_1.0.4 readr_1.4.0
+## [1] gridExtra_2.3   pheatmap_1.0.12 ggpubr_0.4.0    ggplot2_3.3.3  
+## [5] tidyr_1.1.2     dplyr_1.0.4     readr_1.4.0    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] rstudioapi_0.13   knitr_1.31        magrittr_2.0.1    hms_1.0.0        
-##  [5] tidyselect_1.1.0  here_1.0.1        R6_2.5.0          rlang_0.4.10     
-##  [9] fansi_0.4.2       stringr_1.4.0     tools_4.0.3       xfun_0.20        
-## [13] utf8_1.1.4        cli_2.3.0         htmltools_0.5.1.1 ellipsis_0.3.1   
-## [17] assertthat_0.2.1  rprojroot_2.0.2   yaml_2.2.1        digest_0.6.27    
-## [21] tibble_3.0.6      lifecycle_0.2.0   crayon_1.4.1      purrr_0.3.4      
-## [25] ps_1.5.0          vctrs_0.3.6       glue_1.4.2        evaluate_0.14    
-## [29] rmarkdown_2.6     stringi_1.5.3     compiler_4.0.3    pillar_1.4.7     
-## [33] generics_0.1.0    pkgconfig_2.0.3
+##  [1] Rcpp_1.0.6         here_1.0.1         lattice_0.20-41    ps_1.5.0          
+##  [5] assertthat_0.2.1   rprojroot_2.0.2    digest_0.6.27      utf8_1.1.4        
+##  [9] R6_2.5.0           cellranger_1.1.0   backports_1.2.1    evaluate_0.14     
+## [13] highr_0.8          pillar_1.4.7       rlang_0.4.10       curl_4.3          
+## [17] readxl_1.3.1       rstudioapi_0.13    data.table_1.13.6  car_3.0-10        
+## [21] Matrix_1.3-2       rmarkdown_2.6      labeling_0.4.2     splines_4.0.3     
+## [25] stringr_1.4.0      foreign_0.8-81     munsell_0.5.0      broom_0.7.4       
+## [29] compiler_4.0.3     xfun_0.20          pkgconfig_2.0.3    mgcv_1.8-33       
+## [33] htmltools_0.5.1.1  tidyselect_1.1.0   tibble_3.0.6       rio_0.5.16        
+## [37] fansi_0.4.2        crayon_1.4.1       withr_2.4.1        grid_4.0.3        
+## [41] nlme_3.1-152       gtable_0.3.0       lifecycle_0.2.0    magrittr_2.0.1    
+## [45] scales_1.1.1       zip_2.1.1          cli_2.3.0          stringi_1.5.3     
+## [49] carData_3.0-4      farver_2.0.3       ggsignif_0.6.0     ellipsis_0.3.1    
+## [53] generics_0.1.0     vctrs_0.3.6        openxlsx_4.2.3     ggsci_2.9         
+## [57] RColorBrewer_1.1-2 tools_4.0.3        forcats_0.5.1      glue_1.4.2        
+## [61] purrr_0.3.4        hms_1.0.0          abind_1.4-5        yaml_2.2.1        
+## [65] colorspace_2.0-0   rstatix_0.6.0      knitr_1.31         haven_2.3.1
 </pre></div>
 </div>
 </div>
