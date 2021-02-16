@@ -171,9 +171,6 @@ from the packages introduced previously. These solutions are completely
 subjective, so feel free to find your own best ways of combining and
 visualizing the different types of data.
 
-\[This section will be updated the day of the talk to build some
-“suspense”… :)\]
-
 Counting
 --------
 

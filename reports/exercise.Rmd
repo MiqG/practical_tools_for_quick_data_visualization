@@ -90,7 +90,6 @@ muts %>% drop_na(effect)
 # Exploratory Data Analysis
 In this section, we will try to answer the questions using functions from the packages introduced previously. These solutions are completely subjective, so feel free to find your own best ways of combining and visualizing the different types of data.
 
-[This section will be updated the day of the talk to build some "suspense"... :)]
 
 ## Counting
 ### How many samples per cancer type are there?
