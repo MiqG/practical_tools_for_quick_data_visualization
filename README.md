@@ -60,4 +60,12 @@ git clone https://github.com/MiqG/practical_tools_for_quick_data_visualization.g
 ```
 or just by clicking [here](https://codeload.github.com/MiqG/practical_tools_for_quick_data_visualization/zip/main).
 
+## Reproducibility
+
+In case you'd like to re-create all the outputs from the repository, you will need to have a github account and to install [`jupyter-book`](https://jupyterbook.org/intro.html) and [`ghp-import`](https://pypi.org/project/ghp-import/).
+Then, you can run
+```shell
+bash run_all.sh
+```
+
 Enjoy!
