@@ -94,208 +94,87 @@ In this section, we will try to answer the questions using functions from the pa
 ## Counting
 ### How many samples per cancer type are there?
 ```{r}
-ggbarplot(omics %>% group_by(cancer_type) %>% count(), x = 'cancer_type', y = 'n', 
-          fill = 'cancer_type',
-          ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
+# try ggbarplot()
 ```
 
 ### How many samples per cancer type and sample type are there?
-```{r, fig.width=10, fig.height=4}
-ggbarplot(omics %>% group_by(cancer_type, sample_type) %>% count(), x = 'cancer_type', y = 'n', 
-          fill = 'sample_type', palette = 'uchicago',
-          ggtheme = theme_pubr(x.text.angle = 50, base_size = 10, legend = 'right'))
+```{r}
+# try ggbarplot()
 ```
 
 ## Distributions
 ### What are the distributions of values for every omic type across cancer types?
 ```{r}
-omic_types = unique(omics$omic_type)
-#omic_type_oi = 'gene_expression'
-
-plts = list()
-for (omic_type_oi in omic_types){
-  omic_names = omics %>% filter(omic_type==omic_type_oi) %>% distinct(omic_name) %>% pull()
-  for (omic_name_oi in omic_names){
-    # plot
-    pltTitle = paste0(omic_type_oi,'-',omic_name_oi)
-    plt = ggboxplot(omics %>% filter(omic_type==omic_type_oi & omic_name==omic_name_oi), 
-                    x = 'cancer_type', y = 'value',
-                    color = 'cancer_type',
-                    ggtheme = theme_pubr(x.text.angle = 50, base_size = 10, legend = 'right')) +
-                  ggtitle(pltTitle)
-    # save
-    plts[[pltTitle]] = plt
-  }
-}
-names(plts)
+# try ggboxplot()
 ```
-```{r}
-plts$`methylation-cg25053252`
-```
-
 
 ### Could you now split them by sample type?
 ```{r}
-omic_types = unique(omics$omic_type)
-#omic_type_oi = 'gene_expression'
-
-plts = list()
-for (omic_type_oi in omic_types){
-  omic_names = omics %>% filter(omic_type==omic_type_oi) %>% distinct(omic_name) %>% pull()
-  for (omic_name_oi in omic_names){
-    # plot
-    pltTitle = paste0(omic_type_oi,'-',omic_name_oi)
-    plt = ggboxplot(omics %>% filter(omic_type==omic_type_oi & omic_name==omic_name_oi), 
-                    x = 'cancer_type', y = 'value',
-                    fill = 'sample_type',
-                    ggtheme = theme_pubr(x.text.angle = 50, base_size = 10, legend = 'right')) +
-                  ggtitle(pltTitle)
-    # save
-    plts[[pltTitle]] = plt
-  }
-}
-names(plts)
-```
-```{r}
-plts$`exon_expression-chr17:7573927-7574033:-`
+# try ggboxplot()
 ```
 
 ### Can you find a type of omic with statistically different values across cancer types when comparing "Primary Tumor" vs. "Solid Tissue Normal" sample types?
 ```{r}
-omic_types = unique(omics$omic_type)
-sample_types_oi = c('Primary Tumor','Solid Tissue Normal')
-  
-plts = list()
-for (omic_type_oi in omic_types){
-  omic_names = omics %>% filter(omic_type==omic_type_oi) %>% distinct(omic_name) %>% pull()
-  for (omic_name_oi in omic_names){
-    # plot
-    pltTitle = paste0(omic_type_oi,'-',omic_name_oi)
-    plt = ggboxplot(omics %>% filter(omic_type==omic_type_oi & omic_name==omic_name_oi & sample_type%in%sample_types_oi), 
-                    x = 'cancer_type', y = 'value',
-                    fill = 'sample_type',
-                    ggtheme = theme_pubr(x.text.angle = 50, base_size = 10)) +
-                  stat_compare_means(aes(color = sample_type), label = "p.signif", method = 'wilcox.test')
-                  ggtitle(pltTitle)
-    # save
-    plts[[pltTitle]] = plt
-  }
-}
-names(plts)
-```
-```{r fig.width=10, fig.height=4}
-plts$`gene_expression-TP53`
+# try ggboxplot() with stat_compare_means()
 ```
 
 ## Mutations
 ### How many samples have at least a mutation?
 ```{r}
-muts %>% filter(!is.na(effect) & effect != 'no variant') %>% group_by(sample) %>% count() %>% nrow()
+# no plot needed, just data wrangling
 ```
 
 ### Which are the most common effects of mutations?
 ```{r}
-df = muts %>% filter(!is.na(effect) & effect != 'no variant')
-
-ggbarplot(df %>% group_by(effect) %>% count(), x = 'effect', y = 'n', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
+# try ggbarplot()
 ```
 
 ### Are there mutations associated to certain cancer types?
 ```{r}
-ggbarplot(df %>% group_by(cancer_type, effect) %>% count(), x = 'cancer_type', y = 'n', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
+# try ggbarplot()
 ```
 
 ### Are there mutations associated to sample types?
 ```{r}
-ggbarplot(df %>% group_by(sample_type, effect) %>% summarise(n = n()) %>% mutate(freq=n/sum(n)), x = 'sample_type', y = 'freq', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
+# try ggbarplot()
 ```
 
+
 ### How are mutation effects associated to certain positions? And cancer_types?
-```{r, fig.width=8, fig.height=8}
-plt = gghistogram(df, x = 'start', y = '..density..', facet.by = 'effect', fill = 'effect', palette = 'simpsons')
-ggpar(plt, font.xtickslab = 8, font.ytickslab = 8)
+```{r}
+# try gghistogram()
 ```
+
 
 ## Pairwise associations
 ### Could mutation effects be associated with gene expression?
 ```{r}
-omic_type_oi = 'gene_expression'
-df = merge(omics %>% filter(omic_type==omic_type_oi), muts %>% filter(!is.na(effect) & effect != 'no variant') %>% select(sample, effect), by = 'sample')
-ggboxplot(df, x = 'effect', y = 'value', fill = 'sample_type', ggtheme = theme_pubr(x.text.angle = 50, base_size = 8, legend = 'right'), palette = 'simpsons') +
-  ggtitle(omic_type_oi)
+# you need some data wrangling
+# try ggboxplot()
 ```
 
+
 ### Could gene expression be associated with copy number variation?
-```{r fig.width=8, fig.height=8}
-cancer_types_oi = c('BRCA','OV','GBM','PRAD','LUAD')
-omic_types_oi = c('gene_expression','copy_number_variation')
-df = omics %>% filter(omic_type%in%omic_types_oi & cancer_type%in%cancer_types_oi) %>% 
-               pivot_wider(id_cols = c(sample, cancer_type, sample_type), names_from = omic_type, values_from = value) %>%
-               drop_na()
-ggscatter(df, x = 'gene_expression', y = 'copy_number_variation', size = 1, 
-          color = 'sample_type', palette = 'uchicago', alpha = 0.5,
-          facet.by = 'cancer_type',
-          add = 'reg.line',
-          ggtheme = theme_pubr(legend = 'right')) +
-          stat_cor(aes(color = sample_type), method='spearman', label.x.npc = 'left', label.y.npc = 'bottom') +
-          theme(aspect.ratio = 1)
+```{r}
+# try ggscatter()
 ```
+
 
 ### Visualize other pairwise associations that you found interesting
 Try to visualize them considering different sample types, cancer types and omic types and names.
+```{r}
+# prepare annotations of rows and columns
+# prepare color annotations
+# prepare matrix of values
+# try pheatmap() for every 'omic_type'
+```
+
 
 ## Generating data overviews
 ### Could you use `pheatmap` to get an overview of the distributions of every omic type across samples? Could you also include "cancer_type" and "omic_name" as row and column annotations?
 ```{r}
-# subset by cancer types (my computer does not have enough memory)
-cancer_types_oi = c('BRCA')
-
-# prepare annotations
-annotation_col = omics %>% select(omic_type, omic_name) %>% distinct() %>% as.data.frame()
-rownames(annotation_col) = annotation_col$omic_name
-annotation_row = omics %>% select(sample, sample_type, cancer_type) %>% distinct() %>% as.data.frame()
-rownames(annotation_row) = annotation_row$sample
-annotation_row = annotation_row[,setdiff(colnames(annotation_row),'sample')]
-
-# prepare annotation colors
-annotation_colors = list(
-  #omic_name = setNames(get_palette(k=length(unique(annotation_col$omic_name))), unique(annotation_col$omic_name)),
-  omic_type = setNames(get_palette('lancet',length(unique(annotation_col$omic_type))), unique(annotation_col$omic_type)),
-  sample_type = setNames(get_palette('npg',length(unique(annotation_row$sample_type))), unique(annotation_row$sample_type)),
-  cancer_type = setNames(get_palette('simpsons',length(unique(annotation_row$cancer_type))), unique(annotation_row$cancer_type))
-)
-
-# prepare matrix of values, sorted by gene expression
-df = omics %>% filter(cancer_type%in%cancer_types_oi) %>% 
-               pivot_wider(id_cols = c(sample, cancer_type, sample_type), names_from = omic_name, values_from = value)
-df = df %>% arrange(TP53) # gene expression
-mat = as.matrix(df[,annotation_col$omic_name])
-rownames(mat) = df$sample
-
-plts = list()
-for (omic_type_oi in omic_types){
-    # get omic names corresponding to this omic type
-    omic_names_oi = annotation_col$omic_name[annotation_col$omic_type==omic_type_oi]
-    plts[[omic_type_oi]] = pheatmap(mat[,omic_names_oi, drop=FALSE], 
-                                    main = omic_type_oi,
-                                    annotation_row = annotation_row, annotation_col = annotation_col, annotation_colors = annotation_colors,
-                                    cluster_rows = FALSE, cluster_cols = FALSE, show_rownames = FALSE, show_colnames = FALSE, silent = TRUE)
-}
 ```
 
-```{r, warning=FALSE, message=FALSE, results='hide'}
-require(gridExtra)
-png('images/heatmaps.png', height = 400, width = 800, units = 'mm', res = 100)
-grid.arrange(plts[['gene_expression']]$gtable, 
-             plts[['exon_expression']]$gtable, 
-             plts[['methylation']]$gtable, 
-             plts[['copy_number_variation']]$gtable,
-             ncol=length(plts), widths=c(0.75,2,2,0.75))
-dev.off()
-```
 
 ![](images/heatmaps.png)
 
