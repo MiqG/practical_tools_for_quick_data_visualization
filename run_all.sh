@@ -26,6 +26,7 @@ jupyter-book build book/
 # update github
 git add .
 git commit -m "re-run whole project"
+git push origin main
 
 # update webpage
 ghp-import -n -p -f book/_build/html
