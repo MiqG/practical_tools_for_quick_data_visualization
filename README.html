@@ -257,6 +257,11 @@
   <a class="reference internal nav-link" href="#before-starting">
    Before starting
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reproducibility">
+   Reproducibility
+  </a>
   <ul class="nav section-nav flex-column">
   </ul>
  </li>
@@ -277,6 +282,7 @@
 a new publication, data visualization is essential to both explore new hypotheses and
 to validate our findings.</p>
 <p>With this crash talk I aim to spread the word on the existence of a series of packages that have made my life much easier when it comes to exploratory data anlysis.</p>
+<p>In case you are reading this from this project’s repository checkout the <a class="reference external" href="https://miqg.github.io/practical_tools_for_quick_data_visualization">webpage</a> for a nicer experience.</p>
 <div class="section" id="before-starting">
 <h2>Before starting<a class="headerlink" href="#before-starting" title="Permalink to this headline">¶</a></h2>
 <p>Please, make sure to have R and RStudio installed with the following packages:</p>
@@ -299,6 +305,7 @@ to validate our findings.</p>
 <li><p><a class="reference external" href="https://rpkgs.datanovia.com/ggpubr/"><code class="docutils literal notranslate"><span class="pre">ggpubr</span></code></a>: ggplot metapackage that wraps many funcitonalities together.</p></li>
 <li><p><a class="reference external" href="https://www.rdocumentation.org/packages/pheatmap/versions/1.0.12"><code class="docutils literal notranslate"><span class="pre">pheatmap</span></code></a>: to make “pretty-heatmaps”.</p></li>
 <li><p><a class="reference external" href="https://bioconductor.org/packages/release/bioc/html/ggtree.html"><code class="docutils literal notranslate"><span class="pre">ggtree</span></code></a>: to visualize muliple sequence alignments as trees.</p></li>
+<li><p><a class="reference external" href="https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html"><code class="docutils literal notranslate"><span class="pre">gridExtra</span></code></a>: to arrange multiple plots not created through <code class="docutils literal notranslate"><span class="pre">ggplot</span></code>.</p></li>
 </ul>
 </li>
 </ul>
@@ -312,6 +319,7 @@ to validate our findings.</p>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;reshape2&#39;</span><span class="p">)</span>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;seqinr&#39;</span><span class="p">)</span>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;ape&#39;</span><span class="p">)</span>
+<span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;gridExtra&#39;</span><span class="p">)</span>
 
 <span class="c1"># visualization</span>
 <span class="nf">install.packages</span><span class="p">(</span><span class="s">&#39;ggplot2&#39;</span><span class="p">)</span>
@@ -329,6 +337,14 @@ to validate our findings.</p>
 </pre></div>
 </div>
 <p>or just by clicking <a class="reference external" href="https://codeload.github.com/MiqG/practical_tools_for_quick_data_visualization/zip/main">here</a>.</p>
+</div>
+<div class="section" id="reproducibility">
+<h2>Reproducibility<a class="headerlink" href="#reproducibility" title="Permalink to this headline">¶</a></h2>
+<p>In case you’d like to re-create all the outputs from the repository, you will need to have a github account and to install <a class="reference external" href="https://jupyterbook.org/intro.html"><code class="docutils literal notranslate"><span class="pre">jupyter-book</span></code></a> and <a class="reference external" href="https://pypi.org/project/ghp-import/"><code class="docutils literal notranslate"><span class="pre">ghp-import</span></code></a>.
+Then, you can run</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bash run_all.sh
+</pre></div>
+</div>
 <p>Enjoy!</p>
 <div class="toctree-wrapper compound">
 </div>
