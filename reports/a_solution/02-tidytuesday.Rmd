@@ -1,0 +1,35 @@
+---
+title: TidyTuesdays
+author: miquel [dot] anglada [at] crg [dot] eu
+date: 2021-02-17
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output: md_document
+---
+# Load data
+
+<img src="images/tt_logo.png" width="25%">
+
+- [video on how to reproduce a cool plot](https://www.youtube.com/watch?v=F4c-rEFfJpQ)
+- [Twitter bot collecting visualizations](https://twitter.com/TidyTuesday_Bot)
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+
+dat_url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+dat = read_csv(url(dat_url))
+dat = dat %>% drop_na()
+head(dat)
+```
+
+# References
+- [`tidytuesday`](https://github.com/rfordatascience/tidytuesday)
+- [`Cedric Scherer`](https://www.cedricscherer.com/)
+
+# Session Info
+```{r session info}
+sessionInfo()
+```

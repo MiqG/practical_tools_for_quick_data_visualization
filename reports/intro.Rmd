@@ -46,43 +46,62 @@ Next, we will try to answer different questions using this library and `ggplot2`
 ## How many penguins of each species did we observe in total?
 ```{r}
 # try ggpie()
+ggpie(dat %>% count(species), x = 'n', fill = 'species')
 ```
 ## How many penguins of each species and sex did we observe across the different islands?
 ```{r}
 # try ggbarplot()
+ggbarplot(dat %>% count(species, sex, island), x = 'species', y = 'n', fill = 'sex', facet.by='island', 
+          label=TRUE, position = position_dodge(0.7), palette = 'simpsons')
 ```
 
 ## What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
 ```{r}
 # try gghistogram()
+gghistogram(dat, x = 'flipper_length_mm', fill = 'sex', facet.by = c('species','island'))
 ```
 Alternatively, we can use stripcharts charts:
 ```{r}
 # try ggstripchart()
+plt = ggstripchart(dat, x = 'species', y = 'flipper_length_mm', color = 'sex', facet.by = 'island', position = position_jitterdodge(),
+             add = 'median_iqr', add.params = list(color='black', group='sex', size=0.2), alpha=0.5)
+plt
 ```
 ## Are the differences of body mass between sexes significant if we control for species and island?
 ```{r}
 # try ggstripchart() with stat_compare_means()
+plt + stat_compare_means(aes(color=sex), label = 'p.signif', method = 'wilcox.test')
 ```
 
 ## What is the relationship between flipper length, body mass and bill length?
 ```{r}
 # try ggscatter()
+ggscatter(dat, x = 'bill_length_mm', y = 'flipper_length_mm', color = 'body_mass_g', alpha = 0.5)
 ```
 
 ## Could we have sampling bias in the relationship between flipper length and body mass?
 ```{r}
-# try ggscatter()'s 'fill' options
+# try ggscatter()'s 'color' options
+ggscatter(dat %>% mutate(year=as.factor(year)), x = 'bill_length_mm', y = 'flipper_length_mm', color = 'year', alpha = 0.5, ellipse = TRUE)
 ```
 
 ## What is the spearman correlation coefficient between body mass and flipper length?
 ```{r, message=FALSE, warning=FALSE}
 # try ggscatter() with 'cor.coef' and 'add' options
+ggscatter(dat %>% mutate(year=as.factor(year)), x = 'bill_length_mm', y = 'flipper_length_mm', color = 'year', alpha = 0.5, add = 'reg.line') + stat_cor(aes(color=year))
 ```
 
 ## Create and save a figure
 ```{r, warning=FALSE, message=FALSE}
 # try ggarrange() and ggsave()
+p1 = ggscatter(dat %>% mutate(year=as.factor(year)), x = 'bill_length_mm', y = 'flipper_length_mm', color = 'year', alpha = 0.5, add = 'reg.line') + stat_cor(aes(color=year))
+p2 = plt + stat_compare_means(aes(color=sex), label = 'p.signif', method = 'wilcox.test')
+p3 = ggpie(dat %>% count(species), x = 'n', fill = 'species')
+
+out = ggarrange(p1,p2, ncol = 1)
+out2 = ggarrange(out, p3)
+
+ggsave('images/out.png',out, height = 10, width = 5)
 ```
 
 ![](images/myfig.png)
@@ -91,6 +110,10 @@ Alternatively, we can use stripcharts charts:
 A part from `ggpubr`, one of the most common packages to visualize multiple types of data altogether is `pheatmap`, which allows to combine hierarchical clustering of rows and columns with continuous and categorical data.
 
 ```{r message=FALSE, warning=FALSE}
+require(pheatmap)
+rownames(dat) = 1:nrow(dat)
+cols_oi = c('bill_length_mm','flipper_length_mm','body_mass_g')
+pheatmap(dat[,cols_oi], show_rownames = FALSE, annotation_row = dat[,c('species','island'),drop=FALSE], scale = 'column')
 ```
 
 # Phylogenetic trees with `ggtree`
@@ -100,6 +123,9 @@ Trees are another very common plot to visualize hierarchical patterns. Here, we 
 ```{r, message=FALSE, warning=FALSE}
 # create a random rtree with rtree()
 # plot with ggtree()
+require(ggtree)
+tree = rtree(50)
+ggtree(tree, layout = 'circular') + geom_tiplab()
 ```
 
 ## Tree and multiple sequence alignment of *TP53* amino acids

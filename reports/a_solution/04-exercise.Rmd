@@ -25,7 +25,7 @@ require(tidyr)
 
 require(ggpubr)
 require(ggplot2)
-require(pheatmap)
+require(ComplexHeatmap)
 
 ROOT = here::here()
 ```
@@ -248,7 +248,7 @@ ggscatter(df, x = 'gene_expression', y = 'copy_number_variation', size = 1,
 Try to visualize them considering different sample types, cancer types and omic types and names.
 
 ## Generating data overviews
-### Could you use `pheatmap` to get an overview of the distributions of every omic type across samples? Could you also include "cancer_type" and "omic_name" as row and column annotations?
+### Could you use `ComplexHeatmap` to get an overview of the distributions of every omic type across samples? Could you also include "cancer_type" and "omic_name" as row and column annotations?
 ```{r}
 # subset by cancer types (my computer does not have enough memory)
 cancer_types_oi = c('BRCA')
@@ -279,7 +279,7 @@ plts = list()
 for (omic_type_oi in omic_types){
     # get omic names corresponding to this omic type
     omic_names_oi = annotation_col$omic_name[annotation_col$omic_type==omic_type_oi]
-    plts[[omic_type_oi]] = pheatmap(mat[,omic_names_oi, drop=FALSE], 
+    plts[[omic_type_oi]] = ComplexHeatmap(mat[,omic_names_oi, drop=FALSE], 
                                     main = omic_type_oi,
                                     annotation_row = annotation_row, annotation_col = annotation_col, annotation_colors = annotation_colors,
                                     cluster_rows = FALSE, cluster_cols = FALSE, show_rownames = FALSE, show_colnames = FALSE, silent = TRUE)

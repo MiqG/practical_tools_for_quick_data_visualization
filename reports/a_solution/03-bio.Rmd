@@ -1,0 +1,60 @@
+---
+title: Biology-related packages
+author: miquel [dot] anglada [at] crg [dot] eu
+date: 2021-03-07
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output: md_document
+---
+
+# Phylogenetic trees with `ggtree`
+Trees are another very common plot to visualize hierarchical patterns. Here, we will use [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html) to visualize the phylogenetic relationships extracted from a multiple sequence alignment of *TP53* across mammals.
+
+## Basic tree
+```{r, message=FALSE, warning=FALSE}
+require(ggtree)
+set.seed(100)
+tree <- rtree(50)
+ggtree(tree, layout="circular") + geom_tiplab()
+```
+
+## Tree and multiple sequence alignment of *TP53* amino acids
+We will follow [Russell J. Gray](https://github.com/RussellGrayxd/Phylogenetics/blob/master/Sequence%20analysis.R)'s approach.
+```{r, warning=FALSE, message=FALSE, fig.height=10}
+require(seqinr)
+require(ape)
+
+# create tree from alignment
+fasta_file = file.path(here::here(), "data", "raw", "TP53-mammals-alignment-aa.fa")
+aln = read.alignment(fasta_file, format = "fasta", whole.header=TRUE)
+D = dist.alignment(aln)
+tree = njs(D)
+
+# plot tree with MSA
+tree_plot = ggtree(tree)
+msaplot(tree_plot, fasta = fasta_file) + ggtitle("tree with MSA")
+```
+
+
+# Gene Set Enrichment Analysis (GSEA) with `clusterProfiler`
+
+```{r}
+require(clusterProfiler)
+```
+
+
+# References
+- [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
+- [`seqinr`](https://seqinr.r-forge.r-project.org/)
+- [`ape`](https://www.rdocumentation.org/packages/ape/versions/5.4-1)
+- [`Biostrings`](https://bioconductor.org/packages/release/bioc/html/Biostrings.html)
+- [`Russell J. Gray's github`](https://github.com/RussellGrayxd)
+- [`clusterProfiler`](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html)
+
+# Session Info
+```{r session info}
+sessionInfo()
+```

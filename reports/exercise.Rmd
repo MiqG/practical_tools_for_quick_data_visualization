@@ -61,6 +61,7 @@ omics %>% distinct(cancer_type) %>% pull()
 
 I pre-processed different omic data sets into a long format data frame in which every "value" is linked to an "omic_type", which in turn can have several "omic_names". Additionally, we added information on the sample metadata.
 ```{r}
+head(omics)
 # available variables
 colnames(omics)
 # omic data types
@@ -95,17 +96,26 @@ In this section, we will try to answer the questions using functions from the pa
 ### How many samples per cancer type are there?
 ```{r}
 # try ggbarplot()
+ggbarplot(omics %>% count(cancer_type), x = 'cancer_type', y = 'n', ggtheme = theme_pubr(base_size = 8, x.text.angle = 45))
 ```
 
 ### How many samples per cancer type and sample type are there?
 ```{r}
 # try ggbarplot()
+ggbarplot(omics %>% count(cancer_type, sample_type), x = 'cancer_type', y = 'n', fill = 'sample_type', ggtheme = theme_pubr(base_size = 8, x.text.angle = 45), 
+          palette = 'lancet')
+ggbarplot(omics %>% group_by(cancer_type, sample_type) %>% summarise(n = n()) %>% mutate(freq=n/sum(n)), 
+          x = 'cancer_type', y = 'freq', fill = 'sample_type', ggtheme = theme_pubr(base_size = 8, x.text.angle = 45), palette = 'lancet')
 ```
 
 ## Distributions
 ### What are the distributions of values for every omic type across cancer types?
 ```{r}
 # try ggboxplot()
+omic_type_oi = 'exon_expression'
+omic_names = omics %>% filter(omic_type==omic_type_oi) %>% distinct(omic_name) %>% pull()
+omic_name_oi = omic_names[1]
+ggboxplot(omics %>% filter(omic_type==omic_type_oi & omic_name==omic_name_oi), x = 'cancer_type', y  = 'value')
 ```
 
 ### Could you now split them by sample type?
