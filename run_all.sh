@@ -8,8 +8,10 @@ set -euo pipefail
 Rscript scripts/prepare_multiomic_data.R
 
 # run report
-R -e "rmarkdown::render('reports/a_solution/intro.Rmd', output_format='md_document')"
-R -e "rmarkdown::render('reports/a_solution/exercise.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/01-intro.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/02-tidytuesday.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/03-bio.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/04-exercise.Rmd', output_format='md_document')"
 
 # move markdown and images
 mv reports/a_solution/*.md book/
@@ -24,11 +26,11 @@ cp README.md book/
 jupyter-book build book/
 
 # update github
-git add .
-git commit -m "re-run whole project"
-git push origin main
+#git add .
+#git commit -m "re-run whole project"
+#git push origin main
 
 # update webpage
-ghp-import -n -p -f book/_build/html
+#ghp-import -n -p -f book/_build/html
 
 echo "Done!"

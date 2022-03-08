@@ -1,7 +1,15 @@
-- file: README
-- part: Get started
-  chapters:
-    - file: intro
-- part: An exercise
-  chapters:
-    - file: exercise
+format: jb-book
+root: README
+parts: 
+  - caption: Get started
+    chapters:
+    - file: 01-intro
+  - caption: Personalize the details
+    chapters:
+    - file: 02-tidytuesday
+  - caption: Biology-related viz
+    chapters:
+    - file: 03-bio
+  - caption: A multi-omics exercise
+    chapters:
+    - file: 04-exercise

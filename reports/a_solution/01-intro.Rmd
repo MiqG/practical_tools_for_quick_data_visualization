@@ -9,13 +9,13 @@ urlcolor: blue
 
 output: md_document
 ---
+# Introduction
 # Load data
 
 <img src="images/palmerpenguins.png" width="25%">
 
 To start playing around with the functions from these packages we will use the [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data set.
 This simple data set has both continuous and categorical variables that make it perfect for showcasing how different functions work.
-
 
 ```{r, message=FALSE, warning=FALSE}
 require(tidyverse)

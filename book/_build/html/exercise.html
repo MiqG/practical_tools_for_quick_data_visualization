@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data &#8212; Practical tools for quick data visualization</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,35 +31,39 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Load data" href="intro.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -71,104 +72,75 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Practical tools for quick data visualization</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Practical tools for quick data visualization</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="README.html">
    Practical tools for quick data visualization
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Get started
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Load data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#general-plotting-with-ggpubr">
-   General plotting with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     ggpubr
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#heatmaps-with-pheatmap">
-   Heatmaps with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     pheatmap
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#phylogenetic-trees-with-ggtree">
-   Phylogenetic trees with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     ggtree
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#references">
-   References
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="intro.html#session-info">
-   Session Info
+  <a class="reference internal" href="01-intro.html">
+   Introduction
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  An exercise
+  Personalize the details
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Data
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-tidytuesday.html">
+   The R data viz community
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Biology-related viz
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="#exploratory-data-analysis">
-   Exploratory Data Analysis
+  <a class="reference internal" href="03-bio.html">
+   Biology-related data visualization
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A multi-omics exercise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="#references">
-   References
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#session-info">
-   Session Info
+  <a class="reference internal" href="04-exercise.html">
+   Exploratory Data Analysis of the most popular human gene
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -184,21 +156,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -212,11 +184,11 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -234,30 +206,30 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    Data
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#description">
      Description
@@ -274,7 +246,7 @@
   <a class="reference internal nav-link" href="#exploratory-data-analysis">
    Exploratory Data Analysis
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#counting">
      Counting
@@ -400,16 +372,179 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#description">
+     Description
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview">
+     Overview
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-data-analysis">
+   Exploratory Data Analysis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#counting">
+     Counting
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-per-cancer-type-are-there">
+       How many samples per cancer type are there?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-per-cancer-type-and-sample-type-are-there">
+       How many samples per cancer type and sample type are there?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distributions">
+     Distributions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#what-are-the-distributions-of-values-for-every-omic-type-across-cancer-types">
+       What are the distributions of values for every omic type across cancer types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-you-now-split-them-by-sample-type">
+       Could you now split them by sample type?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
+       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mutations">
+     Mutations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-many-samples-have-at-least-a-mutation">
+       How many samples have at least a mutation?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#which-are-the-most-common-effects-of-mutations">
+       Which are the most common effects of mutations?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-certain-cancer-types">
+       Are there mutations associated to certain cancer types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-sample-types">
+       Are there mutations associated to sample types?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
+       How are mutation effects associated to certain positions? And cancer_types?
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pairwise-associations">
+     Pairwise associations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-mutation-effects-be-associated-with-gene-expression">
+       Could mutation effects be associated with gene expression?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-gene-expression-be-associated-with-copy-number-variation">
+       Could gene expression be associated with copy number variation?
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#visualize-other-pairwise-associations-that-you-found-interesting">
+       Visualize other pairwise associations that you found interesting
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generating-data-overviews">
+     Generating data overviews
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#could-you-use-pheatmap-to-get-an-overview-of-the-distributions-of-every-omic-type-across-samples-could-you-also-include-cancer-type-and-omic-name-as-row-and-column-annotations">
+       Could you use
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         pheatmap
+        </span>
+       </code>
+       to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#session-info">
+   Session Info
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="data">
+  <div class="tex2jax_ignore mathjax_ignore section" id="data">
 <h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
 <span class="nf">require</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
@@ -565,7 +700,7 @@ occur inthis gene in every sample:</p>
 </div>
 </div>
 </div>
-<div class="section" id="exploratory-data-analysis">
+<div class="tex2jax_ignore mathjax_ignore section" id="exploratory-data-analysis">
 <h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h1>
 <p>In this section, we will try to answer the questions using functions
 from the packages introduced previously. These solutions are completely
@@ -580,7 +715,7 @@ visualizing the different types of data.</p>
           <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-13.png" /></p>
 </div>
 <div class="section" id="how-many-samples-per-cancer-type-and-sample-type-are-there">
 <h3>How many samples per cancer type and sample type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-and-sample-type-are-there" title="Permalink to this headline">¶</a></h3>
@@ -589,7 +724,7 @@ visualizing the different types of data.</p>
           <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="s">&#39;right&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-12.png" /></p>
 </div>
 </div>
 <div class="section" id="distributions">
@@ -669,7 +804,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`methylation-cg25053252`</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-11-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-11-11.png" /></p>
 </div>
 <div class="section" id="could-you-now-split-them-by-sample-type">
 <h3>Could you now split them by sample type?<a class="headerlink" href="#could-you-now-split-them-by-sample-type" title="Permalink to this headline">¶</a></h3>
@@ -746,7 +881,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`exon_expression-chr17:7573927-7574033:-`</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-13-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-13-11.png" /></p>
 </div>
 <div class="section" id="can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
 <h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this headline">¶</a></h3>
@@ -824,7 +959,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`gene_expression-TP53`</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-15-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-15-11.png" /></p>
 </div>
 </div>
 <div class="section" id="mutations">
@@ -846,7 +981,7 @@ visualizing the different types of data.</p>
           <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-17-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-17-11.png" /></p>
 </div>
 <div class="section" id="are-there-mutations-associated-to-certain-cancer-types">
 <h3>Are there mutations associated to certain cancer types?<a class="headerlink" href="#are-there-mutations-associated-to-certain-cancer-types" title="Permalink to this headline">¶</a></h3>
@@ -854,7 +989,7 @@ visualizing the different types of data.</p>
           <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-18-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-18-11.png" /></p>
 </div>
 <div class="section" id="are-there-mutations-associated-to-sample-types">
 <h3>Are there mutations associated to sample types?<a class="headerlink" href="#are-there-mutations-associated-to-sample-types" title="Permalink to this headline">¶</a></h3>
@@ -865,7 +1000,7 @@ visualizing the different types of data.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `summarise()` has grouped output by &#39;sample_type&#39;. You can override using the `.groups` argument.
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-19-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-19-11.png" /></p>
 </div>
 <div class="section" id="how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
 <h3>How are mutation effects associated to certain positions? And cancer_types?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types" title="Permalink to this headline">¶</a></h3>
@@ -879,7 +1014,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggpar</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">font.xtickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">font.ytickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-20-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-20-11.png" /></p>
 </div>
 </div>
 <div class="section" id="pairwise-associations">
@@ -892,7 +1027,7 @@ visualizing the different types of data.</p>
   <span class="nf">ggtitle</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-21-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-21-11.png" /></p>
 </div>
 <div class="section" id="could-gene-expression-be-associated-with-copy-number-variation">
 <h3>Could gene expression be associated with copy number variation?<a class="headerlink" href="#could-gene-expression-be-associated-with-copy-number-variation" title="Permalink to this headline">¶</a></h3>
@@ -913,7 +1048,7 @@ visualizing the different types of data.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `geom_smooth()` using formula &#39;y ~ x&#39;
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-22-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-22-11.png" /></p>
 </div>
 <div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
 <h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this headline">¶</a></h3>
@@ -975,7 +1110,7 @@ and omic types and names.</p>
 </div>
 </div>
 </div>
-<div class="section" id="references">
+<div class="tex2jax_ignore mathjax_ignore section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">Article on the most popular
@@ -984,7 +1119,7 @@ genes.</a></p></li>
 <li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a></p></li>
 </ul>
 </div>
-<div class="section" id="session-info">
+<div class="tex2jax_ignore mathjax_ignore section" id="session-info">
 <h1>Session Info<a class="headerlink" href="#session-info" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sessionInfo</span><span class="p">()</span>
 </pre></div>
@@ -1056,35 +1191,28 @@ genes.</a></p></li>
 
               </div>
               
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
         </div>
     </div>
+    <footer class="footer">
+  <p>
     
+      By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)<br/>
     
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">Load data</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

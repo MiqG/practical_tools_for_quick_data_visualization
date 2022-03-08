@@ -9,6 +9,56 @@ urlcolor: blue
 
 output: md_document
 ---
+# Biology-related data visualization
+# Gene Set Enrichment Analysis (GSEA) with `clusterProfiler`
+
+```{r}
+require(tidyverse)
+```
+
+Let's say we have found a set of interesting genes.
+```{r}
+geneset_file = file.path(here::here(), "data", "raw", "geneset.txt")
+genes_oi = readLines(geneset_file)
+
+genes_oi %>% length() %>% print()
+genes_oi %>% head()
+```
+Is is enriched in some biological processes?
+```{r}
+require(clusterProfiler)
+require(org.Hs.eg.db)
+
+result = enrichGO(genes_oi, ont="BP", keyType="SYMBOL", OrgDb=org.Hs.eg.db)
+result %>% as.data.frame()
+```
+
+```{r}
+result %>% dotplot()
+```
+```{r}
+result %>% cnetplot()
+```
+
+Now, we would like to see the overlap between the genes in the top 5 enriched categories.
+```{r}
+require(ComplexHeatmap)
+
+# extract lists of genes in top enriched terms
+terms_oi = result %>% as.data.frame() %>% filter(p.adjust<0.05) %>% slice_max(Count, n=10)
+terms_oi = terms_oi %>% group_by(Description) %>% summarize(genes=strsplit(geneID, split="/")) %>% ungroup()
+terms_oi = sapply(terms_oi[["Description"]], 
+                  function(genes){ terms_oi[["genes"]][[1]]}, simplify=FALSE)
+
+# prepare inputs
+terms_oi = terms_oi %>% 
+    list_to_matrix() %>% 
+    make_comb_mat()
+  
+# plot
+plt = terms_oi %>% UpSet()
+plt
+```
 
 # Phylogenetic trees with `ggtree`
 Trees are another very common plot to visualize hierarchical patterns. Here, we will use [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html) to visualize the phylogenetic relationships extracted from a multiple sequence alignment of *TP53* across mammals.
@@ -39,14 +89,8 @@ msaplot(tree_plot, fasta = fasta_file) + ggtitle("tree with MSA")
 ```
 
 
-# Gene Set Enrichment Analysis (GSEA) with `clusterProfiler`
-
-```{r}
-require(clusterProfiler)
-```
-
-
 # References
+- [Gene set used](https://www.gsea-msigdb.org/gsea/msigdb/cards/KEGG_ALZHEIMERS_DISEASE)
 - [`ggtree`](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html)
 - [`seqinr`](https://seqinr.r-forge.r-project.org/)
 - [`ape`](https://www.rdocumentation.org/packages/ape/versions/5.4-1)

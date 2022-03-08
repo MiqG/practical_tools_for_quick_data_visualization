@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Load data &#8212; Practical tools for quick data visualization</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,36 +31,39 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data" href="exercise.html" />
-    <link rel="prev" title="Practical tools for quick data visualization" href="README.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
 
-
-
+    <!-- Google Analytics -->
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -72,104 +72,75 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="index.html">
-  
-  
-  <h1 class="site-logo" id="site-title">Practical tools for quick data visualization</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Practical tools for quick data visualization</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <ul class="nav sidenav_l1">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="README.html">
    Practical tools for quick data visualization
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Get started
  </span>
 </p>
-<ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Load data
-  </a>
- </li>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="#general-plotting-with-ggpubr">
-   General plotting with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     ggpubr
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#heatmaps-with-pheatmap">
-   Heatmaps with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     pheatmap
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#phylogenetic-trees-with-ggtree">
-   Phylogenetic trees with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     ggtree
-    </span>
-   </code>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#references">
-   References
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="#session-info">
-   Session Info
+  <a class="reference internal" href="01-intro.html">
+   Introduction
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  An exercise
+  Personalize the details
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="exercise.html">
-   Data
+  <a class="reference internal" href="02-tidytuesday.html">
+   The R data viz community
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Biology-related viz
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="exercise.html#exploratory-data-analysis">
-   Exploratory Data Analysis
+  <a class="reference internal" href="03-bio.html">
+   Biology-related data visualization
   </a>
  </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A multi-omics exercise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="exercise.html#references">
-   References
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="exercise.html#session-info">
-   Session Info
+  <a class="reference internal" href="04-exercise.html">
+   Exploratory Data Analysis of the most popular human gene
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -185,21 +156,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -213,11 +184,11 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -235,25 +206,25 @@
     </div>
 </div>
 
+            <!-- Full screen (wrap in <a> to have style consistency -->
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
-
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
         </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    Load data
@@ -268,7 +239,7 @@
     </span>
    </code>
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#how-many-penguins-of-each-species-did-we-observe-in-total">
      How many penguins of each species did we observe in total?
@@ -330,7 +301,7 @@
     </span>
    </code>
   </a>
-  <ul class="nav section-nav flex-column">
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#basic-tree">
      Basic tree
@@ -359,16 +330,137 @@
  </li>
 </ul>
 
-        </nav>
-        
+            </nav>
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Load data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-plotting-with-ggpubr">
+   General plotting with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggpubr
+    </span>
+   </code>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-penguins-of-each-species-did-we-observe-in-total">
+     How many penguins of each species did we observe in total?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-many-penguins-of-each-species-and-sex-did-we-observe-across-the-different-islands">
+     How many penguins of each species and sex did we observe across the different islands?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin">
+     What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island">
+     Are the differences of body mass between sexes significant if we control for species and island?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-the-relationship-between-flipper-length-body-mass-and-bill-length">
+     What is the relationship between flipper length, body mass and bill length?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass">
+     Could we have sampling bias in the relationship between flipper length and body mass?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length">
+     What is the spearman correlation coefficient between body mass and flipper length?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-and-save-a-figure">
+     Create and save a figure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heatmaps-with-pheatmap">
+   Heatmaps with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     pheatmap
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phylogenetic-trees-with-ggtree">
+   Phylogenetic trees with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggtree
+    </span>
+   </code>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-tree">
+     Basic tree
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tree-and-multiple-sequence-alignment-of-tp53-amino-acids">
+     Tree and multiple sequence alignment of
+     <em>
+      TP53
+     </em>
+     amino acids
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#session-info">
+   Session Info
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="section" id="load-data">
+  <div class="tex2jax_ignore mathjax_ignore section" id="load-data">
 <h1>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="_images/palmerpenguins.png"><img alt="_images/palmerpenguins.png" src="_images/palmerpenguins.png" style="width: 25%;" /></a>
 <p>To start playing around with the functions from these packages we will
@@ -402,7 +494,7 @@ head(dat)
 </pre></div>
 </div>
 </div>
-<div class="section" id="general-plotting-with-ggpubr">
+<div class="tex2jax_ignore mathjax_ignore section" id="general-plotting-with-ggpubr">
 <h1>General plotting with <code class="docutils literal notranslate"><span class="pre">ggpubr</span></code><a class="headerlink" href="#general-plotting-with-ggpubr" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>require(ggpubr)
 require(ggplot2)
@@ -426,7 +518,7 @@ making</a></p></li>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggpie(dat %&gt;% count(species), x = &#39;n&#39;, fill = &#39;species&#39;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-3-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-3-11.png" /></p>
 </div>
 <div class="section" id="how-many-penguins-of-each-species-and-sex-did-we-observe-across-the-different-islands">
 <h2>How many penguins of each species and sex did we observe across the different islands?<a class="headerlink" href="#how-many-penguins-of-each-species-and-sex-did-we-observe-across-the-different-islands" title="Permalink to this headline">¶</a></h2>
@@ -434,19 +526,19 @@ making</a></p></li>
           label = TRUE, position = position_dodge(0.7), facet.by = &#39;island&#39;, palette = &#39;lancet&#39;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-4-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-4-12.png" /></p>
 </div>
 <div class="section" id="what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin">
 <h2>What are the distributions of flipper lengths considering penguin species, sex and islands of origin?<a class="headerlink" href="#what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>gghistogram(dat, x = &#39;flipper_length_mm&#39;, fill = &#39;sex&#39;, facet.by = c(&#39;species&#39;,&#39;island&#39;))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-5-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-5-12.png" /></p>
 <p>Alternatively, we can use stripcharts charts:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggstripchart(dat, x = &#39;island&#39;, y = &#39;flipper_length_mm&#39;, color = &#39;sex&#39;, facet.by = &#39;species&#39;, alpha = 0.5, position = position_jitterdodge(), add = &#39;median_iqr&#39;, add.params = list(color=&#39;black&#39;, group=&#39;sex&#39;, size=0.2))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-6-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-6-12.png" /></p>
 </div>
 <div class="section" id="are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island">
 <h2>Are the differences of body mass between sexes significant if we control for species and island?<a class="headerlink" href="#are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island" title="Permalink to this headline">¶</a></h2>
@@ -454,21 +546,21 @@ making</a></p></li>
    stat_compare_means(aes(color = sex), label = &quot;p.signif&quot;, method = &#39;wilcox.test&#39;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-7-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-7-12.png" /></p>
 </div>
 <div class="section" id="what-is-the-relationship-between-flipper-length-body-mass-and-bill-length">
 <h2>What is the relationship between flipper length, body mass and bill length?<a class="headerlink" href="#what-is-the-relationship-between-flipper-length-body-mass-and-bill-length" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat, x = &#39;flipper_length_mm&#39;, y = &#39;body_mass_g&#39;, color = &#39;bill_length_mm&#39;, alpha = 0.5)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-14.png" /></p>
 </div>
 <div class="section" id="could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass">
 <h2>Could we have sampling bias in the relationship between flipper length and body mass?<a class="headerlink" href="#could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat %&gt;% mutate(year=factor(year)), x = &#39;flipper_length_mm&#39;, y = &#39;body_mass_g&#39;, alpha = 0.5, color = &#39;year&#39;, ellipse = TRUE)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-13.png" /></p>
 </div>
 <div class="section" id="what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length">
 <h2>What is the spearman correlation coefficient between body mass and flipper length?<a class="headerlink" href="#what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length" title="Permalink to this headline">¶</a></h2>
@@ -479,7 +571,7 @@ making</a></p></li>
    theme(aspect.ratio = 1)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-10-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-10-11.png" /></p>
 </div>
 <div class="section" id="create-and-save-a-figure">
 <h2>Create and save a figure<a class="headerlink" href="#create-and-save-a-figure" title="Permalink to this headline">¶</a></h2>
@@ -517,7 +609,7 @@ ggsave(&#39;images/myfig.png&#39;, fig, width = 15, height = 10, unit = &#39;cm&
 <p><img alt="" src="_images/myfig.png" /></p>
 </div>
 </div>
-<div class="section" id="heatmaps-with-pheatmap">
+<div class="tex2jax_ignore mathjax_ignore section" id="heatmaps-with-pheatmap">
 <h1>Heatmaps with <code class="docutils literal notranslate"><span class="pre">pheatmap</span></code><a class="headerlink" href="#heatmaps-with-pheatmap" title="Permalink to this headline">¶</a></h1>
 <p>A part from <code class="docutils literal notranslate"><span class="pre">ggpubr</span></code>, one of the most common packages to visualize
 multiple types of data altogether is <code class="docutils literal notranslate"><span class="pre">pheatmap</span></code>, which allows to combine
@@ -530,9 +622,9 @@ rownames(dat) = 1:nrow(dat)
 pheatmap(dat[,cols_oi], scale = &#39;column&#39;, show_rownames = FALSE, annotation_row = dat[,c(&#39;species&#39;,&#39;island&#39;),drop=FALSE])
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-12-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-12-11.png" /></p>
 </div>
-<div class="section" id="phylogenetic-trees-with-ggtree">
+<div class="tex2jax_ignore mathjax_ignore section" id="phylogenetic-trees-with-ggtree">
 <h1>Phylogenetic trees with <code class="docutils literal notranslate"><span class="pre">ggtree</span></code><a class="headerlink" href="#phylogenetic-trees-with-ggtree" title="Permalink to this headline">¶</a></h1>
 <p>Trees are another very common plot to visualize hierarchical patterns.
 Here, we will use
@@ -547,7 +639,7 @@ tree &lt;- rtree(50)
 ggtree(tree, layout=&quot;circular&quot;) + geom_tiplab()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-13-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-13-12.png" /></p>
 </div>
 <div class="section" id="tree-and-multiple-sequence-alignment-of-tp53-amino-acids">
 <h2>Tree and multiple sequence alignment of <em>TP53</em> amino acids<a class="headerlink" href="#tree-and-multiple-sequence-alignment-of-tp53-amino-acids" title="Permalink to this headline">¶</a></h2>
@@ -571,7 +663,7 @@ msaplot(tree_plot, fasta = fasta_file) + ggtitle(&#39;tree with MSA&#39;)
 <p><img alt="" src="_images/unnamed-chunk-14-1.png" /></p>
 </div>
 </div>
-<div class="section" id="references">
+<div class="tex2jax_ignore mathjax_ignore section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ggplot2.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code></a></p></li>
@@ -584,7 +676,7 @@ msaplot(tree_plot, fasta = fasta_file) + ggtitle(&#39;tree with MSA&#39;)
 <li><p><a class="reference external" href="https://github.com/RussellGrayxd"><code class="docutils literal notranslate"><span class="pre">Russell</span> <span class="pre">J.</span> <span class="pre">Gray's</span> <span class="pre">github</span></code></a></p></li>
 </ul>
 </div>
-<div class="section" id="session-info">
+<div class="tex2jax_ignore mathjax_ignore section" id="session-info">
 <h1>Session Info<a class="headerlink" href="#session-info" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sessionInfo()
 
@@ -666,36 +758,28 @@ msaplot(tree_plot, fasta = fasta_file) + ggtitle(&#39;tree with MSA&#39;)
 
               </div>
               
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
         </div>
     </div>
+    <footer class="footer">
+  <p>
     
+      By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)<br/>
     
-    <div class='prev-next-bottom'>
-        
-    <a class='left-prev' id="prev-link" href="README.html" title="previous page">Practical tools for quick data visualization</a>
-    <a class='right-next' id="next-link" href="exercise.html" title="next page">Data</a>
-
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
       </div>
     </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
   </body>
 </html>

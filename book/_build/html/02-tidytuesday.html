@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The R data viz community &#8212; Practical tools for quick data visualization</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Biology-related data visualization" href="03-bio.html" />
+    <link rel="prev" title="Introduction" href="01-intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Practical tools for quick data visualization</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   Practical tools for quick data visualization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Personalize the details
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The R data viz community
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Biology-related viz
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-bio.html">
+   Biology-related data visualization
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A multi-omics exercise
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-exercise.html">
+   Exploratory Data Analysis of the most popular human gene
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/02-tidytuesday.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MiqG/practical_tools_for_quick_data_visualization"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MiqG/practical_tools_for_quick_data_visualization/issues/new?title=Issue%20on%20page%20%2F02-tidytuesday.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The R data viz community
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explore-the-data-using-the-functions-introduced">
+   Explore the data using the functions introduced.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#session-info">
+   Session Info
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The R data viz community</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The R data viz community
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-data">
+   Load data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explore-the-data-using-the-functions-introduced">
+   Explore the data using the functions introduced.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#session-info">
+   Session Info
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-r-data-viz-community">
+<h1>The R data viz community<a class="headerlink" href="#the-r-data-viz-community" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="load-data">
+<h1>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="_images/tt_logo.png"><img alt="_images/tt_logo.png" src="_images/tt_logo.png" style="width: 50%;" /></a>
+<p>One of the greatest things of R data visualization is its community.
+There are many open-source projects going on that revolve around getting
+started and improving our data viz skills. One of my favorite projects
+is <a class="reference external" href="https://github.com/rfordatascience/tidytuesday"><code class="docutils literal notranslate"><span class="pre">tidytuesday</span></code></a>, a
+challenge consisting of sharing toy datasets, plotting them and posting
+them together with the corresponding code on twitter with the hashtag
+<a class="reference external" href="https://twitter.com/search?q=%23tidytuesday&amp;src=typed_query">#tidytuesday</a>.
+They even share <a class="reference external" href="https://www.youtube.com/watch?v=F4c-rEFfJpQ">videos</a> on
+how to reproduce plots made by others just by looking at their final
+plot! I think this is a great resource to get inspired, getting to know
+new possibilities, and training. There are people that have made this a
+weekly ritual! I recommend you to follow <a class="reference external" href="https://twitter.com/TidyTuesday_Bot">this twitter
+bot</a> to check out people’s ideas.
+One of my favorite R plotters is
+<a class="reference external" href="https://www.cedricscherer.com/"><code class="docutils literal notranslate"><span class="pre">Cedric</span> <span class="pre">Scherer</span></code></a>, who has become a
+guru of data visualization. Check out his webpage!</p>
+<p>Here, we will use the toy dataset from 2022/03/08 on <a class="reference external" href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-03-08">EU student
+mobility</a>,
+describing the movements of students throughout the ERASMUS program.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>require(tidyverse)
+require(ggpubr)
+
+dat_url = &quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-03-08/erasmus.csv&quot;
+dat = read_csv(dat_url)
+dat %&gt;% head(1) %&gt;% t()
+
+##                                     [,1]                                              
+## project_reference                   &quot;2014-1-AT02-KA347-000139&quot;                        
+## academic_year                       &quot;2014-2015&quot;                                       
+## mobility_start_month                &quot;2014-11&quot;                                         
+## mobility_end_month                  &quot;2014-11&quot;                                         
+## mobility_duration                   &quot;1&quot;                                               
+## activity_mob                        &quot;National youth meetings&quot;                         
+## field_of_education                  &quot;? Unknown ?&quot;                                     
+## participant_nationality             &quot;AT&quot;                                              
+## education_level                     &quot;??? - ? Unknown ?&quot;                               
+## participant_gender                  &quot;Female&quot;                                          
+## participant_profile                 &quot;Learner&quot;                                         
+## special_needs                       &quot;No&quot;                                              
+## fewer_opportunities                 &quot;Yes&quot;                                             
+## group_leader                        &quot;No&quot;                                              
+## participant_age                     &quot;13&quot;                                              
+## sending_country_code                &quot;AT&quot;                                              
+## sending_city                        &quot;Dornbirn&quot;                                        
+## sending_organization                &quot;bOJA - Bundesweites Netzwerk Offene Jugendarbeit&quot;
+## sending_organisation_erasmus_code   &quot;-&quot;                                               
+## receiving_country_code              &quot;AT&quot;                                              
+## receiving_city                      &quot;Dornbirn&quot;                                        
+## receiving_organization              &quot;bOJA - Bundesweites Netzwerk Offene Jugendarbeit&quot;
+## receiving_organisation_erasmus_code &quot;-&quot;                                               
+## participants                        &quot;2&quot;
+</pre></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="explore-the-data-using-the-functions-introduced">
+<h1>Explore the data using the functions introduced.<a class="headerlink" href="#explore-the-data-using-the-functions-introduced" title="Permalink to this headline">¶</a></h1>
+<p>Freestyle time! Try out the functions from <code class="docutils literal notranslate"><span class="pre">ggpubr</span></code> that we introduced
+earlier to get some answers from this dataset (e.g. what is the most
+common connection?).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># mobility troughout years and months by gender
+plt = dat %&gt;% 
+    mutate(month=gsub(&quot;.*-&quot;,&quot;&quot;, mobility_start_month)) %&gt;% 
+    count(academic_year, month, participant_gender) %&gt;% 
+    ggbarplot(x=&quot;month&quot;, y=&quot;n&quot;, fill=&quot;participant_gender&quot;, palette=&quot;simpsons&quot;, 
+              facet.by=&quot;academic_year&quot;, position=position_dodge(0.5), color=NA) + 
+    labs(x=&quot;Month&quot;, y=&quot;Count&quot;, fill=&quot;&quot;)
+
+plt
+</pre></div>
+</div>
+<p><img alt="" src="_images/unnamed-chunk-2-1.png" />
+# <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> in depth:
+[&#64;KittJonathan](<a class="reference external" href="https://twitter.com/KittJonathan">https://twitter.com/KittJonathan</a>)’s version To
+exemplify how projects like <code class="docutils literal notranslate"><span class="pre">tidytuesday</span></code> can help us learning new ways
+of plotting in R, I have copy-pasted
+[&#64;KittJonathan](<a class="reference external" href="https://twitter.com/KittJonathan">https://twitter.com/KittJonathan</a>)’s version of the
+challenge:
+<a class="reference external" href="https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R">https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R</a>.
+In this github page you’ll find many more cool visualizations!</p>
+<p><strong>NOTE</strong>: you’ll need to install several extra packages to be able to
+run it: -
+<a class="reference external" href="https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html"><code class="docutils literal notranslate"><span class="pre">showtext</span></code></a>:
+edit fonts more easily in R graphs. -
+<a class="reference external" href="https://cran.r-project.org/web/packages/countrycode/index.html"><code class="docutils literal notranslate"><span class="pre">countrycode</span></code></a>:
+get country code names.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>erasmus = dat
+
+require(showtext)
+
+## Loading required package: showtext
+
+## Loading required package: sysfonts
+
+## Loading required package: showtextdb
+
+require(countrycode)
+
+## Loading required package: countrycode
+
+# Load fonts ----
+
+font_add_google(name = &quot;Comfortaa&quot;, family = &quot;Comfortaa&quot;)
+showtext_auto()
+
+# Data wrangling ----
+
+country_codes &lt;- codelist %&gt;%
+  select(iso2c, country_name = country.name.en)
+
+d1 &lt;- erasmus %&gt;% 
+  filter(participant_nationality == &quot;FR&quot;,  # keep data for french students
+         receiving_country_code != &quot;FR&quot;) %&gt;%  # keep mobilities abroad
+  select(receiving_country_code, participants) %&gt;%   # remove unwanted columns
+  left_join(country_codes, by = c(&quot;receiving_country_code&quot; = &quot;iso2c&quot;)) %&gt;%  # add sending country name
+  mutate(country_name = case_when(receiving_country_code == &quot;EL&quot; ~ &quot;Greece&quot;,  # add missing country names 
+                                  receiving_country_code == &quot;UK&quot; ~ &quot;United Kingdom&quot;,
+                                  receiving_country_code == &quot;CZ&quot; ~ &quot;Czech Republic&quot;,
+                                  TRUE ~ country_name)) %&gt;% 
+  group_by(country_name) %&gt;%  # group data by country name
+  mutate(total = sum(participants)) %&gt;%   # count total number of participants for each receiving country
+  filter(row_number() == 1) %&gt;%  # keep 1 row by receiving country
+  arrange(desc(total)) %&gt;%   # arrange data by descending order
+  ungroup() %&gt;%  # ungroup data
+  mutate(percent = 100 * total / sum(total)) %&gt;%   # calculate ratio
+  mutate(country_name = factor(country_name, levels = rev(country_name))) %&gt;%  # set levels %&gt;% 
+  head(10)  # keep top 10 destinations
+
+# Create plot ----
+
+p &lt;- ggplot(data = d1,
+       aes(x = country_name, y = total, fill = country_name)) +
+  geom_bar(width = 0.9, stat = &quot;identity&quot;, show.legend = FALSE) +
+  scale_fill_manual(values = rep(c(&quot;#3caea3&quot;, &quot;#173f5f&quot;), 5)) +
+  coord_polar(theta = &quot;y&quot;, start = 0) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;&quot;) +
+  labs(caption = &quot;Visualisation : Jonathan Kitt | Data source : Data.Europa | #TidyTuesday 2022 week 10&quot;) +
+  geom_text(aes(x = country_name, y = 0, label = paste0(country_name, &quot; - &quot;, round(percent, digits = 1), &quot; %&quot;)),
+            hjust = 1.05, family = &quot;Comfortaa&quot;, size = 10, colour = rep(c(&quot;#173f5f&quot;, &quot;#3caea3&quot;), 5)) +
+  ggtitle(label = &quot;Where do french students prefer to go ?&quot;,
+          subtitle = &quot;Top 10 destinations for french ERASMUS participants (2014-2020&quot;) +
+  ylim(c(0, 250)) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = &quot;#d6ecef&quot;, colour = &quot;#d6ecef&quot;),
+        panel.background = element_rect(fill = &quot;#d6ecef&quot;, colour = &quot;#d6ecef&quot;),
+        plot.title = element_text(family = &quot;Comfortaa&quot;, size = 60, colour = &quot;#173f5f&quot;, hjust = 0.5,
+                                  margin = margin(t = 20)),
+        plot.subtitle = element_text(family = &quot;Comfortaa&quot;, size = 30, colour = &quot;#173f5f&quot;, hjust = 0.5),
+        plot.caption = element_text(colour = &quot;#173f5f&quot;, size = 20, hjust = 0.5,
+                                    margin = margin(b = 20)))
+
+ggsave(&quot;images/2022_03_08_erasmus.png&quot;, p, dpi = 320, width = 12, height = 6)
+</pre></div>
+</div>
+<p><img alt="" src="_images/2022_03_08_erasmus.png" /></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rfordatascience/tidytuesday"><code class="docutils literal notranslate"><span class="pre">tidytuesday</span></code></a></p></li>
+<li><p><a class="reference external" href="https://www.cedricscherer.com/"><code class="docutils literal notranslate"><span class="pre">Cedric</span> <span class="pre">Scherer</span></code></a></p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="session-info">
+<h1>Session Info<a class="headerlink" href="#session-info" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sessionInfo()
+
+## R version 4.1.2 (2021-11-01)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.6 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/openblas/libblas.so.3
+## LAPACK: /usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_GB.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_GB.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_GB.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_GB.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] countrycode_1.3.1 showtext_0.9-5    showtextdb_3.0    sysfonts_0.8.5   
+##  [5] ggpubr_0.4.0      forcats_0.5.1     stringr_1.4.0     dplyr_1.0.8      
+##  [9] purrr_0.3.4       readr_2.1.2       tidyr_1.2.0       tibble_3.1.6     
+## [13] ggplot2_3.3.5     tidyverse_1.3.1  
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_1.0.8       lubridate_1.8.0  assertthat_0.2.1 digest_0.6.29   
+##  [5] utf8_1.2.2       R6_2.5.1         cellranger_1.1.0 backports_1.4.1 
+##  [9] reprex_2.0.1     evaluate_0.15    highr_0.9        httr_1.4.2      
+## [13] pillar_1.7.0     rlang_1.0.2      curl_4.3.2       readxl_1.3.1    
+## [17] rstudioapi_0.13  car_3.0-12       rmarkdown_2.12   labeling_0.4.2  
+## [21] bit_4.0.4        munsell_0.5.0    broom_0.7.12     compiler_4.1.2  
+## [25] modelr_0.1.8     xfun_0.30        pkgconfig_2.0.3  htmltools_0.5.2 
+## [29] tidyselect_1.1.2 fansi_1.0.2      crayon_1.5.0     tzdb_0.2.0      
+## [33] dbplyr_2.1.1     withr_2.5.0      grid_4.1.2       jsonlite_1.8.0  
+## [37] gtable_0.3.0     lifecycle_1.0.1  DBI_1.1.2        magrittr_2.0.2  
+## [41] scales_1.1.1     cli_3.2.0        stringi_1.7.6    vroom_1.5.7     
+## [45] carData_3.0-5    farver_2.1.0     ggsignif_0.6.3   fs_1.5.2        
+## [49] xml2_1.3.3       ellipsis_0.3.2   generics_0.1.2   vctrs_0.3.8     
+## [53] ggsci_2.9        tools_4.1.2      bit64_4.0.5      glue_1.6.2      
+## [57] hms_1.1.1        parallel_4.1.2   abind_1.4-5      fastmap_1.1.0   
+## [61] yaml_2.3.5       colorspace_2.0-3 rstatix_0.7.0    rvest_1.0.2     
+## [65] knitr_1.37       haven_2.4.3
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01-intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03-bio.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Biology-related data visualization</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

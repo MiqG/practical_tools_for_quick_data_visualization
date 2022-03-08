@@ -16,15 +16,11 @@ output:
     md_document:
       variant: markdown_github
 ---
-
+# Exploratory Data Analysis of the most popular human gene
 # Data
 ```{r, message=FALSE, warning=FALSE}
-require(readr)
-require(dplyr)
-require(tidyr)
-
+require(tidyverse)
 require(ggpubr)
-require(ggplot2)
 require(ComplexHeatmap)
 
 ROOT = here::here()
@@ -215,7 +211,7 @@ ggbarplot(df %>% group_by(sample_type, effect) %>% summarise(n = n()) %>% mutate
 
 ### How are mutation effects associated to certain positions? And cancer_types?
 ```{r, fig.width=8, fig.height=8}
-plt = gghistogram(df, x = 'start', y = '..density..', facet.by = 'effect', fill = 'effect', palette = 'simpsons')
+plt = gghistogram(df %>% mutate(start=as.numeric(start)), x = 'start', stat="density", facet.by = 'effect', fill = 'effect', palette = 'simpsons', numeric.x.axis=TRUE)
 ggpar(plt, font.xtickslab = 8, font.ytickslab = 8)
 ```
 
@@ -254,51 +250,71 @@ Try to visualize them considering different sample types, cancer types and omic 
 cancer_types_oi = c('BRCA')
 
 # prepare annotations
-annotation_col = omics %>% select(omic_type, omic_name) %>% distinct() %>% as.data.frame()
-rownames(annotation_col) = annotation_col$omic_name
-annotation_row = omics %>% select(sample, sample_type, cancer_type) %>% distinct() %>% as.data.frame()
-rownames(annotation_row) = annotation_row$sample
-annotation_row = annotation_row[,setdiff(colnames(annotation_row),'sample')]
+annotation_col = omics %>% 
+    drop_na(sample_type) %>% 
+    select(omic_type, omic_name) %>% 
+    distinct() %>% 
+    as.data.frame()
+
+annotation_row = omics %>% 
+    drop_na(sample_type) %>% 
+    filter(cancer_type%in%cancer_types_oi) %>% 
+    select(sample, sample_type, cancer_type) %>% 
+    distinct() %>% 
+    select(-sample) %>% 
+    as.data.frame()
+
+# prepare matrix of values, sorted by gene expression
+df = omics %>% 
+  drop_na(sample_type) %>%
+  filter(cancer_type%in%cancer_types_oi) %>% 
+  pivot_wider(id_cols = c(sample, cancer_type, sample_type), 
+              names_from = omic_name, 
+              values_from = value)
+df = df %>% arrange(TP53) # gene expression
+mat = as.matrix(df[,annotation_col$omic_name])
+rownames(mat) = df$sample
 
 # prepare annotation colors
 annotation_colors = list(
-  #omic_name = setNames(get_palette(k=length(unique(annotation_col$omic_name))), unique(annotation_col$omic_name)),
+  omic_name = setNames(get_palette(k=length(unique(annotation_col$omic_name))), unique(annotation_col$omic_name)),
   omic_type = setNames(get_palette('lancet',length(unique(annotation_col$omic_type))), unique(annotation_col$omic_type)),
   sample_type = setNames(get_palette('npg',length(unique(annotation_row$sample_type))), unique(annotation_row$sample_type)),
   cancer_type = setNames(get_palette('simpsons',length(unique(annotation_row$cancer_type))), unique(annotation_row$cancer_type))
 )
 
-# prepare matrix of values, sorted by gene expression
-df = omics %>% filter(cancer_type%in%cancer_types_oi) %>% 
-               pivot_wider(id_cols = c(sample, cancer_type, sample_type), names_from = omic_name, values_from = value)
-df = df %>% arrange(TP53) # gene expression
-mat = as.matrix(df[,annotation_col$omic_name])
-rownames(mat) = df$sample
-
 plts = list()
 for (omic_type_oi in omic_types){
     # get omic names corresponding to this omic type
-    omic_names_oi = annotation_col$omic_name[annotation_col$omic_type==omic_type_oi]
-    plts[[omic_type_oi]] = ComplexHeatmap(mat[,omic_names_oi, drop=FALSE], 
-                                    main = omic_type_oi,
-                                    annotation_row = annotation_row, annotation_col = annotation_col, annotation_colors = annotation_colors,
-                                    cluster_rows = FALSE, cluster_cols = FALSE, show_rownames = FALSE, show_colnames = FALSE, silent = TRUE)
+    idx = annotation_col$omic_type==omic_type_oi
+    omic_names_oi = annotation_col$omic_name[idx]
+    
+    # build annotations
+    annot_color = annotation_colors
+    annot_color$omic_type = annot_color$omic_type[omic_type_oi]
+    annot_color$omic_name = annot_color$omic_name[omic_names_oi]
+    
+    h_annotation_col = HeatmapAnnotation(df=annotation_col, col=annot_color[colnames(annotation_col)], which="column")
+    h_annotation_row = HeatmapAnnotation(df=annotation_row, col=annot_color[colnames(annotation_row)], which="row")
+
+    
+    plts[[omic_type_oi]] = Heatmap(
+        mat[,omic_names_oi, drop=FALSE],
+        right_annotation = h_annotation_row, top_annotation = h_annotation_col[idx], 
+        cluster_rows = FALSE, cluster_columns = FALSE, 
+        show_row_names = FALSE, show_column_names = FALSE,
+        name=" "
+      )
 }
 ```
 
 ```{r, warning=FALSE, message=FALSE, results='hide'}
-require(gridExtra)
 png('images/heatmaps.png', height = 400, width = 800, units = 'mm', res = 100)
-grid.arrange(plts[['gene_expression']]$gtable, 
-             plts[['exon_expression']]$gtable, 
-             plts[['methylation']]$gtable, 
-             plts[['copy_number_variation']]$gtable,
-             ncol=length(plts), widths=c(0.75,2,2,0.75))
+plts[['gene_expression']] + plts[['exon_expression']] + plts[['methylation']] + plts[['copy_number_variation']]
 dev.off()
 ```
 
 ![](images/heatmaps.png)
-
 
 # References
 - [Article on the most popular genes.](https://www.nature.com/articles/d41586-017-07291-9)

@@ -28,23 +28,28 @@ Please, make sure to have R and RStudio installed with the following packages:
   - [`ComplexHeatmap`](http://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html): to make heatmaps.
   - [`gridExtra`](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html): to arrange multiple plots not created through `ggplot`.
   - [`ggplotify`](https://cran.r-project.org/web/packages/ggplotify/index.html): converts any plot into a ggplot.
- 
+  - [`showtext`](https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html): edit fonts more easily in R graphs.
+  - [`countrycode`](https://cran.r-project.org/web/packages/countrycode/index.html): get country code names.
+
 
 Here"s the code snipped in case you need to install some of them.
 ```r
 # install packages from CRAN
 # wrangling
-install.packages("here")
-install.packages("tidyverse")
-install.packages("seqinr")
-install.packages("ape")
+install.packages("here", dependency=TRUE)
+install.packages("tidyverse", dependency=TRUE)
+install.packages("seqinr", dependency=TRUE)
+install.packages("ape", dependency=TRUE)
 
 # visualization
-install.packages("ggplot2")
-install.packages("ggpubr") # requires libcurl4 and libnlopt-dev in ubuntu
-install.packages("gridExtra")
-install.packages("ggplotify")
+install.packages("ggplot2", dependency=TRUE)
+install.packages("ggpubr", dependency=TRUE) # requires libcurl4 and libnlopt-dev in ubuntu
+install.packages("gridExtra", dependency=TRUE)
+install.packages("ggplotify", dependency=TRUE)
 
+# extra (optional)
+install.packages("showtext", dependecy=TRUE)
+install.packages("countrycode", dependecy=TRUE)
 
 # install packages from Bioconductor
 if (!requireNamespace("BiocManager", quietly = TRUE)){ install.packages("BiocManager") }
@@ -52,6 +57,7 @@ BiocManager::install("clusterProfiler")
 BiocManager::install("ggtree")
 BiocManager::install("Biostrings")
 BiocManager::install("ComplexHeatmap")
+BiocManager::install("org.Hs.eg.db")
 ```
 
 Then, you can also download the notebooks for the talk with:
