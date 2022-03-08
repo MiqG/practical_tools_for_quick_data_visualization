@@ -437,47 +437,14 @@ ggbarplot(df %>% group_by(effect) %>% count(), x = 'effect', y = 'n',
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
-### Are there mutations associated to certain cancer types?
-
-``` r
-ggbarplot(df %>% group_by(cancer_type, effect) %>% count(), x = 'cancer_type', y = 'n', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
-```
-
-![](04-exercise_files/figure-markdown_github/unnamed-chunk-18-1.png)
-
-### Are there mutations associated to sample types?
-
-``` r
-ggbarplot(df %>% group_by(sample_type, effect) %>% summarise(n = n()) %>% mutate(freq=n/sum(n)), x = 'sample_type', y = 'freq', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
-```
-
-    ## `summarise()` has grouped output by 'sample_type'. You can override using the
-    ## `.groups` argument.
-
-![](04-exercise_files/figure-markdown_github/unnamed-chunk-19-1.png)
-
 ### How are mutation effects associated to certain positions? And cancer\_types?
 
 ``` r
 plt = gghistogram(df %>% mutate(start=as.numeric(start)), x = 'start', stat="density", facet.by = 'effect', fill = 'effect', palette = 'simpsons', numeric.x.axis=TRUE)
-```
-
-    ## Warning: Using `bins = 30` by default. Pick better value with the argument
-    ## `bins`.
-
-    ## Warning: Ignoring unknown parameters: binwidth, bins, pad
-
-``` r
 ggpar(plt, font.xtickslab = 8, font.ytickslab = 8)
 ```
 
-    ## Warning: Groups with fewer than two data points have been dropped.
-
-    ## Warning: Removed 1 rows containing missing values (geom_bar).
-
-![](04-exercise_files/figure-markdown_github/unnamed-chunk-20-1.png)
+![](04-exercise_files/figure-markdown_github/unnamed-chunk-18-1.png)
 
 Pairwise associations
 ---------------------
@@ -491,7 +458,7 @@ ggboxplot(df, x = 'effect', y = 'value', fill = 'sample_type', ggtheme = theme_p
   ggtitle(omic_type_oi)
 ```
 
-![](04-exercise_files/figure-markdown_github/unnamed-chunk-21-1.png)
+![](04-exercise_files/figure-markdown_github/unnamed-chunk-19-1.png)
 
 ### Could gene expression be associated with copy number variation?
 
@@ -510,9 +477,7 @@ ggscatter(df, x = 'gene_expression', y = 'copy_number_variation', size = 1,
           theme(aspect.ratio = 1)
 ```
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
-![](04-exercise_files/figure-markdown_github/unnamed-chunk-22-1.png)
+![](04-exercise_files/figure-markdown_github/unnamed-chunk-20-1.png)
 
 ### Visualize other pairwise associations that you found interesting
 

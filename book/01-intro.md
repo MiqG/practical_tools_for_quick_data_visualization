@@ -1,5 +1,5 @@
-Introduction
-============
+Get started
+===========
 
 Load data
 =========

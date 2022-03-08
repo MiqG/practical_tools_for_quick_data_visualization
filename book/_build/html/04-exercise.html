@@ -92,48 +92,22 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Get started
- </span>
-</p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-intro.html">
-   Introduction
+   Get started
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Personalize the details
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="02-tidytuesday.html">
-   The R data viz community
+   Customize every detail
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Biology-related viz
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="03-bio.html">
    Biology-related data visualization
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A multi-omics exercise
- </span>
-</p>
-<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Exploratory Data Analysis of the most popular human gene
@@ -308,16 +282,6 @@ const thebe_selector_output = ".output, .cell_output"
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-certain-cancer-types">
-       Are there mutations associated to certain cancer types?
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-sample-types">
-       Are there mutations associated to sample types?
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
        How are mutation effects associated to certain positions? And cancer_types?
       </a>
@@ -475,16 +439,6 @@ const thebe_selector_output = ".output, .cell_output"
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#which-are-the-most-common-effects-of-mutations">
        Which are the most common effects of mutations?
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-certain-cancer-types">
-       Are there mutations associated to certain cancer types?
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#are-there-mutations-associated-to-sample-types">
-       Are there mutations associated to sample types?
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
@@ -977,46 +931,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p><img alt="" src="_images/unnamed-chunk-17-1.png" /></p>
 </div>
-<div class="section" id="are-there-mutations-associated-to-certain-cancer-types">
-<h3>Are there mutations associated to certain cancer types?<a class="headerlink" href="#are-there-mutations-associated-to-certain-cancer-types" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">cancer_type</span><span class="p">,</span> <span class="n">effect</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">count</span><span class="p">(),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;cancer_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> 
-          <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
-</pre></div>
-</div>
-<p><img alt="" src="_images/unnamed-chunk-18-1.png" /></p>
-</div>
-<div class="section" id="are-there-mutations-associated-to-sample-types">
-<h3>Are there mutations associated to sample types?<a class="headerlink" href="#are-there-mutations-associated-to-sample-types" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggbarplot</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">sample_type</span><span class="p">,</span> <span class="n">effect</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summarise</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nf">n</span><span class="p">())</span> <span class="o">%&gt;%</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="n">n</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;sample_type&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s">&#39;freq&#39;</span><span class="p">,</span> 
-          <span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">ggtheme</span> <span class="o">=</span> <span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span> <span class="o">=</span> <span class="m">50</span><span class="p">,</span> <span class="n">base_size</span> <span class="o">=</span> <span class="m">10</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `summarise()` has grouped output by &#39;sample_type&#39;. You can override using the
-## `.groups` argument.
-</pre></div>
-</div>
-<p><img alt="" src="_images/unnamed-chunk-19-1.png" /></p>
-</div>
 <div class="section" id="how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
 <h3>How are mutation effects associated to certain positions? And cancer_types?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span> <span class="o">=</span> <span class="nf">gghistogram</span><span class="p">(</span><span class="n">df</span> <span class="o">%&gt;%</span> <span class="nf">mutate</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">start</span><span class="p">)),</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&#39;start&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s">&quot;density&quot;</span><span class="p">,</span> <span class="n">facet.by</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="s">&#39;effect&#39;</span><span class="p">,</span> <span class="n">palette</span> <span class="o">=</span> <span class="s">&#39;simpsons&#39;</span><span class="p">,</span> <span class="n">numeric.x.axis</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">ggpar</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">font.xtickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">font.ytickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## Warning: Using `bins = 30` by default. Pick better value with the argument
-## `bins`.
-
-## Warning: Ignoring unknown parameters: binwidth, bins, pad
-</pre></div>
-</div>
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ggpar</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span> <span class="n">font.xtickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">,</span> <span class="n">font.ytickslab</span> <span class="o">=</span> <span class="m">8</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## Warning: Groups with fewer than two data points have been dropped.
-
-## Warning: Removed 1 rows containing missing values (geom_bar).
-</pre></div>
-</div>
-<p><img alt="" src="_images/unnamed-chunk-20-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-18-1.png" /></p>
 </div>
 </div>
 <div class="section" id="pairwise-associations">
@@ -1029,7 +950,7 @@ const thebe_selector_output = ".output, .cell_output"
   <span class="nf">ggtitle</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-21-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-19-1.png" /></p>
 </div>
 <div class="section" id="could-gene-expression-be-associated-with-copy-number-variation">
 <h3>Could gene expression be associated with copy number variation?<a class="headerlink" href="#could-gene-expression-be-associated-with-copy-number-variation" title="Permalink to this headline">¶</a></h3>
@@ -1047,10 +968,7 @@ const thebe_selector_output = ".output, .cell_output"
           <span class="nf">theme</span><span class="p">(</span><span class="n">aspect.ratio</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>## `geom_smooth()` using formula &#39;y ~ x&#39;
-</pre></div>
-</div>
-<p><img alt="" src="_images/unnamed-chunk-22-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-20-1.png" /></p>
 </div>
 <div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
 <h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this headline">¶</a></h3>

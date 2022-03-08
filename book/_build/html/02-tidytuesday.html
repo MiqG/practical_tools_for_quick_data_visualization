@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The R data viz community &#8212; Practical tools for quick data visualization</title>
+    <title>Customize every detail &#8212; Practical tools for quick data visualization</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Biology-related data visualization" href="03-bio.html" />
-    <link rel="prev" title="Introduction" href="01-intro.html" />
+    <link rel="prev" title="Get started" href="01-intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -93,48 +93,22 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Get started
- </span>
-</p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01-intro.html">
-   Introduction
+   Get started
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Personalize the details
- </span>
-</p>
-<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   The R data viz community
+   Customize every detail
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Biology-related viz
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="03-bio.html">
    Biology-related data visualization
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A multi-omics exercise
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="04-exercise.html">
    Exploratory Data Analysis of the most popular human gene
@@ -229,7 +203,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   The R data viz community
+   Customize every detail
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -240,6 +214,22 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#explore-the-data-using-the-functions-introduced">
    Explore the data using the functions introduced.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ggplot2-in-depth-kittjonathan-s-version">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggplot2
+    </span>
+   </code>
+   in depth:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @KittJonathan
+    </span>
+   </code>
+   ’s version
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -262,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The R data viz community</h1>
+                <h1>Customize every detail</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -274,7 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   The R data viz community
+   Customize every detail
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -285,6 +275,22 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#explore-the-data-using-the-functions-introduced">
    Explore the data using the functions introduced.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ggplot2-in-depth-kittjonathan-s-version">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ggplot2
+    </span>
+   </code>
+   in depth:
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     @KittJonathan
+    </span>
+   </code>
+   ’s version
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -306,12 +312,12 @@ const thebe_selector_output = ".output, .cell_output"
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="the-r-data-viz-community">
-<h1>The R data viz community<a class="headerlink" href="#the-r-data-viz-community" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="customize-every-detail">
+<h1>Customize every detail<a class="headerlink" href="#customize-every-detail" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="load-data">
 <h1>Load data<a class="headerlink" href="#load-data" title="Permalink to this headline">¶</a></h1>
-<a class="reference internal image-reference" href="_images/tt_logo.png"><img alt="_images/tt_logo.png" src="_images/tt_logo.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="_images/tt_logo.png"><img alt="_images/tt_logo.png" src="_images/tt_logo.png" style="width: 75%;" /></a>
 <p>One of the greatest things of R data visualization is its community.
 There are many open-source projects going on that revolve around getting
 started and improving our data viz skills. One of my favorite projects
@@ -382,34 +388,29 @@ plt = dat %&gt;%
 plt
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-2-1.png" />
-# <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> in depth:
-[&#64;KittJonathan](<a class="reference external" href="https://twitter.com/KittJonathan">https://twitter.com/KittJonathan</a>)’s version To
-exemplify how projects like <code class="docutils literal notranslate"><span class="pre">tidytuesday</span></code> can help us learning new ways
-of plotting in R, I have copy-pasted
-[&#64;KittJonathan](<a class="reference external" href="https://twitter.com/KittJonathan">https://twitter.com/KittJonathan</a>)’s version of the
+<p><img alt="" src="_images/unnamed-chunk-2-1.png" /></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ggplot2-in-depth-kittjonathan-s-version">
+<h1><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> in depth: <a class="reference external" href="https://twitter.com/KittJonathan"><code class="docutils literal notranslate"><span class="pre">&#64;KittJonathan</span></code></a>’s version<a class="headerlink" href="#ggplot2-in-depth-kittjonathan-s-version" title="Permalink to this headline">¶</a></h1>
+<p>To exemplify how projects like <code class="docutils literal notranslate"><span class="pre">tidytuesday</span></code> can help us learning new
+ways of plotting in R, I have copy-pasted
+<a class="reference external" href="https://twitter.com/KittJonathan"><code class="docutils literal notranslate"><span class="pre">&#64;KittJonathan</span></code></a>’s version of the
 challenge:
 <a class="reference external" href="https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R">https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R</a>.
 In this github page you’ll find many more cool visualizations!</p>
 <p><strong>NOTE</strong>: you’ll need to install several extra packages to be able to
-run it: -
-<a class="reference external" href="https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html"><code class="docutils literal notranslate"><span class="pre">showtext</span></code></a>:
-edit fonts more easily in R graphs. -
-<a class="reference external" href="https://cran.r-project.org/web/packages/countrycode/index.html"><code class="docutils literal notranslate"><span class="pre">countrycode</span></code></a>:
-get country code names.</p>
+run it:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html"><code class="docutils literal notranslate"><span class="pre">showtext</span></code></a>:
+edit fonts more easily in R graphs.</p></li>
+<li><p><a class="reference external" href="https://cran.r-project.org/web/packages/countrycode/index.html"><code class="docutils literal notranslate"><span class="pre">countrycode</span></code></a>:
+get country code names.</p></li>
+</ul>
+<!-- -->
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>erasmus = dat
 
 require(showtext)
-
-## Loading required package: showtext
-
-## Loading required package: sysfonts
-
-## Loading required package: showtextdb
-
 require(countrycode)
-
-## Loading required package: countrycode
 
 # Load fonts ----
 
@@ -555,7 +556,7 @@ ggsave(&quot;images/2022_03_08_erasmus.png&quot;, p, dpi = 320, width = 12, heig
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction</p>
+            <p class="prev-next-title">Get started</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03-bio.html" title="next page">

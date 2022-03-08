@@ -35,11 +35,11 @@ result %>% as.data.frame() %>% head()
 
 Then, we can quickly get a glimpse of the main results.
 ```{r}
-result %>% dotplot()
+# try dotplot()
 ```
 
 ```{r}
-result %>% cnetplot()
+# try cnetplot()
 ```
 
 Now, we would like to see the overlap between the genes in the top 5 enriched categories.
@@ -57,9 +57,7 @@ terms_oi = terms_oi %>%
     list_to_matrix() %>% 
     make_comb_mat()
   
-# plot
-plt = terms_oi %>% UpSet()
-plt
+# try UpSet()
 ```
 
 # Phylogenetic trees with `ggtree`
@@ -70,7 +68,7 @@ Trees are another very common plot to visualize hierarchical patterns. Here, we 
 require(ggtree)
 set.seed(100)
 tree <- rtree(50)
-ggtree(tree, layout="circular") + geom_tiplab()
+# try ggtree()
 ```
 
 ## Tree and multiple sequence alignment of *TP53* amino acids
@@ -86,8 +84,7 @@ D = dist.alignment(aln)
 tree = njs(D)
 
 # plot tree with MSA
-tree_plot = ggtree(tree)
-msaplot(tree_plot, fasta = fasta_file) + ggtitle("tree with MSA")
+# try combining ggtree with msaplot()
 ```
 
 

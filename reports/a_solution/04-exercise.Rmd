@@ -197,20 +197,8 @@ ggbarplot(df %>% group_by(effect) %>% count(), x = 'effect', y = 'n',
           fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
 ```
 
-### Are there mutations associated to certain cancer types?
-```{r}
-ggbarplot(df %>% group_by(cancer_type, effect) %>% count(), x = 'cancer_type', y = 'n', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
-```
-
-### Are there mutations associated to sample types?
-```{r}
-ggbarplot(df %>% group_by(sample_type, effect) %>% summarise(n = n()) %>% mutate(freq=n/sum(n)), x = 'sample_type', y = 'freq', 
-          fill='effect', palette='simpsons', ggtheme = theme_pubr(x.text.angle = 50, base_size = 10))
-```
-
 ### How are mutation effects associated to certain positions? And cancer_types?
-```{r, fig.width=8, fig.height=8}
+```{r, fig.width=8, fig.height=8, message=FALSE, warning=FALSE}
 plt = gghistogram(df %>% mutate(start=as.numeric(start)), x = 'start', stat="density", facet.by = 'effect', fill = 'effect', palette = 'simpsons', numeric.x.axis=TRUE)
 ggpar(plt, font.xtickslab = 8, font.ytickslab = 8)
 ```
@@ -225,7 +213,7 @@ ggboxplot(df, x = 'effect', y = 'value', fill = 'sample_type', ggtheme = theme_p
 ```
 
 ### Could gene expression be associated with copy number variation?
-```{r fig.width=8, fig.height=8}
+```{r fig.width=8, fig.height=8, message=FALSE, warning=FALSE}
 cancer_types_oi = c('BRCA','OV','GBM','PRAD','LUAD')
 omic_types_oi = c('gene_expression','copy_number_variation')
 df = omics %>% filter(omic_type%in%omic_types_oi & cancer_type%in%cancer_types_oi) %>% 

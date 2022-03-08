@@ -1,10 +1,10 @@
-The R data viz community
-========================
+Customize every detail
+======================
 
 Load data
 =========
 
-<img src="images/tt_logo.png" width="50%"/>
+<img src="images/tt_logo.png" width="75%"/>
 
 One of the greatest things of R data visualization is its community.
 There are many open-source projects going on that revolve around getting
@@ -78,35 +78,31 @@ common connection?).
     plt
 
 ![](02-tidytuesday_files/figure-markdown_strict/unnamed-chunk-2-1.png)
-\# `ggplot2` in depth:
-\[@KittJonathan\](<https://twitter.com/KittJonathan>)'s version To
-exemplify how projects like `tidytuesday` can help us learning new ways
-of plotting in R, I have copy-pasted
-\[@KittJonathan\](<https://twitter.com/KittJonathan>)'s version of the
+
+`ggplot2` in depth: [`@KittJonathan`](https://twitter.com/KittJonathan)'s version
+=================================================================================
+
+To exemplify how projects like `tidytuesday` can help us learning new
+ways of plotting in R, I have copy-pasted
+[`@KittJonathan`](https://twitter.com/KittJonathan)'s version of the
 challenge:
 <https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R>.
 In this github page you'll find many more cool visualizations!
 
 **NOTE**: you'll need to install several extra packages to be able to
-run it: -
-[`showtext`](https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html):
-edit fonts more easily in R graphs. -
-[`countrycode`](https://cran.r-project.org/web/packages/countrycode/index.html):
-get country code names.
+run it:
+
+-   [`showtext`](https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html):
+    edit fonts more easily in R graphs.
+-   [`countrycode`](https://cran.r-project.org/web/packages/countrycode/index.html):
+    get country code names.
+
+<!-- -->
 
     erasmus = dat
 
     require(showtext)
-
-    ## Loading required package: showtext
-
-    ## Loading required package: sysfonts
-
-    ## Loading required package: showtextdb
-
     require(countrycode)
-
-    ## Loading required package: countrycode
 
     # Load fonts ----
 
