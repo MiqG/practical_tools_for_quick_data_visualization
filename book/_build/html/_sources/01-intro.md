@@ -1,8 +1,6 @@
-Get started
-===========
+# Get started
 
-Load data
-=========
+# Load data
 
 <img src="images/palmerpenguins.png" width="25%">
 
@@ -31,8 +29,7 @@ work.
     ## 6 Adelie  Torge…           38.9          17.8              181        3625 fema…
     ## # … with 1 more variable: year <dbl>
 
-General plotting with `ggpubr`
-==============================
+# General plotting with `ggpubr`
 
     require(ggpubr)
 
@@ -51,23 +48,20 @@ These are useful links for using this package:
 Next, we will try to answer different questions using this library and
 `ggplot2`.
 
-How many penguins of each species did we observe in total?
-----------------------------------------------------------
+## How many penguins of each species did we observe in total?
 
     ggpie(dat %>% count(species), x = "n", fill = "species")
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
-How many penguins of each species and sex did we observe across the different islands?
---------------------------------------------------------------------------------------
+## How many penguins of each species and sex did we observe across the different islands?
 
     ggbarplot(dat %>% count(species, sex, island), x = "species", y = "n", fill = "sex", 
               label = TRUE, position = position_dodge(0.7), facet.by = "island", palette = "lancet")
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
-What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
------------------------------------------------------------------------------------------------------
+## What are the distributions of flipper lengths considering penguin species, sex and islands of origin?
 
     gghistogram(dat, x = "flipper_length_mm", fill = "sex", facet.by = c("species","island"))
 
@@ -79,30 +73,26 @@ Alternatively, we can use stripcharts charts:
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
-Are the differences of body mass between sexes significant if we control for species and island?
-------------------------------------------------------------------------------------------------
+## Are the differences of body mass between sexes significant if we control for species and island?
 
     ggstripchart(dat, x = "island", y = "body_mass_g", color = "sex", facet.by = "species", alpha = 0.5, position = position_jitterdodge(), add = "median_iqr", add.params = list(color="black", group="sex", size=0.2))+
        stat_compare_means(aes(color = sex), label = "p.signif", method = "wilcox.test")
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
-What is the relationship between flipper length, body mass and bill length?
----------------------------------------------------------------------------
+## What is the relationship between flipper length, body mass and bill length?
 
     ggscatter(dat, x = "flipper_length_mm", y = "body_mass_g", color = "bill_length_mm", alpha = 0.5)
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
-Could we have sampling bias in the relationship between flipper length and body mass?
--------------------------------------------------------------------------------------
+## Could we have sampling bias in the relationship between flipper length and body mass?
 
     ggscatter(dat %>% mutate(year=factor(year)), x = "flipper_length_mm", y = "body_mass_g", alpha = 0.5, color = "year", ellipse = TRUE)
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
-What is the spearman correlation coefficient between body mass and flipper length?
-----------------------------------------------------------------------------------
+## What is the spearman correlation coefficient between body mass and flipper length?
 
     ggscatter(dat %>% mutate(year=factor(year)), x = "flipper_length_mm", y = "body_mass_g", alpha = 0.5, color = "year", 
               add = "reg.line", conf.int = TRUE, 
@@ -112,8 +102,7 @@ What is the spearman correlation coefficient between body mass and flipper lengt
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-Create and save a figure
-------------------------
+## Create and save a figure
 
     fontsize = 6
     labsize = 2
@@ -147,8 +136,7 @@ Create and save a figure
 
 ![](images/myfig.png)
 
-Heatmaps with `ComplexHeatmap`
-==============================
+# Heatmaps with `ComplexHeatmap`
 
 A part from `ggpubr`, one of the most common packages to visualize
 multiple types of data altogether is `ComplexHeatmap`, which allows to
@@ -162,9 +150,13 @@ categorical data.
 
     # we need to add as.data.frame() because "dat" is a tibble,
     # which differ in the way they handle data underlying data types
+    # we can customize the color for each species
+    colors_species = c("Adelie"="red", "Chinstrap"="yellow", "Gentoo"="grey")
+    colors_annot = list(species=colors_species)
     annotation_row = HeatmapAnnotation(df=dat[,c("island","species")] %>% as.data.frame(),
                                        name="metadata_row",
-                                       which="row")
+                                       which="row",
+                                       col = colors_annot)
 
     mat = dat[,cols_oi] %>% as.matrix()
     mat = scale(mat)
@@ -175,15 +167,13 @@ categorical data.
 
 ![](01-intro_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
-References
-==========
+# References
 
 -   [`ggplot2`](https://ggplot2.tidyverse.org/)
 -   [`ggpubr`](https://rpkgs.datanovia.com/ggpubr/)
 -   [`ComplexHeatmap`](http://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html)
 
-Session Info
-============
+# Session Info
 
     sessionInfo()
 

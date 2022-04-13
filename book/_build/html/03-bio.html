@@ -405,9 +405,12 @@ enriched categories.</p>
 
 # extract lists of genes in top enriched terms
 terms_oi = result %&gt;% as.data.frame() %&gt;% filter(p.adjust&lt;0.05) %&gt;% slice_max(Count, n=10)
-terms_oi = terms_oi %&gt;% group_by(Description) %&gt;% summarize(genes=strsplit(geneID, split=&quot;/&quot;)) %&gt;% ungroup()
-terms_oi = sapply(terms_oi[[&quot;Description&quot;]], 
-                  function(genes){ terms_oi[[&quot;genes&quot;]][[1]]}, simplify=FALSE)
+terms_oi = 
+  terms_oi %&gt;% 
+  group_by(Description) %&gt;% 
+  summarize(genes=strsplit(geneID, split=&quot;/&quot;)) %&gt;% 
+  ungroup() %&gt;%
+  deframe()
 
 # prepare inputs
 terms_oi = terms_oi %&gt;% 

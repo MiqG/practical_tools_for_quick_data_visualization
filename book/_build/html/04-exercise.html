@@ -261,7 +261,7 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
-       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
+       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
       </a>
      </li>
     </ul>
@@ -421,7 +421,7 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
-       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
+       Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
       </a>
      </li>
     </ul>
@@ -523,8 +523,13 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-<p>According to this <a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">article</a>, <em>TP53</em> is the most popular gene in the human genome by far. In the practical part of the talk, we will all dive into pubicly available data on this gene.</p>
-<p>We collected harmonized multi-omic data from the XenaBrowser’s <a class="reference external" href="https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&amp;removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443">TCGA Pan Cancer (PANCAN) dataset</a>:</p>
+<p>According to this
+<a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">article</a>, <em>TP53</em> is
+the most popular gene in the human genome by far. In the practical part
+of the talk, we will all dive into pubicly available data on this gene.</p>
+<p>We collected harmonized multi-omic data from the XenaBrowser’s <a class="reference external" href="https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&amp;removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443">TCGA Pan
+Cancer (PANCAN)
+dataset</a>:</p>
 <ul class="simple">
 <li><p>Gene expression: log2(norm_value+1)</p></li>
 <li><p>Exon expression: log2(RPKM+1)</p></li>
@@ -532,7 +537,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Copy Number Variation: log( tumor / normal )</p></li>
 <li><p>Mutations</p></li>
 </ul>
-<p>Additionally, we downloaded a protein Multiple Sequence Alignment (MSA) of 153 <em>TP53</em> mammal orthologues from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a>, generated through their aligner <a class="reference external" href="https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674">COBALT</a>.</p>
+<p>Additionally, we downloaded a protein Multiple Sequence Alignment (MSA)
+of 153 <em>TP53</em> mammal orthologues from
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a>, generated through their aligner
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674">COBALT</a>.</p>
 </div>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
@@ -551,7 +559,10 @@ const thebe_selector_output = ".output, .cell_output"
 ## [31] &quot;ACC&quot;  &quot;PCPG&quot; &quot;UVM&quot;
 </pre></div>
 </div>
-<p>I pre-processed different omic data sets into a long format data frame in which every “value” is linked to an “omic_type”, which in turn can have several “omic_names”. Additionally, we added information on the sample metadata.</p>
+<p>I pre-processed different omic data sets into a long format data frame
+in which every “value” is linked to an “omic_type”, which in turn can
+have several “omic_names”. Additionally, we added information on the
+sample metadata.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># available variables</span>
 <span class="nf">colnames</span><span class="p">(</span><span class="n">omics</span><span class="p">)</span>
 </pre></div>
@@ -581,7 +592,8 @@ const thebe_selector_output = ".output, .cell_output"
 ## 4 methylation           318050
 </pre></div>
 </div>
-<p>In the cases of exon expression and methylation, there are multiple “omic_name”s that correspond to different exons and methylation sites.</p>
+<p>In the cases of exon expression and methylation, there are multiple
+“omic_name”s that correspond to different exons and methylation sites.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># exons</span>
 <span class="n">omics</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="n">omic_type</span><span class="o">==</span><span class="s">&#39;exon_expression&#39;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">distinct</span><span class="p">(</span><span class="n">omic_name</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">()</span>
 </pre></div>
@@ -607,7 +619,8 @@ const thebe_selector_output = ".output, .cell_output"
 ## [31] &quot;cg04009932&quot; &quot;cg25053252&quot; &quot;cg07991600&quot;
 </pre></div>
 </div>
-<p>Then, the mutations data set is structured as a list of mutations that occur inthis gene in every sample:</p>
+<p>Then, the mutations data set is structured as a list of mutations that
+occur inthis gene in every sample:</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">colnames</span><span class="p">(</span><span class="n">muts</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -653,7 +666,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="exploratory-data-analysis">
 <h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Permalink to this headline">¶</a></h1>
-<p>In this section, we will try to answer the questions using functions from the packages introduced previously. These solutions are completely subjective, so feel free to find your own best ways of combining and visualizing the different types of data.</p>
+<p>In this section, we will try to answer the questions using functions
+from the packages introduced previously. These solutions are completely
+subjective, so feel free to find your own best ways of combining and
+visualizing the different types of data.</p>
 <div class="section" id="counting">
 <h2>Counting<a class="headerlink" href="#counting" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="how-many-samples-per-cancer-type-are-there">
@@ -832,7 +848,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p><img alt="" src="_images/unnamed-chunk-13-1.png" /></p>
 </div>
 <div class="section" id="can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
-<h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this headline">¶</a></h3>
+<h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">omic_types</span> <span class="o">=</span> <span class="nf">unique</span><span class="p">(</span><span class="n">omics</span><span class="o">$</span><span class="n">omic_type</span><span class="p">)</span>
 <span class="n">sample_types_oi</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&#39;Primary Tumor&#39;</span><span class="p">,</span><span class="s">&#39;Solid Tissue Normal&#39;</span><span class="p">)</span>
   
@@ -972,7 +988,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
 <h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this headline">¶</a></h3>
-<p>Try to visualize them considering different sample types, cancer types and omic types and names.</p>
+<p>Try to visualize them considering different sample types, cancer types
+and omic types and names.</p>
 </div>
 </div>
 <div class="section" id="generating-data-overviews">
@@ -1053,7 +1070,8 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="tex2jax_ignore mathjax_ignore section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">Article on the most popular genes.</a></p></li>
+<li><p><a class="reference external" href="https://www.nature.com/articles/d41586-017-07291-9">Article on the most popular
+genes.</a></p></li>
 <li><p><a class="reference external" href="https://xenabrowser.net/">XenaBrowser</a></p></li>
 <li><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/">NCBI</a></p></li>
 </ul>
