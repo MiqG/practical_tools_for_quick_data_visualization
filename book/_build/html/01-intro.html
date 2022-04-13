@@ -457,19 +457,19 @@ making</a></p></li>
           label = TRUE, position = position_dodge(0.7), facet.by = &quot;island&quot;, palette = &quot;lancet&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-4-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-4-1.png" /></p>
 </div>
 <div class="section" id="what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin">
 <h2>What are the distributions of flipper lengths considering penguin species, sex and islands of origin?<a class="headerlink" href="#what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>gghistogram(dat, x = &quot;flipper_length_mm&quot;, fill = &quot;sex&quot;, facet.by = c(&quot;species&quot;,&quot;island&quot;))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-5-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-5-1.png" /></p>
 <p>Alternatively, we can use stripcharts charts:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggstripchart(dat, x = &quot;island&quot;, y = &quot;flipper_length_mm&quot;, color = &quot;sex&quot;, facet.by = &quot;species&quot;, alpha = 0.5, position = position_jitterdodge(), add = &quot;median_iqr&quot;, add.params = list(color=&quot;black&quot;, group=&quot;sex&quot;, size=0.2))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-6-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-6-1.png" /></p>
 </div>
 <div class="section" id="are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island">
 <h2>Are the differences of body mass between sexes significant if we control for species and island?<a class="headerlink" href="#are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island" title="Permalink to this headline">¶</a></h2>
@@ -477,21 +477,21 @@ making</a></p></li>
    stat_compare_means(aes(color = sex), label = &quot;p.signif&quot;, method = &quot;wilcox.test&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-7-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-7-1.png" /></p>
 </div>
 <div class="section" id="what-is-the-relationship-between-flipper-length-body-mass-and-bill-length">
 <h2>What is the relationship between flipper length, body mass and bill length?<a class="headerlink" href="#what-is-the-relationship-between-flipper-length-body-mass-and-bill-length" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat, x = &quot;flipper_length_mm&quot;, y = &quot;body_mass_g&quot;, color = &quot;bill_length_mm&quot;, alpha = 0.5)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-12.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
 </div>
 <div class="section" id="could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass">
 <h2>Could we have sampling bias in the relationship between flipper length and body mass?<a class="headerlink" href="#could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat %&gt;% mutate(year=factor(year)), x = &quot;flipper_length_mm&quot;, y = &quot;body_mass_g&quot;, alpha = 0.5, color = &quot;year&quot;, ellipse = TRUE)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-1.png" /></p>
 </div>
 <div class="section" id="what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length">
 <h2>What is the spearman correlation coefficient between body mass and flipper length?<a class="headerlink" href="#what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length" title="Permalink to this headline">¶</a></h2>
