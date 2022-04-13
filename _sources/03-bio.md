@@ -1,12 +1,10 @@
-Biology-related data visualization
-==================================
+# Biology-related data visualization
 
-Gene Set Enrichment Analysis (GSEA) with `clusterProfiler`
-==========================================================
+# Gene Set Enrichment Analysis (GSEA) with `clusterProfiler`
 
     require(tidyverse)
 
-Let's say we have found a set of interesting genes.
+Let’s say we have found a set of interesting genes.
 
     geneset_file = file.path(here::here(), "data", "raw", "geneset.txt")
     genes_oi = readLines(geneset_file)
@@ -73,9 +71,12 @@ enriched categories.
 
     # extract lists of genes in top enriched terms
     terms_oi = result %>% as.data.frame() %>% filter(p.adjust<0.05) %>% slice_max(Count, n=10)
-    terms_oi = terms_oi %>% group_by(Description) %>% summarize(genes=strsplit(geneID, split="/")) %>% ungroup()
-    terms_oi = sapply(terms_oi[["Description"]], 
-                      function(genes){ terms_oi[["genes"]][[1]]}, simplify=FALSE)
+    terms_oi = 
+      terms_oi %>% 
+      group_by(Description) %>% 
+      summarize(genes=strsplit(geneID, split="/")) %>% 
+      ungroup() %>%
+      deframe()
 
     # prepare inputs
     terms_oi = terms_oi %>% 
@@ -88,8 +89,7 @@ enriched categories.
 
 ![](03-bio_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
-Phylogenetic trees with `ggtree`
-================================
+# Phylogenetic trees with `ggtree`
 
 Trees are another very common plot to visualize hierarchical patterns.
 Here, we will use
@@ -97,8 +97,7 @@ Here, we will use
 to visualize the phylogenetic relationships extracted from a multiple
 sequence alignment of *TP53* across mammals.
 
-Basic tree
-----------
+## Basic tree
 
     require(ggtree)
     set.seed(100)
@@ -107,11 +106,10 @@ Basic tree
 
 ![](03-bio_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
-Tree and multiple sequence alignment of *TP53* amino acids
-----------------------------------------------------------
+## Tree and multiple sequence alignment of *TP53* amino acids
 
 We will follow [Russell J.
-Gray](https://github.com/RussellGrayxd/Phylogenetics/blob/master/Sequence%20analysis.R)'s
+Gray](https://github.com/RussellGrayxd/Phylogenetics/blob/master/Sequence%20analysis.R)’s
 approach.
 
     require(seqinr)
@@ -129,8 +127,7 @@ approach.
 
 ![](03-bio_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
-References
-==========
+# References
 
 -   [Gene set
     used](https://www.gsea-msigdb.org/gsea/msigdb/cards/KEGG_ALZHEIMERS_DISEASE)
@@ -141,8 +138,7 @@ References
 -   [`Russell J. Gray's github`](https://github.com/RussellGrayxd)
 -   [`clusterProfiler`](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html)
 
-Session Info
-============
+# Session Info
 
     sessionInfo()
 
