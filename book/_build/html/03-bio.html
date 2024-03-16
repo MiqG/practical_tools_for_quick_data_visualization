@@ -394,20 +394,23 @@ result %&gt;% as.data.frame() %&gt;% head()
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>result %&gt;% dotplot()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-4-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-4-11.png" /></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>result %&gt;% cnetplot()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-5-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-5-11.png" /></p>
 <p>Now, we would like to see the overlap between the genes in the top 5
 enriched categories.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>require(ComplexHeatmap)
 
 # extract lists of genes in top enriched terms
 terms_oi = result %&gt;% as.data.frame() %&gt;% filter(p.adjust&lt;0.05) %&gt;% slice_max(Count, n=10)
-terms_oi = terms_oi %&gt;% group_by(Description) %&gt;% summarize(genes=strsplit(geneID, split=&quot;/&quot;)) %&gt;% ungroup()
-terms_oi = sapply(terms_oi[[&quot;Description&quot;]], 
-                  function(genes){ terms_oi[[&quot;genes&quot;]][[1]]}, simplify=FALSE)
+terms_oi = 
+  terms_oi %&gt;% 
+  group_by(Description) %&gt;% 
+  summarize(genes=strsplit(geneID, split=&quot;/&quot;)) %&gt;% 
+  ungroup() %&gt;%
+  deframe()
 
 # prepare inputs
 terms_oi = terms_oi %&gt;% 
@@ -419,7 +422,7 @@ plt = terms_oi %&gt;% UpSet()
 plt
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-6-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-6-11.png" /></p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="phylogenetic-trees-with-ggtree">
 <h1>Phylogenetic trees with <code class="docutils literal notranslate"><span class="pre">ggtree</span></code><a class="headerlink" href="#phylogenetic-trees-with-ggtree" title="Permalink to this headline">¶</a></h1>
@@ -436,7 +439,7 @@ tree &lt;- rtree(50)
 ggtree(tree, layout=&quot;circular&quot;) + geom_tiplab()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-7-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-7-11.png" /></p>
 </div>
 <div class="section" id="tree-and-multiple-sequence-alignment-of-tp53-amino-acids">
 <h2>Tree and multiple sequence alignment of <em>TP53</em> amino acids<a class="headerlink" href="#tree-and-multiple-sequence-alignment-of-tp53-amino-acids" title="Permalink to this headline">¶</a></h2>
@@ -457,7 +460,7 @@ tree_plot = ggtree(tree)
 msaplot(tree_plot, fasta = fasta_file) + ggtitle(&quot;tree with MSA&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-11.png" /></p>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="references">

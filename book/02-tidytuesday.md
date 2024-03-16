@@ -1,8 +1,6 @@
-Customize every detail
-======================
+# Customize every detail
 
-Load data
-=========
+# Load data
 
 <img src="images/tt_logo.png" width="75%"/>
 
@@ -18,7 +16,7 @@ how to reproduce plots made by others just by looking at their final
 plot! I think this is a great resource to get inspired, getting to know
 new possibilities, and training. There are people that have made this a
 weekly ritual! I recommend you to follow [this twitter
-bot](https://twitter.com/TidyTuesday_Bot) to check out people's ideas.
+bot](https://twitter.com/TidyTuesday_Bot) to check out people’s ideas.
 One of my favorite R plotters is
 [`Cedric Scherer`](https://www.cedricscherer.com/), who has become a
 guru of data visualization. Check out his webpage!
@@ -60,11 +58,10 @@ describing the movements of students throughout the ERASMUS program.
     ## receiving_organisation_erasmus_code "-"                                               
     ## participants                        "2"
 
-Explore the data using the functions introduced.
-================================================
+# Explore the data using the functions introduced.
 
 Freestyle time! Try out the functions from `ggpubr` that we introduced
-earlier to get some answers from this dataset (e.g. what is the most
+earlier to get some answers from this dataset (e.g. what is the most
 common connection?).
 
     # mobility troughout years and months by gender
@@ -79,17 +76,16 @@ common connection?).
 
 ![](02-tidytuesday_files/figure-markdown_strict/unnamed-chunk-2-1.png)
 
-`ggplot2` in depth: [`@KittJonathan`](https://twitter.com/KittJonathan)'s version
-=================================================================================
+# `ggplot2` in depth: [`@KittJonathan`](https://twitter.com/KittJonathan)’s version
 
 To exemplify how projects like `tidytuesday` can help us learning new
 ways of plotting in R, I have copy-pasted
-[`@KittJonathan`](https://twitter.com/KittJonathan)'s version of the
+[`@KittJonathan`](https://twitter.com/KittJonathan)’s version of the
 challenge:
 <https://github.com/KittJonathan/tidytuesday/blob/master/R/2022_03_08_erasmus.R>.
-In this github page you'll find many more cool visualizations!
+In this github page you’ll find many more cool visualizations!
 
-**NOTE**: you'll need to install several extra packages to be able to
+**NOTE**: you’ll need to install several extra packages to be able to
 run it:
 
 -   [`showtext`](https://cran.rstudio.com/web/packages/showtext/vignettes/introduction.html):
@@ -160,14 +156,12 @@ run it:
 
 ![](images/2022_03_08_erasmus.png)
 
-References
-==========
+# References
 
 -   [`tidytuesday`](https://github.com/rfordatascience/tidytuesday)
 -   [`Cedric Scherer`](https://www.cedricscherer.com/)
 
-Session Info
-============
+# Session Info
 
     sessionInfo()
 

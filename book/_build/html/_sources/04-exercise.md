@@ -1,8 +1,6 @@
-Exploratory Data Analysis of the most popular human gene
-========================================================
+# Exploratory Data Analysis of the most popular human gene
 
-Data
-====
+# Data
 
 ``` r
 require(tidyverse)
@@ -12,23 +10,29 @@ require(ComplexHeatmap)
 ROOT = here::here()
 ```
 
-Description
------------
+## Description
 
-According to this [article](https://www.nature.com/articles/d41586-017-07291-9), *TP53* is the most popular gene in the human genome by far. In the practical part of the talk, we will all dive into pubicly available data on this gene.
+According to this
+[article](https://www.nature.com/articles/d41586-017-07291-9), *TP53* is
+the most popular gene in the human genome by far. In the practical part
+of the talk, we will all dive into pubicly available data on this gene.
 
-We collected harmonized multi-omic data from the XenaBrowser's [TCGA Pan Cancer (PANCAN) dataset](https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443):
+We collected harmonized multi-omic data from the XenaBrowser’s [TCGA Pan
+Cancer (PANCAN)
+dataset](https://xenabrowser.net/datapages/?cohort=TCGA%20Pan-Cancer%20(PANCAN)&removeHub=https%3A%2F%2Fxena.treehouse.gi.ucsc.edu%3A443):
 
--   Gene expression: log2(norm\_value+1)
+-   Gene expression: log2(norm_value+1)
 -   Exon expression: log2(RPKM+1)
 -   Gene methylation 450k: beta value
 -   Copy Number Variation: log( tumor / normal )
 -   Mutations
 
-Additionally, we downloaded a protein Multiple Sequence Alignment (MSA) of 153 *TP53* mammal orthologues from [NCBI](https://www.ncbi.nlm.nih.gov/), generated through their aligner [COBALT](https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674).
+Additionally, we downloaded a protein Multiple Sequence Alignment (MSA)
+of 153 *TP53* mammal orthologues from
+[NCBI](https://www.ncbi.nlm.nih.gov/), generated through their aligner
+[COBALT](https://www.ncbi.nlm.nih.gov/gene/7157/ortholog/?scope=40674).
 
-Overview
---------
+## Overview
 
 The pre-processed data sets can be found in `data/prep`.
 
@@ -48,7 +52,10 @@ omics %>% distinct(cancer_type) %>% pull()
     ## [21] "CHOL" "KIRC" "THCA" "HNSC" "LAML" "READ" "LGG"  "DLBC" "KICH" "UCS" 
     ## [31] "ACC"  "PCPG" "UVM"
 
-I pre-processed different omic data sets into a long format data frame in which every "value" is linked to an "omic\_type", which in turn can have several "omic\_names". Additionally, we added information on the sample metadata.
+I pre-processed different omic data sets into a long format data frame
+in which every “value” is linked to an “omic_type”, which in turn can
+have several “omic_names”. Additionally, we added information on the
+sample metadata.
 
 ``` r
 # available variables
@@ -79,7 +86,8 @@ omics %>% group_by(omic_type) %>% count()
     ## 3 gene_expression        11060
     ## 4 methylation           318050
 
-In the cases of exon expression and methylation, there are multiple "omic\_name"s that correspond to different exons and methylation sites.
+In the cases of exon expression and methylation, there are multiple
+“omic_name”s that correspond to different exons and methylation sites.
 
 ``` r
 # exons
@@ -106,7 +114,8 @@ omics %>% filter(omic_type=='methylation') %>% distinct(omic_name) %>% pull()
     ## [26] "cg13169780" "cg06317056" "cg02690969" "cg02842899" "cg02855142"
     ## [31] "cg04009932" "cg25053252" "cg07991600"
 
-Then, the mutations data set is structured as a list of mutations that occur inthis gene in every sample:
+Then, the mutations data set is structured as a list of mutations that
+occur inthis gene in every sample:
 
 ``` r
 colnames(muts)
@@ -149,13 +158,14 @@ muts %>% drop_na(effect)
     ## #   histological_type <chr>, OS <chr>, OS.time <dbl>, residual_tumor <chr>,
     ## #   sample_type <chr>, tumor_status <chr>, `_PATIENT` <chr>, cancer_type <chr>
 
-Exploratory Data Analysis
-=========================
+# Exploratory Data Analysis
 
-In this section, we will try to answer the questions using functions from the packages introduced previously. These solutions are completely subjective, so feel free to find your own best ways of combining and visualizing the different types of data.
+In this section, we will try to answer the questions using functions
+from the packages introduced previously. These solutions are completely
+subjective, so feel free to find your own best ways of combining and
+visualizing the different types of data.
 
-Counting
---------
+## Counting
 
 ### How many samples per cancer type are there?
 
@@ -177,8 +187,7 @@ ggbarplot(omics %>% group_by(cancer_type, sample_type) %>% count(), x = 'cancer_
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-9-1.png)
 
-Distributions
--------------
+## Distributions
 
 ### What are the distributions of values for every omic type across cancer types?
 
@@ -336,7 +345,7 @@ plts$`exon_expression-chr17:7573927-7574033:-`
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
-### Can you find a type of omic with statistically different values across cancer types when comparing "Primary Tumor" vs. "Solid Tissue Normal" sample types?
+### Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?
 
 ``` r
 omic_types = unique(omics$omic_type)
@@ -415,8 +424,7 @@ plts$`gene_expression-TP53`
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-15-1.png)
 
-Mutations
----------
+## Mutations
 
 ### How many samples have at least a mutation?
 
@@ -437,7 +445,7 @@ ggbarplot(df %>% group_by(effect) %>% count(), x = 'effect', y = 'n',
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-17-1.png)
 
-### How are mutation effects associated to certain positions? And cancer\_types?
+### How are mutation effects associated to certain positions? And cancer_types?
 
 ``` r
 plt = gghistogram(df %>% mutate(start=as.numeric(start)), x = 'start', stat="density", facet.by = 'effect', fill = 'effect', palette = 'simpsons', numeric.x.axis=TRUE)
@@ -446,8 +454,7 @@ ggpar(plt, font.xtickslab = 8, font.ytickslab = 8)
 
 ![](04-exercise_files/figure-markdown_github/unnamed-chunk-18-1.png)
 
-Pairwise associations
----------------------
+## Pairwise associations
 
 ### Could mutation effects be associated with gene expression?
 
@@ -481,12 +488,12 @@ ggscatter(df, x = 'gene_expression', y = 'copy_number_variation', size = 1,
 
 ### Visualize other pairwise associations that you found interesting
 
-Try to visualize them considering different sample types, cancer types and omic types and names.
+Try to visualize them considering different sample types, cancer types
+and omic types and names.
 
-Generating data overviews
--------------------------
+## Generating data overviews
 
-### Could you use `ComplexHeatmap` to get an overview of the distributions of every omic type across samples? Could you also include "cancer\_type" and "omic\_name" as row and column annotations?
+### Could you use `ComplexHeatmap` to get an overview of the distributions of every omic type across samples? Could you also include “cancer_type” and “omic_name” as row and column annotations?
 
 ``` r
 # subset by cancer types (my computer does not have enough memory)
@@ -559,15 +566,14 @@ dev.off()
 
 ![](images/heatmaps.png)
 
-References
-==========
+# References
 
--   [Article on the most popular genes.](https://www.nature.com/articles/d41586-017-07291-9)
+-   [Article on the most popular
+    genes.](https://www.nature.com/articles/d41586-017-07291-9)
 -   [XenaBrowser](https://xenabrowser.net/)
 -   [NCBI](https://www.ncbi.nlm.nih.gov/)
 
-Session Info
-============
+# Session Info
 
 ``` r
 sessionInfo()

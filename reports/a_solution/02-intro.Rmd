@@ -134,9 +134,13 @@ rownames(dat) = 1:nrow(dat)
 
 # we need to add as.data.frame() because "dat" is a tibble,
 # which differ in the way they handle data underlying data types
+# we can customize the color for each species
+colors_species = c("Adelie"="red", "Chinstrap"="yellow", "Gentoo"="grey")
+colors_annot = list(species=colors_species)
 annotation_row = HeatmapAnnotation(df=dat[,c("island","species")] %>% as.data.frame(),
                                    name="metadata_row",
-                                   which="row")
+                                   which="row",
+                                   col = colors_annot)
 
 mat = dat[,cols_oi] %>% as.matrix()
 mat = scale(mat)

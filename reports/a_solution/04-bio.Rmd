@@ -48,9 +48,12 @@ require(ComplexHeatmap)
 
 # extract lists of genes in top enriched terms
 terms_oi = result %>% as.data.frame() %>% filter(p.adjust<0.05) %>% slice_max(Count, n=10)
-terms_oi = terms_oi %>% group_by(Description) %>% summarize(genes=strsplit(geneID, split="/")) %>% ungroup()
-terms_oi = sapply(terms_oi[["Description"]], 
-                  function(genes){ terms_oi[["genes"]][[1]]}, simplify=FALSE)
+terms_oi = 
+  terms_oi %>% 
+  group_by(Description) %>% 
+  summarize(genes=strsplit(geneID, split="/")) %>% 
+  ungroup() %>%
+  deframe()
 
 # prepare inputs
 terms_oi = terms_oi %>% 
