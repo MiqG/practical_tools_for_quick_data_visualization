@@ -8,10 +8,11 @@ set -euo pipefail
 Rscript scripts/prepare_multiomic_data.R
 
 # run report
-R -e "rmarkdown::render('reports/a_solution/01-intro.Rmd', output_format='md_document')"
-R -e "rmarkdown::render('reports/a_solution/02-tidytuesday.Rmd', output_format='md_document')"
-R -e "rmarkdown::render('reports/a_solution/03-bio.Rmd', output_format='md_document')"
-R -e "rmarkdown::render('reports/a_solution/04-exercise.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/01-intro_to_tidyverse.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/02-intro.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/03-tidytuesday.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/04-bio.Rmd', output_format='md_document')"
+R -e "rmarkdown::render('reports/a_solution/05-exercise.Rmd', output_format='md_document')"
 
 # move markdown and images
 mv reports/a_solution/*.md book/

@@ -1,0 +1,250 @@
+---
+title: Introduction to Tidyverse
+author: gregor [dot] diensthuber [at] crg [dot] eu
+date: 2024-03-14
+
+font-size: 11pt
+geometry: margin=1.0in
+urlcolor: blue
+
+output: md_document
+---
+
+<img src="images/hex-tidyverse.png" width="25%">
+<img src="images/palmerpenguins.png" width="25%">
+
+# What is the Tidyverse?
+
+The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+To start playing around with the functions from these packages we will use the [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data set.
+This simple data set has both continuous and categorical variables that make it perfect for showcasing how different functions work.
+
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+
+penguins_url = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv"
+dat = read_csv(url(penguins_url))
+dat = dat %>% drop_na()
+head(dat)
+```
+
+This dataset follows `tidy` concept, which requires the data to be in the following format:
+
+* rows = observations
+* columns = parameters / variables
+
+In a real life scenario a large part of your time (80%) will be spent bringing non-tidy data into a tidy format in a process called data-wrangling so that you can use the `tidyverse` efficiently. For this practice our data is already in the required format!
+
+
+# Data-Wranlging in the tidyverse 
+
+Here we will introduce the basic functions `filter`, `select` and `arrange` as well as the `%>%` operator:
+
+* `filter` will subset the rows of your table
+* `select` allows you to pick columns of interest
+* `arrange` lets you order your table to look at extreme values
+
+Finally, the `%>%` operator is a key concept of tidyverse and helps with the readability of your code. It takes input from the previous function and pipes it into the next one. Let's have a look!
+
+```{r message=FALSE, warning=FALSE}
+
+# Let us select only penguins of the species Adelie
+
+adelie = dat %>% 
+  filter(species == "Adelie")
+
+# Display the first few rows
+
+head(adelie)
+
+# Now let us pick only those penguins that are of species Adelie AND on the island of Torgersen
+
+adelie_torgesen = dat %>% 
+  filter(species == "Adelie", island == "Torgersen")
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+# Imagine we only care about three variables: species, island and bill_length_mm. Let's subset our dataframe
+
+adelie_torgesen = adelie_torgesen %>% 
+  select(species, island, bill_length_mm)
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+# Let us check for the Adelie penguin from Trogersen with the longest bill using arrange
+
+adelie_torgesen %>% 
+  arrange(-bill_length_mm)
+
+# Let us do all of the above operations in one go
+
+adelie_torgesen <- dat %>% 
+  
+  # select for Adelie + Torgersen penguins
+  filter(species == "Adelie", island == "Torgersen") %>% 
+  
+  # only extract the columns we care about
+  select(species, island, bill_length_mm) %>% 
+  
+  # arrange our table in descending order 
+  arrange(-bill_length_mm)
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+# Doing the same thing in base R works but is harder for humans to read
+
+# Select for Adelie + Torgersen penguins and only extract the columns we care about
+adelie_torgesen_base <- subset(dat, species == "Adelie" & island == "Torgersen", c("species", "island", "bill_length_mm"))
+
+# Arrange our table in descending order 
+adelie_torgesen_base <- adelie_torgesen_base[order(-adelie_torgesen_base$bill_length_mm), ]
+
+# Display the first few rows
+head(adelie_torgesen_base)
+
+```
+
+
+## Time to practice fitlering, selecting and arranging your data
+
+One Task will ask you to select all of the columns starting with `bill_`. Type the following `?tidyselect::starts_with` in your console and try to incorporate it into your select function.
+
+```{r, message=FALSE, warning=FALSE}
+
+# Task 1.1: Select all penguins that are not of the species Adelie and have a bill length greater than 30mm. (Have a look at the != and > operators)
+
+not_adelie = dat %>% 
+  # Filter for penguins that ARE NOT (!=) Adelie
+  filter(species != "Adelie", bill_length_mm > 30)
+
+head(not_adelie)
+
+# Task 1.2: Now check which penguin species exist in your new dataframe using distinct().
+
+not_adelie %>% distinct(species)
+
+# Task 2.1: Starting from the original dataframe (dat), select only species, island and all columns starting with bill_. Take a look at starts_with().
+
+dat_subset = dat %>% 
+  select(species, island, starts_with("bill_"))
+
+head(dat_subset)
+
+# Task 2.2: Now check for the penguin with the shortest bill depth.
+
+dat_subset %>% arrange(bill_depth_mm)
+
+
+```
+This practice introduces two operators:
+
+* `!=` which stands for NOT EQUAL to and in our case selected everything but the species `Adelie` 
+* `>` GREATER sign which we used on `bill_length` to select for those rows in which bill_length is greater than 30mm.
+
+Next we used `distinct` which will only keep unique/distinct rows of your dataframe and is great for having a quick glimpse at your data.
+Finally, we automated the selection by using `starts_with` which as the name suggests allows you to pick any column which starts with a pattern you specified.
+
+# More Data-Wranlging in the tidyverse
+
+Next we will introduce `count`, `group_by`, `mutate` and `summarize`:
+
+* `count` lets you quickly count the unique values of one or more variables
+* `group_by` lets you group your data on a defined variable
+* `mutate` creates new columns that are functions of existing variables
+* `summarize` creates a new data frame. It returns one row for each combination of grouping variables
+
+These functions let you calculate summary statistics and perform other data manipulations that are useful.
+
+```{r, message=FALSE, warning=FALSE}
+
+# Let us quickly count the number of each species present in our dataset
+
+dat %>% count(species)
+
+# Now let us create a new column that contains the mean bill_length for each species
+
+dat_processed = dat %>% 
+  
+  # First group by species so that every following operation is done per group
+  group_by(species) %>% 
+  
+  # Now create a new column called mean_bill_length_mm
+  mutate(mean_bill_length_mm = mean(bill_length_mm))
+
+dat_processed
+
+# Now let us create a more condensed dataframe containing summary statistics of intereset (mean, sd, median, iqr) for all species, island combinations.
+
+dat_summary = dat %>% 
+  
+  # First group by species so that every following operation is done per group
+  group_by(species, island) %>%
+  
+  # Now summarize the data
+  summarize(mean_bill_length_mm = mean(bill_length_mm),
+            sd_bill_length_mm = sd(bill_length_mm),
+            median_bill_length_mm = median(bill_length_mm),
+            iqr_bill_length_mm = IQR(bill_length_mm))
+  
+dat_summary
+
+```
+Here we introduced ways to quickly assess the abundance of individual observations using `count`. Next, we grouped our data using `group_by` to calculate the mean bill length for each species and storing the values in a new column using `mutate`. Finally, we caculated several summary statistics in one go and saved the results in a more condensed dataframe using `summarize`.
+
+## Time to practice grouping, counting, mutating and summarizing your data
+
+```{r, message=FALSE, warning=FALSE}
+
+# Task 3.1: Filter for penguins with a bill depth <= 30mm and count the number of animals per species
+
+dat %>% filter(bill_depth_mm <= 30) %>% 
+  group_by(species) %>% 
+  count(species)
+
+# Task 4.1: Select columns 1:4 and the sex column, group_by species and sex and summarize the values to get mean_bill_length and mean_bill_depth 
+
+dat_matched = dat %>% 
+  
+  # You can use select using positional indicators
+  select(1:4, sex) %>% 
+  
+  # group_by species
+  group_by(species, sex) %>% 
+  
+  # summarize
+  summarize(mean_bill_length_mm = mean(bill_length_mm),
+            mean_bill_depth_mm = mean(bill_depth_mm))
+
+dat_matched
+
+# Task 4.2: Now convert millimeters into meters and name the new columns with the suffix "_m" instead of "_mm"
+
+dat_matched = dat_matched %>% 
+  
+  # use across to perform the same 
+  mutate(across(starts_with("mean_"), ~ .x / 1000, .names = "{sub('_mm$', '_m', .col)}"))
+
+dat_matched
+
+
+```
+# Conclusion
+
+Here we introduced the most basic functions used for data-wrangling in `tidyverse` that can be concatenated, at will, using the pipe operator `%>%`. The results are easily interpretable lines of code that will help you understand what you produced even months after generating the code. At many points during this practice it would have been intuitive to visualize our results, which is what we are going to explore next using the packages `ggplot2` and `ggpubr`.
+
+# References
+- [`tidyverse`](https://www.tidyverse.org/)
+- [`data-wrangling cheatsheet`](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+
+# Session Info
+```{r session info}
+sessionInfo()
+```
