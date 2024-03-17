@@ -61,6 +61,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '02-intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Customize every detail" href="03-tidytuesday.html" />
+    <link rel="prev" title="What is the Tidyverse?" href="01-intro_to_tidyverse.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,25 +158,31 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-intro.html">Get started</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-intro_to_tidyverse.html">What is the Tidyverse?</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="02-tidytuesday.html">Customize every detail</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Get started</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="03-bio.html">Biology-related data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tidytuesday.html">Customize every detail</a></li>
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="04-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04-bio.html">Biology-related data visualization</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="05-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
 
 
 
@@ -457,7 +465,7 @@ making</a></p></li>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggpie(dat %&gt;% count(species), x = &quot;n&quot;, fill = &quot;species&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-3-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-3-1.png" /></p>
 </div>
 <div class="section" id="how-many-penguins-of-each-species-and-sex-did-we-observe-across-the-different-islands">
 <h2>How many penguins of each species and sex did we observe across the different islands?<a class="headerlink" href="#how-many-penguins-of-each-species-and-sex-did-we-observe-across-the-different-islands" title="Permalink to this heading">#</a></h2>
@@ -465,19 +473,19 @@ making</a></p></li>
           label = TRUE, position = position_dodge(0.7), facet.by = &quot;island&quot;, palette = &quot;lancet&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-4-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-4-1.png" /></p>
 </div>
 <div class="section" id="what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin">
 <h2>What are the distributions of flipper lengths considering penguin species, sex and islands of origin?<a class="headerlink" href="#what-are-the-distributions-of-flipper-lengths-considering-penguin-species-sex-and-islands-of-origin" title="Permalink to this heading">#</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>gghistogram(dat, x = &quot;flipper_length_mm&quot;, fill = &quot;sex&quot;, facet.by = c(&quot;species&quot;,&quot;island&quot;))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-5-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-5-1.png" /></p>
 <p>Alternatively, we can use stripcharts charts:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggstripchart(dat, x = &quot;island&quot;, y = &quot;flipper_length_mm&quot;, color = &quot;sex&quot;, facet.by = &quot;species&quot;, alpha = 0.5, position = position_jitterdodge(), add = &quot;median_iqr&quot;, add.params = list(color=&quot;black&quot;, group=&quot;sex&quot;, size=0.2))
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-6-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-6-1.png" /></p>
 </div>
 <div class="section" id="are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island">
 <h2>Are the differences of body mass between sexes significant if we control for species and island?<a class="headerlink" href="#are-the-differences-of-body-mass-between-sexes-significant-if-we-control-for-species-and-island" title="Permalink to this heading">#</a></h2>
@@ -485,21 +493,21 @@ making</a></p></li>
    stat_compare_means(aes(color = sex), label = &quot;p.signif&quot;, method = &quot;wilcox.test&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-7-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-7-1.png" /></p>
 </div>
 <div class="section" id="what-is-the-relationship-between-flipper-length-body-mass-and-bill-length">
 <h2>What is the relationship between flipper length, body mass and bill length?<a class="headerlink" href="#what-is-the-relationship-between-flipper-length-body-mass-and-bill-length" title="Permalink to this heading">#</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat, x = &quot;flipper_length_mm&quot;, y = &quot;body_mass_g&quot;, color = &quot;bill_length_mm&quot;, alpha = 0.5)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-1.png" /></p>
 </div>
 <div class="section" id="could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass">
 <h2>Could we have sampling bias in the relationship between flipper length and body mass?<a class="headerlink" href="#could-we-have-sampling-bias-in-the-relationship-between-flipper-length-and-body-mass" title="Permalink to this heading">#</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ggscatter(dat %&gt;% mutate(year=factor(year)), x = &quot;flipper_length_mm&quot;, y = &quot;body_mass_g&quot;, alpha = 0.5, color = &quot;year&quot;, ellipse = TRUE)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-1.png" /></p>
 </div>
 <div class="section" id="what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length">
 <h2>What is the spearman correlation coefficient between body mass and flipper length?<a class="headerlink" href="#what-is-the-spearman-correlation-coefficient-between-body-mass-and-flipper-length" title="Permalink to this heading">#</a></h2>
@@ -510,7 +518,7 @@ making</a></p></li>
    theme(aspect.ratio = 1)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-10-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-10-1.png" /></p>
 </div>
 <div class="section" id="create-and-save-a-figure">
 <h2>Create and save a figure<a class="headerlink" href="#create-and-save-a-figure" title="Permalink to this heading">#</a></h2>
@@ -577,7 +585,7 @@ Heatmap(mat,
         right_annotation = annotation_row)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-12-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-12-1.png" /></p>
 </div>
 <div class="section" id="references">
 <h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
@@ -682,6 +690,24 @@ Heatmap(mat,
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="01-intro_to_tidyverse.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">What is the Tidyverse?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-tidytuesday.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Customize every detail</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               

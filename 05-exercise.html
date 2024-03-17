@@ -61,6 +61,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '05-exercise';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Biology-related data visualization" href="04-bio.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,25 +157,31 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-intro.html">Get started</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-intro_to_tidyverse.html">What is the Tidyverse?</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="02-tidytuesday.html">Customize every detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-intro.html">Get started</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="03-bio.html">Biology-related data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tidytuesday.html">Customize every detail</a></li>
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="04-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="04-bio.html">Biology-related data visualization</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exploratory Data Analysis of the most popular human gene</a></li>
 
 
 
@@ -595,7 +602,7 @@ visualizing the different types of data.</p>
 <span class="w">          </span><span class="n">ggtheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-15.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-12.png" /></p>
 </div>
 <div class="section" id="how-many-samples-per-cancer-type-and-sample-type-are-there">
 <h3>How many samples per cancer type and sample type are there?<a class="headerlink" href="#how-many-samples-per-cancer-type-and-sample-type-are-there" title="Permalink to this heading">#</a></h3>
@@ -604,7 +611,7 @@ visualizing the different types of data.</p>
 <span class="w">          </span><span class="n">ggtheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;right&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-9-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-9-11.png" /></p>
 </div>
 </div>
 <div class="section" id="distributions">
@@ -684,7 +691,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`methylation-cg25053252`</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-11-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-11-1.png" /></p>
 </div>
 <div class="section" id="could-you-now-split-them-by-sample-type">
 <h3>Could you now split them by sample type?<a class="headerlink" href="#could-you-now-split-them-by-sample-type" title="Permalink to this heading">#</a></h3>
@@ -761,7 +768,7 @@ visualizing the different types of data.</p>
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">plts</span><span class="o">$</span><span class="n">`exon_expression-chr17:7573927-7574033:-`</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-13-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-13-1.png" /></p>
 </div>
 <div class="section" id="can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types">
 <h3>Can you find a type of omic with statistically different values across cancer types when comparing “Primary Tumor” vs. “Solid Tissue Normal” sample types?<a class="headerlink" href="#can-you-find-a-type-of-omic-with-statistically-different-values-across-cancer-types-when-comparing-primary-tumor-vs-solid-tissue-normal-sample-types" title="Permalink to this heading">#</a></h3>
@@ -847,7 +854,7 @@ visualizing the different types of data.</p>
 ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-15-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-15-1.png" /></p>
 </div>
 </div>
 <div class="section" id="mutations">
@@ -869,7 +876,7 @@ visualizing the different types of data.</p>
 <span class="w">          </span><span class="n">fill</span><span class="o">=</span><span class="s">&#39;effect&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">palette</span><span class="o">=</span><span class="s">&#39;simpsons&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ggtheme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">theme_pubr</span><span class="p">(</span><span class="n">x.text.angle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">base_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-17-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-17-1.png" /></p>
 </div>
 <div class="section" id="how-are-mutation-effects-associated-to-certain-positions-and-cancer-types">
 <h3>How are mutation effects associated to certain positions? And cancer_types?<a class="headerlink" href="#how-are-mutation-effects-associated-to-certain-positions-and-cancer-types" title="Permalink to this heading">#</a></h3>
@@ -877,7 +884,7 @@ visualizing the different types of data.</p>
 <span class="nf">ggpar</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span><span class="w"> </span><span class="n">font.xtickslab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">font.ytickslab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-18-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-18-1.png" /></p>
 </div>
 </div>
 <div class="section" id="pairwise-associations">
@@ -890,7 +897,7 @@ visualizing the different types of data.</p>
 <span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="n">omic_type_oi</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-19-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-19-1.png" /></p>
 </div>
 <div class="section" id="could-gene-expression-be-associated-with-copy-number-variation">
 <h3>Could gene expression be associated with copy number variation?<a class="headerlink" href="#could-gene-expression-be-associated-with-copy-number-variation" title="Permalink to this heading">#</a></h3>
@@ -908,7 +915,7 @@ visualizing the different types of data.</p>
 <span class="w">          </span><span class="nf">theme</span><span class="p">(</span><span class="n">aspect.ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-20-11.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-20-1.png" /></p>
 </div>
 <div class="section" id="visualize-other-pairwise-associations-that-you-found-interesting">
 <h3>Visualize other pairwise associations that you found interesting<a class="headerlink" href="#visualize-other-pairwise-associations-that-you-found-interesting" title="Permalink to this heading">#</a></h3>
@@ -1095,6 +1102,15 @@ genes.</a></p></li>
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="04-bio.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Biology-related data visualization</p>
+      </div>
+    </a>
 </div>
                 </footer>
               

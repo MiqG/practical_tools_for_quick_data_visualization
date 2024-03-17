@@ -61,6 +61,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '04-bio';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Exploratory Data Analysis of the most popular human gene" href="05-exercise.html" />
+    <link rel="prev" title="Customize every detail" href="03-tidytuesday.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,25 +158,31 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-intro.html">Get started</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-intro_to_tidyverse.html">What is the Tidyverse?</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="02-tidytuesday.html">Customize every detail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-intro.html">Get started</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="03-bio.html">Biology-related data visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-tidytuesday.html">Customize every detail</a></li>
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="04-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Biology-related data visualization</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="05-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
 
 
 
@@ -457,11 +465,11 @@ result %&gt;% as.data.frame() %&gt;% head()
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>result %&gt;% dotplot()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-4-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-4-11.png" /></p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>result %&gt;% cnetplot()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-5-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-5-11.png" /></p>
 <p>Now, we would like to see the overlap between the genes in the top 5
 enriched categories.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>require(ComplexHeatmap)
@@ -485,7 +493,7 @@ plt = terms_oi %&gt;% UpSet()
 plt
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-6-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-6-11.png" /></p>
 </div>
 <div class="section" id="phylogenetic-trees-with-ggtree">
 <h1>Phylogenetic trees with <code class="docutils literal notranslate"><span class="pre">ggtree</span></code><a class="headerlink" href="#phylogenetic-trees-with-ggtree" title="Permalink to this heading">#</a></h1>
@@ -502,7 +510,7 @@ tree &lt;- rtree(50)
 ggtree(tree, layout=&quot;circular&quot;) + geom_tiplab()
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-7-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-7-11.png" /></p>
 </div>
 <div class="section" id="tree-and-multiple-sequence-alignment-of-tp53-amino-acids">
 <h2>Tree and multiple sequence alignment of <em>TP53</em> amino acids<a class="headerlink" href="#tree-and-multiple-sequence-alignment-of-tp53-amino-acids" title="Permalink to this heading">#</a></h2>
@@ -523,7 +531,7 @@ tree_plot = ggtree(tree)
 msaplot(tree_plot, fasta = fasta_file) + ggtitle(&quot;tree with MSA&quot;)
 </pre></div>
 </div>
-<p><img alt="" src="_images/unnamed-chunk-8-13.png" /></p>
+<p><img alt="" src="_images/unnamed-chunk-8-11.png" /></p>
 </div>
 </div>
 <div class="section" id="references">
@@ -649,6 +657,24 @@ used</a></p></li>
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="03-tidytuesday.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Customize every detail</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="05-exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exploratory Data Analysis of the most popular human gene</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
