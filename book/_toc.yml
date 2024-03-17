@@ -1,7 +1,8 @@
 format: jb-book
 root: README
 chapters:
-  - file: 01-intro
-  - file: 02-tidytuesday
-  - file: 03-bio
-  - file: 04-exercise
+  - file: 01-intro_to_tidyverse
+  - file: 02-intro
+  - file: 03-tidytuesday
+  - file: 04-bio
+  - file: 05-exercise
