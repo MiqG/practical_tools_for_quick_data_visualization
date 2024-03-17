@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What is the Tidyverse? &#8212; Practical tools for quick data visualization</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01-intro_to_tidyverse';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Practical tools for quick data visualization</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    Practical tools for quick data visualization
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-intro.html">Get started</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="02-tidytuesday.html">Customize every detail</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="03-bio.html">Biology-related data visualization</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="04-exercise.html">Exploratory Data Analysis of the most popular human gene</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/MiqG/practical_tools_for_quick_data_visualization" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/MiqG/practical_tools_for_quick_data_visualization/issues/new?title=Issue%20on%20page%20%2F01-intro_to_tidyverse.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/01-intro_to_tidyverse.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>What is the Tidyverse?</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">What is the Tidyverse?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-wranlging-in-the-tidyverse">Data-Wranlging in the tidyverse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-practice-fitlering-selecting-and-arranging-your-data">Time to practice fitlering, selecting and arranging your data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#more-data-wranlging-in-the-tidyverse">More Data-Wranlging in the tidyverse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-practice-grouping-counting-mutating-and-summarizing-your-data">Time to practice grouping, counting, mutating and summarizing your data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#session-info">Session Info</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <a class="reference internal image-reference" href="_images/hex-tidyverse.png"><img alt="_images/hex-tidyverse.png" src="_images/hex-tidyverse.png" style="width: 25%;" /></a>
+<a class="reference internal image-reference" href="_images/palmerpenguins.png"><img alt="_images/palmerpenguins.png" src="_images/palmerpenguins.png" style="width: 25%;" /></a>
+<div class="section" id="what-is-the-tidyverse">
+<h1>What is the Tidyverse?<a class="headerlink" href="#what-is-the-tidyverse" title="Permalink to this heading">#</a></h1>
+<p>The tidyverse is an opinionated collection of R packages designed for
+data science. All packages share an underlying design philosophy,
+grammar, and data structures.</p>
+<p>To start playing around with the functions from these packages we will
+use the
+<a class="reference external" href="https://allisonhorst.github.io/palmerpenguins/articles/intro.html"><code class="docutils literal notranslate"><span class="pre">palmerpenguins</span></code></a>
+data set. This simple data set has both continuous and categorical
+variables that make it perfect for showcasing how different functions
+work.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>require(tidyverse)
+
+penguins_url = &quot;https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/inst/extdata/penguins.csv&quot;
+dat = read_csv(url(penguins_url))
+dat = dat %&gt;% drop_na()
+head(dat)
+
+## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## 6 Adelie  Torgersen           38.9          17.8               181        3625
+## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+</pre></div>
+</div>
+<p>This dataset follows <code class="docutils literal notranslate"><span class="pre">tidy</span></code> concept, which requires the data to be in
+the following format:</p>
+<ul class="simple">
+<li><p>rows = observations</p></li>
+<li><p>columns = parameters / variables</p></li>
+</ul>
+<p>In a real life scenario a large part of your time (80%) will be spent
+bringing non-tidy data into a tidy format in a process called
+data-wrangling so that you can use the <code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> efficiently. For this
+practice our data is already in the required format!</p>
+</div>
+<div class="section" id="data-wranlging-in-the-tidyverse">
+<h1>Data-Wranlging in the tidyverse<a class="headerlink" href="#data-wranlging-in-the-tidyverse" title="Permalink to this heading">#</a></h1>
+<p>Here we will introduce the basic functions <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">select</span></code> and
+<code class="docutils literal notranslate"><span class="pre">arrange</span></code> as well as the <code class="docutils literal notranslate"><span class="pre">%&gt;%</span></code> operator:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">filter</span></code> will subset the rows of your table</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">select</span></code> allows you to pick columns of interest</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arrange</span></code> lets you order your table to look at extreme values</p></li>
+</ul>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">%&gt;%</span></code> operator is a key concept of tidyverse and helps with
+the readability of your code. It takes input from the previous function
+and pipes it into the next one. Let’s have a look!</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Let us select only penguins of the species Adelie
+
+adelie = dat %&gt;% 
+  filter(species == &quot;Adelie&quot;)
+
+# Display the first few rows
+
+head(adelie)
+
+## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## 6 Adelie  Torgersen           38.9          17.8               181        3625
+## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+
+# Now let us pick only those penguins that are of species Adelie AND on the island of Torgersen
+
+adelie_torgesen = dat %&gt;% 
+  filter(species == &quot;Adelie&quot;, island == &quot;Torgersen&quot;)
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+## # A tibble: 6 × 8
+##   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7               181        3750
+## 2 Adelie  Torgersen           39.5          17.4               186        3800
+## 3 Adelie  Torgersen           40.3          18                 195        3250
+## 4 Adelie  Torgersen           36.7          19.3               193        3450
+## 5 Adelie  Torgersen           39.3          20.6               190        3650
+## 6 Adelie  Torgersen           38.9          17.8               181        3625
+## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+
+# Imagine we only care about three variables: species, island and bill_length_mm. Let&#39;s subset our dataframe
+
+adelie_torgesen = adelie_torgesen %&gt;% 
+  select(species, island, bill_length_mm)
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+## # A tibble: 6 × 3
+##   species island    bill_length_mm
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1
+## 2 Adelie  Torgersen           39.5
+## 3 Adelie  Torgersen           40.3
+## 4 Adelie  Torgersen           36.7
+## 5 Adelie  Torgersen           39.3
+## 6 Adelie  Torgersen           38.9
+
+# Let us check for the Adelie penguin from Trogersen with the longest bill using arrange
+
+adelie_torgesen %&gt;% 
+  arrange(-bill_length_mm)
+
+## # A tibble: 47 × 3
+##    species island    bill_length_mm
+##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;
+##  1 Adelie  Torgersen           46  
+##  2 Adelie  Torgersen           45.8
+##  3 Adelie  Torgersen           44.1
+##  4 Adelie  Torgersen           43.1
+##  5 Adelie  Torgersen           42.9
+##  6 Adelie  Torgersen           42.8
+##  7 Adelie  Torgersen           42.5
+##  8 Adelie  Torgersen           42.1
+##  9 Adelie  Torgersen           41.8
+## 10 Adelie  Torgersen           41.5
+## # ℹ 37 more rows
+
+# Let us do all of the above operations in one go
+
+adelie_torgesen &lt;- dat %&gt;% 
+  
+  # select for Adelie + Torgersen penguins
+  filter(species == &quot;Adelie&quot;, island == &quot;Torgersen&quot;) %&gt;% 
+  
+  # only extract the columns we care about
+  select(species, island, bill_length_mm) %&gt;% 
+  
+  # arrange our table in descending order 
+  arrange(-bill_length_mm)
+
+# Display the first few rows
+
+head(adelie_torgesen)
+
+## # A tibble: 6 × 3
+##   species island    bill_length_mm
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen           46  
+## 2 Adelie  Torgersen           45.8
+## 3 Adelie  Torgersen           44.1
+## 4 Adelie  Torgersen           43.1
+## 5 Adelie  Torgersen           42.9
+## 6 Adelie  Torgersen           42.8
+
+# Doing the same thing in base R works but is harder for humans to read
+
+# Select for Adelie + Torgersen penguins and only extract the columns we care about
+adelie_torgesen_base &lt;- subset(dat, species == &quot;Adelie&quot; &amp; island == &quot;Torgersen&quot;, c(&quot;species&quot;, &quot;island&quot;, &quot;bill_length_mm&quot;))
+
+# Arrange our table in descending order 
+adelie_torgesen_base &lt;- adelie_torgesen_base[order(-adelie_torgesen_base$bill_length_mm), ]
+
+# Display the first few rows
+head(adelie_torgesen_base)
+
+## # A tibble: 6 × 3
+##   species island    bill_length_mm
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;
+## 1 Adelie  Torgersen           46  
+## 2 Adelie  Torgersen           45.8
+## 3 Adelie  Torgersen           44.1
+## 4 Adelie  Torgersen           43.1
+## 5 Adelie  Torgersen           42.9
+## 6 Adelie  Torgersen           42.8
+</pre></div>
+</div>
+<div class="section" id="time-to-practice-fitlering-selecting-and-arranging-your-data">
+<h2>Time to practice fitlering, selecting and arranging your data<a class="headerlink" href="#time-to-practice-fitlering-selecting-and-arranging-your-data" title="Permalink to this heading">#</a></h2>
+<p>One Task will ask you to select all of the columns starting with
+<code class="docutils literal notranslate"><span class="pre">bill_</span></code>. Type the following <code class="docutils literal notranslate"><span class="pre">?tidyselect::starts_with</span></code> in your console
+and try to incorporate it into your select function.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Task 1.1: Select all penguins that are not of the species Adelie and have a bill length greater than 30mm. (Have a look at the != and &gt; operators)
+
+not_adelie = dat %&gt;% 
+  # Filter for penguins that ARE NOT (!=) Adelie
+  filter(species != &quot;Adelie&quot;, bill_length_mm &gt; 30)
+
+head(not_adelie)
+
+## # A tibble: 6 × 8
+##   species island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##   &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Gentoo  Biscoe           46.1          13.2               211        4500
+## 2 Gentoo  Biscoe           50            16.3               230        5700
+## 3 Gentoo  Biscoe           48.7          14.1               210        4450
+## 4 Gentoo  Biscoe           50            15.2               218        5700
+## 5 Gentoo  Biscoe           47.6          14.5               215        5400
+## 6 Gentoo  Biscoe           46.5          13.5               210        4550
+## # ℹ 2 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;
+
+# Task 1.2: Now check which penguin species exist in your new dataframe using distinct().
+
+not_adelie %&gt;% distinct(species)
+
+## # A tibble: 2 × 1
+##   species  
+##   &lt;chr&gt;    
+## 1 Gentoo   
+## 2 Chinstrap
+
+# Task 2.1: Starting from the original dataframe (dat), select only species, island and all columns starting with bill_. Take a look at starts_with().
+
+dat_subset = dat %&gt;% 
+  select(species, island, starts_with(&quot;bill_&quot;))
+
+head(dat_subset)
+
+## # A tibble: 6 × 4
+##   species island    bill_length_mm bill_depth_mm
+##   &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;
+## 1 Adelie  Torgersen           39.1          18.7
+## 2 Adelie  Torgersen           39.5          17.4
+## 3 Adelie  Torgersen           40.3          18  
+## 4 Adelie  Torgersen           36.7          19.3
+## 5 Adelie  Torgersen           39.3          20.6
+## 6 Adelie  Torgersen           38.9          17.8
+
+# Task 2.2: Now check for the penguin with the shortest bill depth.
+
+dat_subset %&gt;% arrange(bill_depth_mm)
+
+## # A tibble: 333 × 4
+##    species island bill_length_mm bill_depth_mm
+##    &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+##  1 Gentoo  Biscoe           42.9          13.1
+##  2 Gentoo  Biscoe           46.1          13.2
+##  3 Gentoo  Biscoe           44.9          13.3
+##  4 Gentoo  Biscoe           43.3          13.4
+##  5 Gentoo  Biscoe           46.5          13.5
+##  6 Gentoo  Biscoe           42            13.5
+##  7 Gentoo  Biscoe           44            13.6
+##  8 Gentoo  Biscoe           40.9          13.7
+##  9 Gentoo  Biscoe           45.5          13.7
+## 10 Gentoo  Biscoe           42.6          13.7
+## # ℹ 323 more rows
+</pre></div>
+</div>
+<p>This practice introduces two operators:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">!=</span></code> which stands for NOT EQUAL to and in our case selected
+everything but the species <code class="docutils literal notranslate"><span class="pre">Adelie</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code> GREATER sign which we used on <code class="docutils literal notranslate"><span class="pre">bill_length</span></code> to select for those
+rows in which bill_length is greater than 30mm.</p></li>
+</ul>
+<p>Next we used <code class="docutils literal notranslate"><span class="pre">distinct</span></code> which will only keep unique/distinct rows of
+your dataframe and is great for having a quick glimpse at your data.
+Finally, we automated the selection by using <code class="docutils literal notranslate"><span class="pre">starts_with</span></code> which as the
+name suggests allows you to pick any column which starts with a pattern
+you specified.</p>
+</div>
+</div>
+<div class="section" id="more-data-wranlging-in-the-tidyverse">
+<h1>More Data-Wranlging in the tidyverse<a class="headerlink" href="#more-data-wranlging-in-the-tidyverse" title="Permalink to this heading">#</a></h1>
+<p>Next we will introduce <code class="docutils literal notranslate"><span class="pre">count</span></code>, <code class="docutils literal notranslate"><span class="pre">group_by</span></code>, <code class="docutils literal notranslate"><span class="pre">mutate</span></code> and <code class="docutils literal notranslate"><span class="pre">summarize</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code> lets you quickly count the unique values of one or more
+variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group_by</span></code> lets you group your data on a defined variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutate</span></code> creates new columns that are functions of existing
+variables</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">summarize</span></code> creates a new data frame. It returns one row for each
+combination of grouping variables</p></li>
+</ul>
+<p>These functions let you calculate summary statistics and perform other
+data manipulations that are useful.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Let us quickly count the number of each species present in our dataset
+
+dat %&gt;% count(species)
+
+## # A tibble: 3 × 2
+##   species       n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 Adelie      146
+## 2 Chinstrap    68
+## 3 Gentoo      119
+
+# Now let us create a new column that contains the mean bill_length for each species
+
+dat_processed = dat %&gt;% 
+  
+  # First group by species so that every following operation is done per group
+  group_by(species) %&gt;% 
+  
+  # Now create a new column called mean_bill_length_mm
+  mutate(mean_bill_length_mm = mean(bill_length_mm))
+
+dat_processed
+
+## # A tibble: 333 × 9
+## # Groups:   species [3]
+##    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+##    &lt;chr&gt;   &lt;chr&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Adelie  Torgersen           39.1          18.7               181        3750
+##  2 Adelie  Torgersen           39.5          17.4               186        3800
+##  3 Adelie  Torgersen           40.3          18                 195        3250
+##  4 Adelie  Torgersen           36.7          19.3               193        3450
+##  5 Adelie  Torgersen           39.3          20.6               190        3650
+##  6 Adelie  Torgersen           38.9          17.8               181        3625
+##  7 Adelie  Torgersen           39.2          19.6               195        4675
+##  8 Adelie  Torgersen           41.1          17.6               182        3200
+##  9 Adelie  Torgersen           38.6          21.2               191        3800
+## 10 Adelie  Torgersen           34.6          21.1               198        4400
+## # ℹ 323 more rows
+## # ℹ 3 more variables: sex &lt;chr&gt;, year &lt;dbl&gt;, mean_bill_length_mm &lt;dbl&gt;
+
+# Now let us create a more condensed dataframe containing summary statistics of intereset (mean, sd, median, iqr) for all species, island combinations.
+
+dat_summary = dat %&gt;% 
+  
+  # First group by species so that every following operation is done per group
+  group_by(species, island) %&gt;%
+  
+  # Now summarize the data
+  summarize(mean_bill_length_mm = mean(bill_length_mm),
+            sd_bill_length_mm = sd(bill_length_mm),
+            median_bill_length_mm = median(bill_length_mm),
+            iqr_bill_length_mm = IQR(bill_length_mm))
+  
+dat_summary
+
+## # A tibble: 5 × 6
+## # Groups:   species [3]
+##   species   island   mean_bill_length_mm sd_bill_length_mm median_bill_length_mm
+##   &lt;chr&gt;     &lt;chr&gt;                  &lt;dbl&gt;             &lt;dbl&gt;                 &lt;dbl&gt;
+## 1 Adelie    Biscoe                  39.0              2.48                  38.7
+## 2 Adelie    Dream                   38.5              2.48                  38.8
+## 3 Adelie    Torgers…                39.0              3.03                  39  
+## 4 Chinstrap Dream                   48.8              3.34                  49.6
+## 5 Gentoo    Biscoe                  47.6              3.11                  47.4
+## # ℹ 1 more variable: iqr_bill_length_mm &lt;dbl&gt;
+</pre></div>
+</div>
+<p>Here we introduced ways to quickly assess the abundance of individual
+observations using <code class="docutils literal notranslate"><span class="pre">count</span></code>. Next, we grouped our data using <code class="docutils literal notranslate"><span class="pre">group_by</span></code>
+to calculate the mean bill length for each species and storing the
+values in a new column using <code class="docutils literal notranslate"><span class="pre">mutate</span></code>. Finally, we caculated several
+summary statistics in one go and saved the results in a more condensed
+dataframe using <code class="docutils literal notranslate"><span class="pre">summarize</span></code>.</p>
+<div class="section" id="time-to-practice-grouping-counting-mutating-and-summarizing-your-data">
+<h2>Time to practice grouping, counting, mutating and summarizing your data<a class="headerlink" href="#time-to-practice-grouping-counting-mutating-and-summarizing-your-data" title="Permalink to this heading">#</a></h2>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Task 3.1: Filter for penguins with a bill depth &lt;= 30mm and count the number of animals per species
+
+dat %&gt;% filter(bill_depth_mm &lt;= 30) %&gt;% 
+  group_by(species) %&gt;% 
+  count(species)
+
+## # A tibble: 3 × 2
+## # Groups:   species [3]
+##   species       n
+##   &lt;chr&gt;     &lt;int&gt;
+## 1 Adelie      146
+## 2 Chinstrap    68
+## 3 Gentoo      119
+
+# Task 4.1: Select columns 1:4 and the sex column, group_by species and sex and summarize the values to get mean_bill_length and mean_bill_depth 
+
+dat_matched = dat %&gt;% 
+  
+  # You can use select using positional indicators
+  select(1:4, sex) %&gt;% 
+  
+  # group_by species
+  group_by(species, sex) %&gt;% 
+  
+  # summarize
+  summarize(mean_bill_length_mm = mean(bill_length_mm),
+            mean_bill_depth_mm = mean(bill_depth_mm))
+
+dat_matched
+
+## # A tibble: 6 × 4
+## # Groups:   species [3]
+##   species   sex    mean_bill_length_mm mean_bill_depth_mm
+##   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;              &lt;dbl&gt;
+## 1 Adelie    female                37.3               17.6
+## 2 Adelie    male                  40.4               19.1
+## 3 Chinstrap female                46.6               17.6
+## 4 Chinstrap male                  51.1               19.3
+## 5 Gentoo    female                45.6               14.2
+## 6 Gentoo    male                  49.5               15.7
+
+# Task 4.2: Now convert millimeters into meters and name the new columns with the suffix &quot;_m&quot; instead of &quot;_mm&quot;
+
+dat_matched = dat_matched %&gt;% 
+  
+  # use across to perform the same 
+  mutate(across(starts_with(&quot;mean_&quot;), ~ .x / 1000, .names = &quot;{sub(&#39;_mm$&#39;, &#39;_m&#39;, .col)}&quot;))
+
+dat_matched
+
+## # A tibble: 6 × 6
+## # Groups:   species [3]
+##   species   sex    mean_bill_length_mm mean_bill_depth_mm mean_bill_length_m
+##   &lt;chr&gt;     &lt;chr&gt;                &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
+## 1 Adelie    female                37.3               17.6             0.0373
+## 2 Adelie    male                  40.4               19.1             0.0404
+## 3 Chinstrap female                46.6               17.6             0.0466
+## 4 Chinstrap male                  51.1               19.3             0.0511
+## 5 Gentoo    female                45.6               14.2             0.0456
+## 6 Gentoo    male                  49.5               15.7             0.0495
+## # ℹ 1 more variable: mean_bill_depth_m &lt;dbl&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h1>
+<p>Here we introduced the most basic functions used for data-wrangling in
+<code class="docutils literal notranslate"><span class="pre">tidyverse</span></code> that can be concatenated, at will, using the pipe operator
+<code class="docutils literal notranslate"><span class="pre">%&gt;%</span></code>. The results are easily interpretable lines of code that will help
+you understand what you produced even months after generating the code.
+At many points during this practice it would have been intuitive to
+visualize our results, which is what we are going to explore next using
+the packages <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> and <code class="docutils literal notranslate"><span class="pre">ggpubr</span></code>.</p>
+</div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.tidyverse.org/"><code class="docutils literal notranslate"><span class="pre">tidyverse</span></code></a></p></li>
+<li><p><a class="reference external" href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf"><code class="docutils literal notranslate"><span class="pre">data-wrangling</span> <span class="pre">cheatsheet</span></code></a></p></li>
+</ul>
+</div>
+<div class="section" id="session-info">
+<h1>Session Info<a class="headerlink" href="#session-info" title="Permalink to this heading">#</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>sessionInfo()
+
+## R version 4.3.1 (2023-06-16)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 18.04.6 LTS
+## 
+## Matrix products: default
+## BLAS:   /usr/lib/x86_64-linux-gnu/openblas/libblas.so.3 
+## LAPACK: /usr/lib/x86_64-linux-gnu/libopenblasp-r0.2.20.so;  LAPACK version 3.7.1
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=es_ES.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=es_ES.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=es_ES.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=es_ES.UTF-8 LC_IDENTIFICATION=C       
+## 
+## time zone: Europe/Madrid
+## tzcode source: system (glibc)
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] lubridate_1.9.2 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.1    
+##  [5] purrr_0.3.4     readr_2.1.5     tidyr_1.2.1     tibble_3.2.1   
+##  [9] ggplot2_3.5.0   tidyverse_2.0.0
+## 
+## loaded via a namespace (and not attached):
+##  [1] bit_4.0.5        gtable_0.3.4     crayon_1.5.2     compiler_4.3.1  
+##  [5] tidyselect_1.2.1 parallel_4.3.1   scales_1.3.0     yaml_2.3.8      
+##  [9] fastmap_1.1.1    R6_2.5.1         generics_0.1.3   knitr_1.45      
+## [13] munsell_0.5.0    pillar_1.9.0     tzdb_0.3.0       rlang_1.1.0     
+## [17] utf8_1.2.4       stringi_1.7.8    xfun_0.42        bit64_4.0.5     
+## [21] timechange_0.3.0 cli_3.4.0        withr_3.0.0      magrittr_2.0.3  
+## [25] digest_0.6.29    grid_4.3.1       vroom_1.6.5      hms_1.1.3       
+## [29] lifecycle_1.0.4  vctrs_0.6.1      evaluate_0.23    glue_1.6.2      
+## [33] fansi_1.0.3      colorspace_2.0-3 rmarkdown_2.26   ellipsis_0.3.2  
+## [37] tools_4.3.1      pkgconfig_2.0.3  htmltools_0.5.7
+</pre></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">What is the Tidyverse?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-wranlging-in-the-tidyverse">Data-Wranlging in the tidyverse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-practice-fitlering-selecting-and-arranging-your-data">Time to practice fitlering, selecting and arranging your data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#more-data-wranlging-in-the-tidyverse">More Data-Wranlging in the tidyverse</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-to-practice-grouping-counting-mutating-and-summarizing-your-data">Time to practice grouping, counting, mutating and summarizing your data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#session-info">Session Info</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Miquel Anglada Girotto (miquel [dot] anglada [at] crg [dot] eu)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
